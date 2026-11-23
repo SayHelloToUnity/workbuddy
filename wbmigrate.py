@@ -335,6 +335,84 @@ def cmd_verify(home: Path, args) -> None:
             info(f"    原因={s['reason']}")
 
 
+def cmd_doctor(home: Path, args) -> None:
+    """诊断：项目/会话为何在侧边栏不可见。"""
+    db = home / "workbuddy.db"
+    if not db.exists():
+        die(f"缺少 workbuddy.db：{db}")
+    target_device = None
+    dev = home / "device-id"
+    if dev.exists():
+        try:
+            target_device = dev.read_text(encoding="utf-8").strip() or None
+        except OSError:
+            target_device = None
+
+    con = connect_ro(db)
+    info(f"数据根    : {home}")
+    info(f"本机device: {target_device or '(未找到 device-id)'}")
+    info("")
+
+    try:
+        spaces = con.execute(
+            "SELECT id,name,primary_folder_path,device_id,status,deleted_at FROM spaces"
+        ).fetchall()
+    except sqlite3.Error as e:
+        die(f"读取 spaces 失败：{e}")
+
+    sp_map = {r[0]: r for r in spaces}
+    info(f"空间总数  : {len(spaces)}")
+
+    hidden = [r for r in spaces if target_device and r[3] != target_device]
+    dead = [r for r in spaces if r[4] != "active" or (r[5] not in (-1, None))]
+    if hidden:
+        info(f"[问题] {len(hidden)} 个空间的 device_id 与本机不符（侧边栏会过滤掉）：")
+        for r in hidden[:6]:
+            info(f"    {r[0][:8]}  {r[1]}  device={r[3][:8]}")
+    if dead:
+        info(f"[问题] {len(dead)} 个空间处于非激活/已删除状态：")
+        for r in dead[:6]:
+            info(f"    {r[0][:8]}  {r[1]}  status={r[4]} deleted_at={r[5]}")
+
+    try:
+        rows = con.execute("SELECT id,cwd,space_id,deleted_at FROM sessions").fetchall()
+    except sqlite3.Error as e:
+        die(f"读取 sessions 失败：{e}")
+    info(f"会话总数  : {len(rows)}")
+
+    orphan = [r for r in rows if r[2] and r[2] not in sp_map]
+    missing_space = [r for r in rows if r[2] and r[2] in sp_map and (sp_map[r[2]][4] != "active" or sp_map[r[2]][5] not in (-1, None))]
+    deleted = [r for r in rows if r[3] not in (-1, None)]
+    if orphan:
+        info(f"[问题] {len(orphan)} 个会话的 space_id 指向不存在的空间（会整组隐藏）：")
+        for r in orphan[:6]:
+            info(f"    {r[0][:8]}  space={r[2][:8]}  {r[1]}")
+    if missing_space:
+        info(f"[警告] {len(missing_space)} 个会话挂在非激活空间下：")
+        for r in missing_space[:6]:
+            info(f"    {r[0][:8]}  space={r[2][:8]}  {r[1]}")
+    if deleted:
+        info(f"[警告] {len(deleted)} 个会话被标记删除：")
+        for r in deleted[:6]:
+            info(f"    {r[0][:8]}  deleted_at={r[3]}  {r[1]}")
+
+    no_dir = []
+    for r in spaces:
+        if r[2] and not Path(str(r[2]).replace("/", "\\")).exists():
+            no_dir.append(r)
+    if no_dir:
+        info(f"[提示] {len(no_dir)} 个空间的目录在本机不存在（不影响看历史，但打开会提示路径无效）：")
+        for r in no_dir[:6]:
+            info(f"    {r[1]}  ->  {r[2]}")
+
+    if not (hidden or dead or orphan or missing_space or deleted):
+        info("")
+        info("未发现归属/可见性问题。若仍看不到，请确认已完全退出并重启 WorkBuddy。")
+    else:
+        info("")
+        info("修复办法：确认 WorkBuddy 已退出，然后执行 pull（会自动改名 device_id 并归并同名项目）。")
+
+
 # --------------------------------------------------------------------------- #
 # export
 # --------------------------------------------------------------------------- #
@@ -761,8 +839,48 @@ def cmd_import(home: Path, args) -> None:
     stats = {"spaces": 0, "sessions": 0, "workspaces": 0, "session_usage": 0, "space_folders": 0}
     dirs_to_create = set()
     sf_cleared = set()
+    space_alias: dict = {}
+    merged_folders: list = []
     try:
         con.execute("BEGIN")
+
+        # --- 本机 device_id：spaces 是「本设备的本地空间」，device_id 写错会被侧边栏过滤掉 ---
+        target_device = None
+        dev_file = home / "device-id"
+        if dev_file.exists():
+            try:
+                target_device = dev_file.read_text(encoding="utf-8").strip() or None
+            except OSError:
+                target_device = None
+        if not target_device:
+            try:
+                row = con.execute("SELECT device_id FROM spaces WHERE device_id IS NOT NULL LIMIT 1").fetchone()
+                if row:
+                    target_device = row[0]
+            except sqlite3.Error:
+                pass
+
+        # --- 本机已有空间：路径 -> space_id，用于同名项目归并，避免出现两个同名分组 ---
+        local_space_paths: dict = {}
+        local_space_state: dict = {}
+        try:
+            for sid, pfp, st, dl in con.execute("SELECT id, primary_folder_path, status, deleted_at FROM spaces"):
+                local_space_state[sid] = (st, dl)
+                if pfp:
+                    local_space_paths[norm_path(pfp)] = sid
+            for sid, fp in con.execute("SELECT space_id, path FROM space_folders"):
+                if fp:
+                    local_space_paths.setdefault(norm_path(fp), sid)
+        except sqlite3.Error:
+            pass
+
+        # 预读空间目录绑定，供归并判断主路径
+        sf_paths_by_space: dict = {}
+        _sf_file = pkg / "db" / "space_folders.json"
+        if _sf_file.exists():
+            for _r in json.loads(_sf_file.read_text(encoding="utf-8")):
+                _np, _ = remap_cwd(_r.get("path") or "", mapping)
+                sf_paths_by_space.setdefault(_r.get("space_id"), _np)
         for table in ("spaces", "space_folders", "sessions", "workspaces", "session_usage"):
             f = pkg / "db" / f"{table}.json"
             if not f.exists():
@@ -772,6 +890,8 @@ def cmd_import(home: Path, args) -> None:
                 if table == "sessions":
                     new_cwd, _ = remap_cwd(r.get("cwd") or "", mapping)
                     r["cwd"] = new_cwd
+                    if r.get("space_id") in space_alias:
+                        r["space_id"] = space_alias[r["space_id"]]
                     if reassign and target_user:
                         r["user_id"] = target_user
                 elif table == "spaces":
@@ -781,11 +901,29 @@ def cmd_import(home: Path, args) -> None:
                         if r.get(col):
                             r[col], _ = remap_cwd(r[col], mapping)
                             dirs_to_create.add(r[col])
+                    if target_device:
+                        r["device_id"] = target_device
+                    # 本机已有指向同一路径的空间 -> 归并，不新增同名分组
+                    _cand = r.get("primary_folder_path") or sf_paths_by_space.get(r.get("id")) or ""
+                    _owner = local_space_paths.get(norm_path(_cand)) if _cand else None
+                    if _owner and _owner != r.get("id") and args.overwrite:
+                        space_alias[r.get("id")] = _owner
+                        _st, _dl = local_space_state.get(_owner, ("active", -1))
+                        if _st != "active" or _dl not in (-1, None):
+                            try:
+                                con.execute("UPDATE spaces SET status='active', deleted_at=-1 WHERE id=?", (_owner,))
+                            except sqlite3.Error:
+                                pass
+                        merged_folders.append((_owner, _cand))
+                        info(f"  空间归并：{r.get('name')} -> 本机已有空间 {_owner[:8]}")
+                        continue
                 elif table == "space_folders":
+                    _src_sid = r.get("space_id")
                     new_path, _ = remap_cwd(r.get("path") or "", mapping)
+                    r["space_id"] = space_alias.get(_src_sid, _src_sid)
                     r["path"] = new_path
                     dirs_to_create.add(new_path)
-                    if args.overwrite and r.get("space_id") not in sf_cleared:
+                    if args.overwrite and _src_sid not in space_alias and r.get("space_id") not in sf_cleared:
                         try:
                             con.execute("DELETE FROM space_folders WHERE space_id=?", (r["space_id"],))
                             sf_cleared.add(r["space_id"])
@@ -802,6 +940,12 @@ def cmd_import(home: Path, args) -> None:
                 res = insert_row(con, table, r, overwrite=args.overwrite)
                 if res != "skipped":
                     stats[table] += 1
+        for _sid, _path in merged_folders:
+            if _path:
+                try:
+                    con.execute("INSERT OR IGNORE INTO space_folders (space_id, path, sort_order) VALUES (?,?,0)", (_sid, _path))
+                except sqlite3.Error:
+                    pass
         con.commit()
     except sqlite3.Error as e:
         con.rollback()
@@ -870,6 +1014,8 @@ def cmd_import(home: Path, args) -> None:
     info(f"  workspaces    {stats['workspaces']}")
     info(f"  session_usage {stats['session_usage']}")
     info(f"  正文文件      {copied}（其中 {overwritten} 个覆盖了本机旧版本，已备份）")
+    if space_alias:
+        info(f"  空间归并      {len(space_alias)} 个（已挂到本机同名项目下）")
     if backup_failed:
         info(f"  [警告] {len(backup_failed)} 个旧文件备份失败（已照常写入远端版本）：")
         for path, err in backup_failed[:3]:
@@ -1370,6 +1516,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("list", help="列出所有项目与会话及其磁盘文件")
     sub.add_parser("verify", help="体检：检查会话正文是否完整可读")
+    sub.add_parser("doctor", help="诊断：项目/会话为何在侧边栏看不到")
 
     e = sub.add_parser("export", help="导出会话为迁移包")
     e.add_argument("--all", action="store_true", help="导出全部会话")
@@ -1426,6 +1573,7 @@ def main(argv: list[str] | None = None) -> int:
     handlers = {
         "list": cmd_list,
         "verify": cmd_verify,
+        "doctor": cmd_doctor,
         "export": cmd_export,
         "import": cmd_import,
         "git": cmd_git,
