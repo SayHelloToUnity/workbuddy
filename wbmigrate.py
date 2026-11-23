@@ -34,10 +34,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import sqlite3
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime
 from pathlib import Path
@@ -454,13 +456,16 @@ def session_assets(home: Path, session: dict) -> list[tuple[Path, Path]]:
     return pairs
 
 
+KEEP_IN_PKG = {".git", ".gitignore", ".gitattributes", "wbmigrate.py", "sync.cmd", "pull.cmd"}
+
+
 def clear_package_dir(pkg: Path) -> int:
     """清空包目录内容，但保留 .git —— 用于固定目录的增量同步。
     返回删除的条目数。
     """
     n = 0
     for item in pkg.iterdir():
-        if item.name == ".git":
+        if item.name in KEEP_IN_PKG:
             continue
         if item.is_dir():
             shutil.rmtree(item)
@@ -612,11 +617,22 @@ def cmd_export(home: Path, args) -> None:
     }
     (pkg / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # 把工具本身放进包，目标机无需另行获取
+    # 把工具本身放进包。若包目录就是脚本所在目录（在克隆里直接 sync），
+    # copy2 会因「源与目标同一文件」抛错，旧版因此把脚本永久删掉 —— 这里显式跳过。
     try:
-        shutil.copy2(Path(__file__).resolve(), pkg / "wbmigrate.py")
+        _src = Path(__file__).resolve()
+        _dst = (pkg / "wbmigrate.py").resolve()
+        if _src != _dst:
+            shutil.copy2(_src, _dst)
     except Exception as e:  # noqa: BLE001
         info(f"[提示] 未能把工具复制进包：{e}")
+
+    # 一键脚本随包发布，克隆端无需额外文件
+    try:
+        (pkg / "sync.cmd").write_text(SYNC_CMD, encoding="ascii", newline="\r\n")
+        (pkg / "pull.cmd").write_text(PULL_CMD, encoding="ascii", newline="\r\n")
+    except Exception as e:  # noqa: BLE001
+        info(f"[提示] 未能写入一键脚本：{e}")
 
     write_repo_meta(pkg)
 
@@ -1155,6 +1171,16 @@ echo  WorkBuddy PULL : remote --^> this PC
 echo ==================================================
 echo.
 
+rem ---- guard: refuse to pull inside the PUSH repo ----
+echo %~dp0 | "%SystemRoot%\System32\find.exe" /i "\_wb-sync\" >nul
+if not errorlevel 1 (
+  echo [ERROR] This folder is the PUSH repo, not a clone to pull into.
+  echo         Run sync.cmd here. Run pull.cmd inside your wb-chat clone.
+  echo.
+  set "RC_SCRIPT=1"
+  goto fin
+)
+
 rem ---- locate a real python (skip the Microsoft Store stub) ----
 set "PY="
 for /f "delims=" %%p in ('where python 2^>nul') do (
@@ -1321,6 +1347,21 @@ def run_git(args: list[str], cwd: Path) -> tuple[int, str]:
 
 def cmd_git(home: Path, args) -> None:
     pkg = Path(args.package).expanduser().resolve()
+    man = {}
+    mf = pkg / "manifest.json"
+    if mf.exists():
+        try:
+            man = json.loads(mf.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            man = {}
+    src_host = str((man.get("source") or {}).get("host") or "").lower()
+    if src_host and src_host == host_slug().lower() and not getattr(args, "force", False):
+        die(
+            "这份快照就是本机自己导出的，拉取它只会用旧数据覆盖本机。\n"
+            f"  快照来源主机：{man.get('source', {}).get('host')}\n"
+            "  应该用 sync.cmd 推送；确实要强制覆盖请加 --force。"
+        )
+
     if not (pkg / "manifest.json").exists():
         die(f"不是有效的迁移包：{pkg}")
     if shutil.which("git") is None:
@@ -1385,11 +1426,142 @@ def cmd_git(home: Path, args) -> None:
 # --------------------------------------------------------------------------- #
 # sync / pull —— 双向同步（远端为准）
 # --------------------------------------------------------------------------- #
+
+def _reverse_user_path(p: str) -> str:
+    """把另一台机器的 C:/Users/<name> 前缀换成本机用户目录，使合并进来的会话能显示。"""
+    if not p:
+        return p
+    cur = os.environ.get("USERPROFILE") or str(Path.home())
+    cur_n = cur.replace("\\", "/").rstrip("/")
+    t = p.replace("\\", "/")
+    m = re.match(r"^([A-Za-z]:/Users/)([^/]+)(/.*)?$", t, re.I)
+    if not m:
+        return p
+    if (m.group(1) + m.group(2)).lower() == cur_n.lower():
+        return p
+    return cur_n + (m.group(3) or "")
+
+
+MERGE_TABLES = (
+    ("sessions", lambda r: r.get("id")),
+    ("spaces", lambda r: r.get("id")),
+    ("space_folders", lambda r: (r.get("space_id"), r.get("path"))),
+    ("workspaces", lambda r: r.get("path")),
+)
+
+
+def stash_remote_only(pkg: Path, home: Path):
+    """导出前暂存「远端有、本机没有」的会话，避免两台机器互相删掉对方独有内容。"""
+    dbdir = pkg / "db"
+    if not dbdir.exists():
+        return None, {}, set()
+    tables = {}
+    for name, _key in MERGE_TABLES:
+        f = dbdir / f"{name}.json"
+        if not f.exists():
+            continue
+        try:
+            tables[name] = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+    rows = tables.get("sessions") or []
+    if not rows:
+        return None, tables, set()
+    local_ids = {x["id"] for x in list_sessions(home)}
+    extra = [r for r in rows if r.get("id") and r["id"] not in local_ids]
+    if not extra:
+        return None, tables, set()
+    keep = {r["id"] for r in extra}
+    tmp = Path(tempfile.mkdtemp(prefix="wbmerge-"))
+    proj = pkg / "projects"
+    if proj.exists():
+        for enc_dir in proj.iterdir():
+            if not enc_dir.is_dir():
+                continue
+            for item in enc_dir.iterdir():
+                sid = item.name[:-6] if item.name.endswith(".jsonl") else item.name
+                if sid not in keep:
+                    continue
+                dst = tmp / "projects" / enc_dir.name / item.name
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                try:
+                    if item.is_dir():
+                        shutil.copytree(item, dst)
+                    else:
+                        shutil.copy2(item, dst)
+                except OSError:
+                    pass
+    return tmp, tables, keep
+
+
+def restore_remote_only(pkg: Path, tmp, tables: dict, extra_ids: set) -> int:
+    """把暂存的远端独有内容合并回新快照，路径按本机用户名重写。"""
+    added = 0
+    if tmp is not None and (tmp / "projects").exists():
+        for f in (tmp / "projects").rglob("*"):
+            if not f.is_file():
+                continue
+            parts = f.relative_to(tmp).parts
+            dst = pkg / Path(*parts)
+            if len(parts) >= 3 and parts[0] == "projects":
+                sid = parts[2][:-6] if parts[2].endswith(".jsonl") else parts[2]
+                row = next((r for r in (tables.get("sessions") or []) if r.get("id") == sid), None)
+                new_cwd = _reverse_user_path((row or {}).get("cwd") or "")
+                if new_cwd:
+                    dst = pkg / "projects" / encode_project_dir(new_cwd) / Path(*parts[2:])
+            try:
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(f, dst)
+                added += 1
+            except OSError:
+                pass
+    if not extra_ids:
+        return added
+    for name, key in MERGE_TABLES:
+        rows = tables.get(name)
+        if not rows:
+            continue
+        if name == "sessions":
+            rows = [r for r in rows if r.get("id") in extra_ids]
+            if not rows:
+                continue
+        f = pkg / "db" / f"{name}.json"
+        cur = []
+        if f.exists():
+            try:
+                cur = json.loads(f.read_text(encoding="utf-8"))
+            except ValueError:
+                cur = []
+        have = {key(r) for r in cur}
+        for r in rows:
+            r = dict(r)
+            if name == "sessions" and r.get("cwd"):
+                r["cwd"] = _reverse_user_path(r["cwd"])
+            elif name == "spaces":
+                for c in ("primary_folder_path", "create_folder_path"):
+                    if r.get(c):
+                        r[c] = _reverse_user_path(r[c])
+            elif name == "space_folders" and r.get("path"):
+                r["path"] = _reverse_user_path(r["path"])
+            k = key(r)
+            if k in have:
+                continue
+            cur.append(r)
+            have.add(k)
+            added += 1
+        try:
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(json.dumps(cur, ensure_ascii=False, indent=2), encoding="utf-8")
+        except OSError:
+            pass
+    return added
+
+
 def cmd_sync(home: Path, args) -> None:
     """本机 → 远端。每次先对齐 origin/main，再整体重建快照并推送。"""
     repo = Path(args.repo).expanduser().resolve()
-    pkg = resolve_pkg(repo, args.dir_name)
-    gitroot = find_git_root(pkg) or pkg
+    gitroot = find_git_root(repo) or repo
+    pkg = repo  # 真正的包目录在 reset 之后判定（reset 前工作区可能缺 manifest.json）
 
     if shutil.which("git") is None:
         die("未检测到 git，请先安装 Git for Windows。")
@@ -1399,17 +1571,6 @@ def cmd_sync(home: Path, args) -> None:
             run_git(["init"], gitroot)
         info(f"已初始化仓库：{gitroot}")
 
-    ns = argparse.Namespace(
-        all=True,
-        project=None,
-        session=None,
-        output=str(pkg.parent),
-        name=None,
-        dir_name=pkg.name,
-        replace=True,
-        with_files=args.with_files,
-    )
-
     last_out = ""
     for attempt in range(1, 4):
         # 远端为准：先丢弃仓库里的本地快照，避免与远端分叉
@@ -1418,7 +1579,29 @@ def cmd_sync(home: Path, args) -> None:
             run_git(["reset", "--hard", "origin/main"], gitroot)
             info("已对齐远端（reset --hard origin/main）")
 
+        pkg = resolve_pkg(repo, args.dir_name)
+        ns = argparse.Namespace(
+            all=True,
+            project=None,
+            session=None,
+            output=str(pkg.parent),
+            name=None,
+            dir_name=pkg.name,
+            replace=True,
+            with_files=args.with_files,
+        )
+
+        stash_dir, stash_tables, extra_ids = stash_remote_only(pkg, home)
+        if extra_ids:
+            info(f"检测到远端独有会话 {len(extra_ids)} 个，导出后合并保留")
+
         cmd_export(home, ns)
+
+        if extra_ids:
+            n = restore_remote_only(pkg, stash_dir, stash_tables, extra_ids)
+            info(f"已合并远端独有内容 {n} 项（{len(extra_ids)} 个会话）")
+        if stash_dir is not None:
+            shutil.rmtree(stash_dir, ignore_errors=True)
 
         ok, cmsg = commit_all(
             gitroot, f"wb chat snapshot {time.strftime('%Y-%m-%d %H:%M')} from {host_slug()}"
@@ -1548,6 +1731,7 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--with-files", action="store_true", help="一并同步工作区文件")
 
     pl = sub.add_parser("pull", help="远端 → 本机：拉取并以覆盖方式写入")
+    pl.add_argument("--force", action="store_true", help="即使快照由本机生成也强制拉取")
     pl.add_argument("--repo", required=True, help="仓库或包目录")
     pl.add_argument("--dir-name", help="仓库根不是包时，指定子目录名")
     pl.add_argument("--dry-run", action="store_true", help="只预览不写入")

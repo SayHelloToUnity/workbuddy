@@ -8,6 +8,16 @@ echo  WorkBuddy PULL : remote --^> this PC
 echo ==================================================
 echo.
 
+rem ---- guard: refuse to pull inside the PUSH repo ----
+echo %~dp0 | "%SystemRoot%\System32\find.exe" /i "\_wb-sync\" >nul
+if not errorlevel 1 (
+  echo [ERROR] This folder is the PUSH repo, not a clone to pull into.
+  echo         Run sync.cmd here. Run pull.cmd inside your wb-chat clone.
+  echo.
+  set "RC_SCRIPT=1"
+  goto fin
+)
+
 rem ---- locate a real python (skip the Microsoft Store stub) ----
 set "PY="
 for /f "delims=" %%p in ('where python 2^>nul') do (
