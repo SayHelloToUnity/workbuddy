@@ -1,0 +1,15 @@
+[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":292,"threshold":50,"scope":"turn","targets":["C:/Users/56583/WorkBuddy/_clone-test"],"targetCount":1}
+    -> C:/Users/lisi/WorkBuddy/2026-10-28-18-51-07
+  C:/Users/56583/WorkBuddy/2026-11-17-09-55-25
+    -> C:/Users/lisi/WorkBuddy/2026-11-17-09-55-25
+  C:/Users/56583/WorkBuddy/2026-11-17-16-14-03
+    -> C:/Users/lisi/WorkBuddy/2026-11-17-16-14-03
+  C:/Users/56583/WorkBuddy/手术数据
+    -> C:/Users/lisi/WorkBuddy/手术数据
+  C:\Users\56583\WorkBuddy\Claw
+    -> C:/Users/lisi/WorkBuddy/Claw
+
+
+dry-run 结束，未写入任何内容。确认无误后加 --apply 执行。
+=== 仓库大小 ===
+21M	/c/Users/56583/WorkBuddy/_clone-test

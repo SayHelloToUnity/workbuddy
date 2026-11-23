@@ -659,7 +659,12 @@ def cmd_import(home: Path, args) -> None:
     changed = [p for p in plan if norm_path(p["old_cwd"]) != norm_path(p["new_cwd"])]
     if changed:
         info("路径变化明细:")
+        seen = set()
         for p in changed:
+            key = (p["old_cwd"], p["new_cwd"])
+            if key in seen:
+                continue
+            seen.add(key)
             info(f"  {p['old_cwd']}")
             info(f"    -> {p['new_cwd']}")
         info("")
