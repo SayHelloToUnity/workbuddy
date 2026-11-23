@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+import zipfile, os
+from xml.etree import ElementTree as ET
+
+BASE = r'C:/Users/56583/Desktop/静脉输液手术数据'
+xp = os.path.join(BASE, '静脉输液评分结构图.xmind')
+mp = os.path.join(BASE, '静脉输液评分结构图.mm')
+
+print('=== 校验 .xmind ===')
+z = zipfile.ZipFile(xp)
+print('内部文件:', z.namelist())
+bad = z.testzip()
+print('zip 完整性:', '正常' if bad is None else '损坏 ' + str(bad))
+c = ET.fromstring(z.read('content.xml'))
+ET.fromstring(z.read('META-INF/manifest.xml'))
+ET.fromstring(z.read('meta.xml'))
+ET.fromstring(z.read('styles.xml'))
+print('全部 XML 解析通过')
+
+NS = '{urn:xmind:xmap:xmlns:content:2.0}'
+topics = c.iter(NS + 'topic')
+cnt = 0; titles = []
+for t in c.iter(NS + 'topic'):
+    cnt += 1
+    ti = t.find(NS + 'title')
+    if ti is not None: titles.append(ti.text)
+print('topic 总数:', cnt)
+root_topic = c.find(NS + 'sheet').find(NS + 'topic')
+print('根节点:', root_topic.find(NS + 'title').text)
+lvl1 = root_topic.find(NS + 'children').find(NS + 'topics').findall(NS + 'topic')
+print('第 1 层节点数:', len(lvl1))
+for n in lvl1:
+    ch = n.find(NS + 'children')
+    s = len(ch.find(NS + 'topics').findall(NS + 'topic')) if ch is not None else 0
+    print('   ', n.find(NS + 'title').text, '| 子节点', s)
+
+print()
+print('=== 校验 .mm ===')
+m = ET.parse(mp).getroot()
+print('root tag:', m.tag, m.attrib)
+def walk(n, d=0):
+    cn = n.findall('node')
+    return 1 + sum(walk(x, d + 1) for x in cn)
+print('node 总数:', walk(m))
+print('第 1 层:', [x.get('TEXT') for x in m.findall('node')])

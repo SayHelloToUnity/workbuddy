@@ -1,0 +1,361 @@
+{
+  "version": 2,
+  "changes": [
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1ced8ca8273118e0e24129f03f026",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1ced8ca8273118e0e24129f03f026",
+      "summary": "2 个文件变更，+152 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "create",
+          "additions": 131,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "create",
+          "additions": 21,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 2,
+      "additions": 152,
+      "deletions": 0,
+      "createdAt": 1794471899372,
+      "revision": "198641ee-e4c9-4e6e-92fc-6100887381c7",
+      "detailRef": "cd_a970567c-df4f-48f9-a741-ddae0be32363.198641ee-e4c9-4e6e-92fc-6100887381c7.json",
+      "checkpointId": "01a1cedc-52dd-7049-b163-4c8296ef5a37"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1cee749b57537a8d6c0680f12250c",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1cee749b57537a8d6c0680f12250c",
+      "summary": "2 个文件变更，+152 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "modify",
+          "additions": 131,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "modify",
+          "additions": 21,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 2,
+      "additions": 152,
+      "deletions": 0,
+      "createdAt": 1794472627382,
+      "revision": "e32c20c4-df15-4389-af26-4d39dbe73300",
+      "detailRef": "cd_da6da854-547d-4252-acba-6cfa1ab05712.e32c20c4-df15-4389-af26-4d39dbe73300.json",
+      "checkpointId": "01a1cee7-4cb6-7a00-a3a0-d42dc9f330ff"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1cee93e6c702d96c5169e2def6d56",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1cee93e6c702d96c5169e2def6d56",
+      "summary": "2 个文件变更，+152 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "modify",
+          "additions": 131,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "modify",
+          "additions": 21,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 2,
+      "additions": 152,
+      "deletions": 0,
+      "createdAt": 1794472755257,
+      "revision": "a9d0f97e-3ede-4a4a-a67b-6a500a616175",
+      "detailRef": "cd_54f4c315-0519-469f-817d-f0fbd56c131e.a9d0f97e-3ede-4a4a-a67b-6a500a616175.json",
+      "checkpointId": "01a1cee9-4039-79c9-aeb2-4af13f5dba38"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1ceec754b71ffa21a445e5da8de74",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1ceec754b71ffa21a445e5da8de74",
+      "summary": "2 个文件变更，+152 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "modify",
+          "additions": 131,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "modify",
+          "additions": 21,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 2,
+      "additions": 152,
+      "deletions": 0,
+      "createdAt": 1794472966041,
+      "revision": "3de93d3c-70b9-4c70-a07c-1189be62b7e9",
+      "detailRef": "cd_7d0017f3-654a-4084-94ca-f99a94db4f24.3de93d3c-70b9-4c70-a07c-1189be62b7e9.json",
+      "checkpointId": "01a1ceec-7799-7821-a066-95fcc0051518"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1ceee7f5678b3bd1b7e3c584d97ab",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1ceee7f5678b3bd1b7e3c584d97ab",
+      "summary": "2 个文件变更，+184 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "modify",
+          "additions": 163,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "modify",
+          "additions": 21,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 2,
+      "additions": 184,
+      "deletions": 0,
+      "createdAt": 1794473104181,
+      "revision": "ce7c1e70-f266-4566-9938-0c20e4e15ae0",
+      "detailRef": "cd_4941024b-7280-45d8-b003-972cc5f0c2df.ce7c1e70-f266-4566-9938-0c20e4e15ae0.json",
+      "checkpointId": "01a1cef3-cff8-7ebd-9814-bba4ce06b382"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1cf021edd7343b2b58361877bc09b",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1cf021edd7343b2b58361877bc09b",
+      "summary": "3 个文件变更，+281 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "modify",
+          "additions": 163,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "modify",
+          "additions": 30,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\sandbox-result.md",
+          "action": "create",
+          "additions": 88,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 3,
+      "additions": 281,
+      "deletions": 0,
+      "createdAt": 1794474385699,
+      "revision": "daad2eee-b791-4f5f-ad3d-90f3458391a2",
+      "detailRef": "cd_72cae3a1-52f5-439a-9ba0-c8cbec5e3464.daad2eee-b791-4f5f-ad3d-90f3458391a2.json",
+      "checkpointId": "01a1cf11-10c0-7388-8d94-1547414dcf49"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1cf15f0947320892822fd64923be6",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1cf15f0947320892822fd64923be6",
+      "summary": "4 个文件变更，+509 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\merge-report.md",
+          "action": "modify",
+          "additions": 163,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-12.md",
+          "action": "modify",
+          "additions": 41,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\sandbox-result.md",
+          "action": "modify",
+          "additions": 88,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        },
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\merge-preview\\execution-plan.md",
+          "action": "create",
+          "additions": 217,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 4,
+      "additions": 509,
+      "deletions": 0,
+      "createdAt": 1794475684420,
+      "revision": "80abdd45-7879-432a-8757-676e322c221a",
+      "detailRef": "cd_440b56d0-7fa1-4c44-92f7-93f576944b18.80abdd45-7879-432a-8757-676e322c221a.json",
+      "checkpointId": "01a1cf1c-e276-7162-9b69-3396db456b6b"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1e1d84db77f5eb794189a8e3c3933",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1e1d84db77f5eb794189a8e3c3933",
+      "summary": "1 个文件变更，+10 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-16.md",
+          "action": "create",
+          "additions": 10,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 10,
+      "deletions": 0,
+      "createdAt": 1794791398746,
+      "revision": "ec5cf0ec-dd4e-4bf8-9c86-c437cfdfa8ac",
+      "detailRef": "cd_15668f2c-fca6-4132-9064-8ecc2bbfd6c1.ec5cf0ec-dd4e-4bf8-9c86-c437cfdfa8ac.json",
+      "checkpointId": "01a1e1e7-5d78-7bc8-b08d-9ba589fea413"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1e1ec9b2e7d6f89953eb8e453fa1c",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1e1ec9b2e7d6f89953eb8e453fa1c",
+      "summary": "1 个文件变更，+12 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-16.md",
+          "action": "modify",
+          "additions": 12,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 12,
+      "deletions": 0,
+      "createdAt": 1794791746618,
+      "revision": "b76144a7-bb25-490c-9e58-a861912e2673",
+      "detailRef": "cd_f9e106fc-9769-4601-8d83-ce324a511812.b76144a7-bb25-490c-9e58-a861912e2673.json",
+      "checkpointId": "01a1e1ed-ba4c-7513-a008-5b214e851bec"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1e1f715f677b7b5956bba97d80eed",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1e1f715f677b7b5956bba97d80eed",
+      "summary": "1 个文件变更，+13 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-16.md",
+          "action": "modify",
+          "additions": 13,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 13,
+      "deletions": 0,
+      "createdAt": 1794792430139,
+      "revision": "3bab131b-dc0d-40c0-a520-b57be4fca5e4",
+      "detailRef": "cd_794ddac3-b19d-418f-aaff-8048fb5602fa.3bab131b-dc0d-40c0-a520-b57be4fca5e4.json",
+      "checkpointId": "01a1e1f7-d8f7-7afe-87da-01f2fcd0a8e5"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1e1f8bf3b77318e5fda0ba2c617b5",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1e1f8bf3b77318e5fda0ba2c617b5",
+      "summary": "1 个文件变更，+14 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-16.md",
+          "action": "modify",
+          "additions": 14,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 14,
+      "deletions": 0,
+      "createdAt": 1794792538392,
+      "revision": "927264a1-d303-45dc-b5d7-99913e3791da",
+      "detailRef": "cd_02e0b5f9-4ffa-4dd6-898d-9fafa4b620f0.927264a1-d303-45dc-b5d7-99913e3791da.json",
+      "checkpointId": "01a1e1f9-8f6d-7d41-9183-333521e29e42"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1e1fb6b6276d2adcfd70c79849745",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1e1fb6b6276d2adcfd70c79849745",
+      "summary": "1 个文件变更，+14 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-16.md",
+          "action": "modify",
+          "additions": 14,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 14,
+      "deletions": 0,
+      "createdAt": 1794792713692,
+      "revision": "62b93c55-5b55-4dec-9a52-db18285fd568",
+      "detailRef": "cd_825141eb-0740-4af8-b733-853b7a7aa99b.62b93c55-5b55-4dec-9a52-db18285fd568.json",
+      "checkpointId": "01a1e1fb-6ddc-71b3-8095-674e879b4691"
+    },
+    {
+      "id": "73f47f13-261c-4b80-bd9f-d30ab52134b8,01a1e2363d36710d9c659e016f0cc915",
+      "conversationId": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
+      "requestId": "01a1e2363d36710d9c659e016f0cc915",
+      "summary": "1 个文件变更，+15 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\mcframework\\.workbuddy\\memory\\2026-11-16.md",
+          "action": "modify",
+          "additions": 15,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 15,
+      "deletions": 0,
+      "createdAt": 1794796568416,
+      "revision": "2b579c86-2bc8-4a06-af40-816f8c80ae88",
+      "detailRef": "cd_ea4b730e-1478-42df-bcc4-327adf0b2c34.2b579c86-2bc8-4a06-af40-816f8c80ae88.json",
+      "checkpointId": "01a1e23a-1ef1-766e-9734-7c508bc3a507"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+@echo off
+chcp 65001 >nul
+setlocal
+
+rem ============================================================
+rem  WorkBuddy 会话一键同步（增量快照 + git 提交/推送）
+rem  修改 REPO 可换仓库位置；首次使用需先绑定远端：
+rem    cd "%REPO%\snapshot"
+rem    git remote add origin <你的私有仓库地址>
+rem    git push -u origin HEAD
+rem ============================================================
+
+set "SCRIPT=%~dp0wbmigrate.py"
+set "REPO=C:\Users\56583\WorkBuddy\_wb-sync"
+
+where python >nul 2>nul
+if errorlevel 1 (
+  set "PY=C:\Users\56583\.workbuddy\binaries\python\versions\3.13.12\python.exe"
+) else (
+  set "PY=python"
+)
+
+echo [1/2] 导出会话快照...
+"%PY%" "%SCRIPT%" export --all -o "%REPO%" --dir-name snapshot --replace
+if errorlevel 1 (
+  echo 导出失败，已中止。
+  exit /b 1
+)
+
+echo.
+echo [2/2] 提交并推送...
+"%PY%" "%SCRIPT%" git "%REPO%\snapshot"
+if errorlevel 1 (
+  echo 提交或推送失败，请查看上方输出。
+  exit /b 1
+)
+
+echo.
+echo 同步流程结束。
+endlocal

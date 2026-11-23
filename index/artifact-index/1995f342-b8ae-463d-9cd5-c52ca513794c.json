@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "lastUpdated": 1793165779777,
+  "artifacts": [
+    {
+      "name": "静脉输血2026.10.23.bak-1026.xlsx",
+      "title": "静脉输血2026.10.23.bak-1026.xlsx",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 40585,
+      "createdAt": 1793154450178,
+      "updatedAt": 1793154450178,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%802026.10.23.bak-1026.xlsx",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a18054dc007a219b08ee39bea6316d",
+        "codebuddy.ai/requestId": "01a18054dc007a219b08ee39bea6316d",
+        "createdByRequestId": "01a18054dc007a219b08ee39bea6316d",
+        "touchedByRequestIds": [
+          "01a18054dc007a219b08ee39bea6316d",
+          "01a1810246d67744aac1e548b49a3f48"
+        ]
+      }
+    },
+    {
+      "name": "静脉输血2026.10.23.xlsx",
+      "title": "静脉输血2026.10.23.xlsx",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 40377,
+      "createdAt": 1793150941128,
+      "updatedAt": 1793156795407,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%802026.10.23.xlsx",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "codebuddy.ai/requestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "createdByRequestId": "01a18054dc007a219b08ee39bea6316d",
+        "touchedByRequestIds": [
+          "01a18054dc007a219b08ee39bea6316d",
+          "01a1805b538875eb8b80e6800498654b",
+          "01a1805eb8fe7f258e88d8022b0bca53",
+          "01a18068bc8170a088cc15a728bfa9ae",
+          "01a1806c0fb97dde9996591f546106bc",
+          "01a1810246d67744aac1e548b49a3f48"
+        ],
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_v7bPWQwLKlhGopEWJQ6k3565"
+      }
+    },
+    {
+      "name": "静脉输血2026.10.23.bak-1028.xlsx",
+      "title": "静脉输血2026.10.23.bak-1028.xlsx",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 40283,
+      "createdAt": 1793155074617,
+      "updatedAt": 1793155074617,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%802026.10.23.bak-1028.xlsx",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a1805eb8fe7f258e88d8022b0bca53",
+        "codebuddy.ai/requestId": "01a1805eb8fe7f258e88d8022b0bca53",
+        "createdByRequestId": "01a1805eb8fe7f258e88d8022b0bca53",
+        "touchedByRequestIds": [
+          "01a1805eb8fe7f258e88d8022b0bca53",
+          "01a1810246d67744aac1e548b49a3f48"
+        ]
+      }
+    },
+    {
+      "name": "静脉输血评分结构图.mm",
+      "title": "静脉输血评分结构图.mm",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 4490,
+      "createdAt": 1793155265023,
+      "updatedAt": 1793155265024,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE.mm",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_KVxcHO9fXrA3btmS7Z6I4301",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a18060b0f37a71837fd06ea685d281",
+        "codebuddy.ai/requestId": "01a18060b0f37a71837fd06ea685d281",
+        "createdByRequestId": "01a18060b0f37a71837fd06ea685d281",
+        "touchedByRequestIds": [
+          "01a18060b0f37a71837fd06ea685d281"
+        ]
+      }
+    },
+    {
+      "name": "静脉输血评分结构图.xmind",
+      "title": "静脉输血评分结构图.xmind",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 211699,
+      "createdAt": 1793155265028,
+      "updatedAt": 1793155798607,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE.xmind",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_v7bPWQwLKlhGopEWJQ6k3565",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "codebuddy.ai/requestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "createdByRequestId": "01a18060b0f37a71837fd06ea685d281",
+        "touchedByRequestIds": [
+          "01a18060b0f37a71837fd06ea685d281",
+          "01a18068bc8170a088cc15a728bfa9ae"
+        ]
+      }
+    },
+    {
+      "name": "静脉输血2026.10.23.bak-1049.xlsx",
+      "title": "静脉输血2026.10.23.bak-1049.xlsx",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 33517,
+      "createdAt": 1793155808063,
+      "updatedAt": 1793155808063,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%802026.10.23.bak-1049.xlsx",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "codebuddy.ai/requestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "createdByRequestId": "01a18068bc8170a088cc15a728bfa9ae",
+        "touchedByRequestIds": [
+          "01a18068bc8170a088cc15a728bfa9ae",
+          "01a1810246d67744aac1e548b49a3f48"
+        ]
+      }
+    },
+    {
+      "name": "静脉输血2026.10.23.bak-1052.xlsx",
+      "title": "静脉输血2026.10.23.bak-1052.xlsx",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 33497,
+      "createdAt": 1793155937039,
+      "updatedAt": 1793155937040,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%80/%E9%9D%99%E8%84%89%E8%BE%93%E8%A1%802026.10.23.bak-1052.xlsx",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "1995f342-b8ae-463d-9cd5-c52ca513794c",
+        "requestId": "01a1806c0fb97dde9996591f546106bc",
+        "codebuddy.ai/requestId": "01a1806c0fb97dde9996591f546106bc",
+        "createdByRequestId": "01a1806c0fb97dde9996591f546106bc",
+        "touchedByRequestIds": [
+          "01a1806c0fb97dde9996591f546106bc",
+          "01a1810246d67744aac1e548b49a3f48"
+        ]
+      }
+    }
+  ]
+}

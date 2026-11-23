@@ -1,0 +1,783 @@
+===== a 路径集合变化 =====
+旧=97 新=93
+-- 新增 --
+MCFramework/Assets/AddressableAssetsData/AddressableAssetSettings.asset
+MCFramework/Assets/BaseRes/BasePrefabs/MainPanel/MainPanel.prefab
+MCFramework/Assets/BaseRes/BasePrefabs/MainPanel/TipBg.prefab
+MCFramework/Assets/BaseRes/BasePrefabs/PatientCommunication/AiChatPanel.prefab
+MCFramework/Assets/BaseRes/BasePrefabs/PatientCommunication/AiChatPanel.prefab.meta
+MCFramework/Assets/BaseRes/BasePrefabs/PatientCommunication/OperationChatPanel.prefab
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWaveAnimator.controller
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWaveAnimator.controller.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_1.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_1.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_2.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_2.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_3.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_3.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_4.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_4.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_5.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_5.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.controller
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.controller.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪2@1x.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪2@1x.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪3@1x.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪3@1x.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪4@1x.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪4@1x.png.meta
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪5@1x.png
+MCFramework/Assets/BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪5@1x.png.meta
+MCFramework/Assets/BaseRes/VoiceHelper/Shaders/Base_MSA.shadergraph
+MCFramework/Assets/BaseRes/VoiceHelper/Shaders/Base_MSA.shadergraph.meta
+MCFramework/Assets/BaseRes/VoiceHelper/Shaders/Sub/Sub_MSA.shadersubgraph
+MCFramework/Assets/MCFramework/Editor/Validation.meta
+MCFramework/Assets/MCFramework/Editor/Validation/UISpriteAnimatorValidator.cs
+MCFramework/Assets/MCFramework/Editor/Validation/UISpriteAnimatorValidator.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Command/AIInquiryCommand.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/AIChatPanelCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/BaseChatMgr.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/BaseChatPanelCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/BasePatientChatErrorCorrectionPanelCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/BasePatientChatPanelCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/ChatRule.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/ChatRule.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/PatientCommunicationItem.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AsrManager.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/AsrSinglePassCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/BaiDuAsr.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/BaiDuAsr.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/Helper/HighPerformanceAudioSender.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/Helper/InstructionCodeMatcher.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/KeDaXunFeiAsr.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/AI/KeDaXunFeiAsr.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseTipsCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/UIImageFrameAnimation.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/UIImageFrameAnimation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/DetectHardware/DetectHardwareSignalManager.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Manager/PluginManager.cs
+MCFramework/Assets/New Universal Render Pipeline Asset_Renderer.asset
+MCFramework/Assets/RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/8d51fcec242521a41a56a9b17c2edab3.userdata
+MCFramework/Assets/RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/8d51fcec242521a41a56a9b17c2edab3.userdata.meta
+MCFramework/Assets/RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/96d77769d3bf035459fb6cece1314985.userdata
+MCFramework/Assets/RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/96d77769d3bf035459fb6cece1314985.userdata.meta
+MCFramework/Assets/SseStreamDebug.cs
+MCFramework/Assets/SseStreamDebug.cs.meta
+MCFramework/Assets/SseTest.meta
+MCFramework/Assets/SseTest/SSEDownloadHandler.cs
+MCFramework/Assets/SseTest/SSEDownloadHandler.cs.meta
+-- 消失 --
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWaveAnimator.controller
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWaveAnimator.controller.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_1.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_1.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_2.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_2.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_3.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_3.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_4.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_4.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_5.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/SoundWave_5.png.meta
+MCFramework/Editor/Validation.meta
+MCFramework/Editor/Validation/UISpriteAnimatorValidator.cs
+MCFramework/Editor/Validation/UISpriteAnimatorValidator.cs.meta
+MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/ChatRule.cs
+MCFramework/Runtime/BaseLibrary/Control/AI/AiChat/ChatRule.cs.meta
+MCFramework/Runtime/BaseLibrary/Control/UIImageFrameAnimation.cs
+MCFramework/Runtime/BaseLibrary/Control/UIImageFrameAnimation.cs.meta
+MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashedLine.cs
+MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashedLine.cs.meta
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/2dcf5ea6571d7a546889698256362a84.userdata
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/2dcf5ea6571d7a546889698256362a84.userdata.meta
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/8d51fcec242521a41a56a9b17c2edab3.userdata
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/8d51fcec242521a41a56a9b17c2edab3.userdata.meta
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/96d77769d3bf035459fb6cece1314985.userdata
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/96d77769d3bf035459fb6cece1314985.userdata.meta
+SseStreamDebug.cs
+SseStreamDebug.cs.meta
+SseTest.meta
+SseTest/SSEDownloadHandler.cs
+SseTest/SSEDownloadHandler.cs.meta
+StreamingAssets/StandaloneWindows
+StreamingAssets/StandaloneWindows.manifest
+StreamingAssets/StandaloneWindows.manifest.meta
+StreamingAssets/StandaloneWindows.meta
+StreamingAssets/baseaudio
+StreamingAssets/baseaudio.manifest
+StreamingAssets/baseaudio.manifest.meta
+StreamingAssets/baseaudio.meta
+StreamingAssets/baseprefabs
+StreamingAssets/baseprefabs.manifest
+StreamingAssets/baseprefabs.manifest.meta
+StreamingAssets/baseprefabs.meta
+StreamingAssets/fonts
+StreamingAssets/fonts.manifest
+StreamingAssets/fonts.manifest.meta
+StreamingAssets/fonts.meta
+StreamingAssets/graphscene
+StreamingAssets/graphscene.manifest
+StreamingAssets/graphscene.manifest.meta
+StreamingAssets/graphscene.meta
+StreamingAssets/graphsceneprefabs
+StreamingAssets/graphsceneprefabs.manifest
+StreamingAssets/graphsceneprefabs.manifest.meta
+StreamingAssets/graphsceneprefabs.meta
+StreamingAssets/loadingpanel
+StreamingAssets/loadingpanel.manifest
+StreamingAssets/loadingpanel.manifest.meta
+StreamingAssets/loadingpanel.meta
+StreamingAssets/materials
+StreamingAssets/materials.manifest
+StreamingAssets/materials.manifest.meta
+StreamingAssets/materials.meta
+StreamingAssets/teachmodelprefab
+StreamingAssets/teachmodelprefab.manifest
+StreamingAssets/teachmodelprefab.manifest.meta
+StreamingAssets/teachmodelprefab.meta
+StreamingAssets/texture
+StreamingAssets/texture.manifest
+StreamingAssets/texture.manifest.meta
+StreamingAssets/texture.meta
+===== b 路径集合变化 =====
+旧=297 新=388
+-- 新增 --
+MCFramework/Assets/AddressableAssetsData/AssetGroups/BaseGraph.asset
+MCFramework/Assets/BaseRes/BasePrefabs/CaseSelect/BranchCaseZhaoHuItem.prefab
+MCFramework/Assets/BaseRes/BasePrefabs/CaseSelect/BranchCaseZhaoHuItem.prefab.meta
+MCFramework/Assets/BaseRes/BasePrefabs/CaseSelect/SelectBranchPanel.prefab
+MCFramework/Assets/BaseRes/BasePrefabs/MainPanel/KnowledgePanel.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationArrow.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationArrow.prefab.meta
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationOrder.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationOrder.prefab.meta
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationArrow.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationArrow.prefab.meta
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationOrder.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationOrder.prefab.meta
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/CameraFilterBtnPrefab.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/CameraFilterBtnPrefab.prefab.meta
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/LinkVideoItem.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/OperationVideoItem.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/VideoItem.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplyVideoMenuItem.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplyVideoMenuItem.prefab.meta
+MCFramework/Assets/BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ScoreDetailItem.prefab
+MCFramework/Assets/BaseRes/Chart and Graph Res/Textures/Video_1.renderTexture
+MCFramework/Assets/BaseRes/Chart and Graph Res/Textures/Video_2.renderTexture
+MCFramework/Assets/BaseRes/Chart and Graph Res/Textures/Video_SingleModel.renderTexture
+MCFramework/Assets/BaseRes/Chart and Graph Res/Textures/Video_SingleModel.renderTexture.meta
+MCFramework/Assets/BaseRes/Fonts/Alibaba-PuHuiTi-Regular SDF.asset
+MCFramework/Assets/BaseRes/TestVideo/screenshot_1.mp4
+MCFramework/Assets/BaseRes/TestVideo/screenshot_1.mp4.meta
+MCFramework/Assets/BaseRes/TestVideo/screenshot_2.mp4
+MCFramework/Assets/BaseRes/TestVideo/screenshot_2.mp4.meta
+MCFramework/Assets/BaseRes/Texture/TableSceneUI/联集 18.png
+MCFramework/Assets/BaseRes/Texture/TableSceneUI/联集 18.png.meta
+MCFramework/Assets/MCFramework/Addressable.unitypackage.meta
+MCFramework/Assets/MCFramework/PipelineSet/GlassBlur/SeparableBlur.mat.meta
+MCFramework/Assets/MCFramework/PipelineSet/GlassBlur/blurTex.renderTexture.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Command/BaseCommand.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Command/MatchingQuestionCommand.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Command/VoiceTipCommand.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Config/BaseTimelineEventConfig.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Config/BaseTimelineEventConfig.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseCaseSelectPanel/BaseSelectBranchPanel.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseKnowledge/BaseKnowledgePanel.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseMatchingQuestionCtrl/MatchingQuestionPanel.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseSelect/BaseSelect.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseSelect/NewBaseSelect/ImageOptionItem.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/BaseSelect/NewBaseSelect/TextImageOptionItem.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Control/MainPanel/MainUICtrl.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/GameFacade.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Manager/AudioManager.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Manager/TextureManager.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/Generated/Common.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/LocalReportBuilder.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/LocalReportBuilder.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/LocalScoreCalculator.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/LocalScoreCalculator.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/MockTrainReportFactory.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/MockTrainReportFactory.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreDataTypes.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreDataTypes.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Record.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Record.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Report.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Report.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Submit.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Submit.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Model/ScoreModel.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/AllPowerfulOperation.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/AllPowerfulOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionInBaseSelectToolsOperation.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionInBaseSelectToolsOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionOperation.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseClickObjOperation.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseClickObjOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseDefaultOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseJudgeCaseOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BasePlayTimelineOperation.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BasePlayTimelineOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseSCQDOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseSelectToolsOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Operation/BaseSignZQTYSOperation.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Utils/BaseUIDrag.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashLine.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashLine.cs.meta
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashedLine.cs
+MCFramework/Assets/MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashedLine.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/BrokenLineGraph/AllScoreDataLineGraphItemCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/BrokenLineGraph/DimensionScoreLineGraph.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/MyGraph/DrawDashLine.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/MyGraph/UIRadarGraphManager.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/LinkVideoItemCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/OperationVideoItemCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoControlBar.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoControlBar.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoData.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoFrameSegment.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoFrameSegment.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMagnifyView.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMagnifyView.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuItemCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuItemCtrl.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuPanelCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuPanelCtrl.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoPanelCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoPlayerUiView.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoPlayerUiView.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReportPanelPlayVideoCommandEvent.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/StepVideoItemCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/VideoDataConverter.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/VideoItemCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/VideoPlayerController.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/Data/ReportPanelData.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/GraphConst/GraphConst.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelPagingCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelUICtrl.DataFill.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelUICtrl.Initialize.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelUICtrl.Layout.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelUICtrl.ReplayVideo.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelUICtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ReportPanelUICtrlTest.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/ScoreDetailItem.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/Top/ReportPanelPatientDialogUiCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/Top/ReportPanelPracticalSkillsAssessmentUiCtrl.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/Top/ReportPanelPracticalSkillsAssessmentUiCtrl.cs.meta
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/Utils/FlowLayoutGroup.cs
+MCFramework/Assets/MCFramework/Runtime/Chart and Graph/Chart and Graph/Utils/FlowLayoutGroup.cs.meta
+MCFramework/Assets/MatchingQuestionPanel.prefab
+MCFramework/Assets/MatchingQuestionPanel.prefab.meta
+MCFramework/Assets/New Terrain.asset
+MCFramework/Assets/New Terrain.asset.meta
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/2019.4/JetBrains.Frontend.2019.4.asmdef
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/2020.2/JetBrains.Frontend.2020.2.asmdef
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/2021.2/JetBrains.Frontend.2021.2.asmdef
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/InstallationData/LogConfiguration/backend-log.xml
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/InstallationData/LogConfiguration/frontend-log.xml
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/InstallationData/Resources/ReEditor/RiderDark.xml
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/InstallationData/Resources/ReEditor/RiderLight.xml
+MCFramework/Assets/Plugins/Editor/JetBrains.RiderFlow/package.json
+MCFramework/Assets/Resources.meta
+MCFramework/Assets/Resources/BigCheckSingleItem.prefab
+MCFramework/Assets/Resources/BigCheckSingleItem.prefab.meta
+MCFramework/Assets/Resources/SmallCheckSingleItem.prefab
+MCFramework/Assets/Resources/SmallCheckSingleItem.prefab.meta
+MCFramework/Assets/Resources/TextProUguiFitHeight.cs
+MCFramework/Assets/Resources/TextProUguiFitHeight.cs.meta
+MCFramework/Assets/RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/85317b2843174754d81fc042fcdd2f50.userdata
+MCFramework/Assets/RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/85317b2843174754d81fc042fcdd2f50.userdata.meta
+MCFramework/Assets/Scenes/SampleSceneSettings.lighting
+MCFramework/Assets/Scenes/SampleSceneSettings.lighting.meta
+MCFramework/Assets/Scenes/TestScene.meta
+MCFramework/Assets/Scenes/TestScene/BrokenLineGraphScene.unity
+MCFramework/Assets/Scenes/TestScene/BrokenLineGraphScene.unity.meta
+MCFramework/Assets/Scenes/TestScene/Chat.unity
+MCFramework/Assets/Scenes/TestScene/Chat.unity.meta
+MCFramework/Assets/Scenes/TestScene/EventManager.unity
+MCFramework/Assets/Scenes/TestScene/EventManager.unity.meta
+MCFramework/Assets/Scenes/TestScene/MineGame.meta
+MCFramework/Assets/Scenes/TestScene/MineGame.unity
+MCFramework/Assets/Scenes/TestScene/MineGame.unity.meta
+MCFramework/Assets/Scenes/TestScene/MineGame/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/MineGame/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/MineItem.prefab
+MCFramework/Assets/Scenes/TestScene/MineItem.prefab.meta
+MCFramework/Assets/Scenes/TestScene/ReportPanel.prefab
+MCFramework/Assets/Scenes/TestScene/ReportPanel.prefab.meta
+MCFramework/Assets/Scenes/TestScene/ReportPanelCanvas.prefab
+MCFramework/Assets/Scenes/TestScene/ReportPanelCanvas.prefab.meta
+MCFramework/Assets/Scenes/TestScene/TableSceneTest.unity
+MCFramework/Assets/Scenes/TestScene/TableSceneTest.unity.meta
+MCFramework/Assets/Scenes/TestScene/TeachModelTestScene.meta
+MCFramework/Assets/Scenes/TestScene/TeachModelTestScene.unity
+MCFramework/Assets/Scenes/TestScene/TeachModelTestScene.unity.meta
+MCFramework/Assets/Scenes/TestScene/TeachModelTestScene/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/TeachModelTestScene/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/TestUIScene.unity
+MCFramework/Assets/Scenes/TestScene/TestUIScene.unity.meta
+MCFramework/Assets/Scenes/TestScene/UI2.0修改适配题.meta
+MCFramework/Assets/Scenes/TestScene/UI2.0修改适配题.unity
+MCFramework/Assets/Scenes/TestScene/UI2.0修改适配题.unity.meta
+MCFramework/Assets/Scenes/TestScene/UI2.0修改适配题/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/UI2.0修改适配题/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/测试键盘.meta
+MCFramework/Assets/Scenes/TestScene/测试键盘.unity
+MCFramework/Assets/Scenes/TestScene/测试键盘.unity.meta
+MCFramework/Assets/Scenes/TestScene/测试键盘/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/测试键盘/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/画中画Scene.meta
+MCFramework/Assets/Scenes/TestScene/画中画Scene.unity
+MCFramework/Assets/Scenes/TestScene/画中画Scene.unity.meta
+MCFramework/Assets/Scenes/TestScene/画中画Scene/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/画中画Scene/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/病患沟通.unity
+MCFramework/Assets/Scenes/TestScene/病患沟通.unity.meta
+MCFramework/Assets/Scenes/TestScene/知识点面板.meta
+MCFramework/Assets/Scenes/TestScene/知识点面板.unity
+MCFramework/Assets/Scenes/TestScene/知识点面板.unity.meta
+MCFramework/Assets/Scenes/TestScene/知识点面板/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/知识点面板/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/硬件检测.unity
+MCFramework/Assets/Scenes/TestScene/硬件检测.unity.meta
+MCFramework/Assets/Scenes/TestScene/语音助手.meta
+MCFramework/Assets/Scenes/TestScene/语音助手.unity
+MCFramework/Assets/Scenes/TestScene/语音助手.unity.meta
+MCFramework/Assets/Scenes/TestScene/语音助手/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/TestScene/语音助手/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/TestScene/选择用物面板Scene.unity
+MCFramework/Assets/Scenes/TestScene/选择用物面板Scene.unity.meta
+MCFramework/Assets/Scenes/拼音.meta
+MCFramework/Assets/Scenes/拼音.unity
+MCFramework/Assets/Scenes/拼音.unity.meta
+MCFramework/Assets/Scenes/拼音/GlobalVolumeProfile.asset
+MCFramework/Assets/Scenes/拼音/GlobalVolumeProfile.asset.meta
+MCFramework/Assets/Scenes/拼音/VideoController.cs
+MCFramework/Assets/Scenes/拼音/VideoController.cs.meta
+MCFramework/Assets/Scenes/拼音/VideoUIController.cs
+MCFramework/Assets/Scenes/拼音/VideoUIController.cs.meta
+MCFramework/Assets/Scenes/新手提示.unity
+MCFramework/Assets/Scenes/新手提示.unity.meta
+MCFramework/Assets/StreamingAssets/AsrConfig.json
+MCFramework/Assets/StreamingAssets/AsrConfig.json.meta
+MCFramework/Assets/StreamingAssets/EmergencyAudio.mp4
+MCFramework/Assets/StreamingAssets/EmergencyAudio.mp4.meta
+MCFramework/Assets/StreamingAssets/HospitalAceneAudio.mp4
+MCFramework/Assets/StreamingAssets/HospitalAceneAudio.mp4.meta
+MCFramework/Assets/StreamingAssets/PunctureOperation_1_Position_20260325_135457.mp4
+MCFramework/Assets/StreamingAssets/PunctureOperation_1_Position_20260325_135457.mp4.meta
+MCFramework/Assets/StreamingAssets/PunctureOperation_1_Position_20260325_141139.mp4
+MCFramework/Assets/StreamingAssets/PunctureOperation_1_Position_20260325_141139.mp4.meta
+MCFramework/Assets/StreamingAssets/StandaloneWindows
+MCFramework/Assets/StreamingAssets/StandaloneWindows.manifest
+MCFramework/Assets/StreamingAssets/StandaloneWindows.manifest.meta
+MCFramework/Assets/StreamingAssets/StandaloneWindows.meta
+MCFramework/Assets/StreamingAssets/baseaudio
+MCFramework/Assets/StreamingAssets/baseaudio.manifest
+MCFramework/Assets/StreamingAssets/baseaudio.manifest.meta
+MCFramework/Assets/StreamingAssets/baseaudio.meta
+MCFramework/Assets/StreamingAssets/baseprefabs
+MCFramework/Assets/StreamingAssets/baseprefabs.manifest
+MCFramework/Assets/StreamingAssets/baseprefabs.manifest.meta
+MCFramework/Assets/StreamingAssets/baseprefabs.meta
+MCFramework/Assets/StreamingAssets/fonts
+MCFramework/Assets/StreamingAssets/fonts.manifest
+MCFramework/Assets/StreamingAssets/fonts.manifest.meta
+MCFramework/Assets/StreamingAssets/fonts.meta
+MCFramework/Assets/StreamingAssets/graphscene
+MCFramework/Assets/StreamingAssets/graphscene.manifest
+MCFramework/Assets/StreamingAssets/graphscene.manifest.meta
+MCFramework/Assets/StreamingAssets/graphscene.meta
+MCFramework/Assets/StreamingAssets/graphsceneprefabs
+MCFramework/Assets/StreamingAssets/graphsceneprefabs.manifest
+MCFramework/Assets/StreamingAssets/graphsceneprefabs.manifest.meta
+MCFramework/Assets/StreamingAssets/graphsceneprefabs.meta
+MCFramework/Assets/StreamingAssets/loadingpanel
+MCFramework/Assets/StreamingAssets/loadingpanel.manifest
+MCFramework/Assets/StreamingAssets/loadingpanel.manifest.meta
+MCFramework/Assets/StreamingAssets/loadingpanel.meta
+MCFramework/Assets/StreamingAssets/materials
+MCFramework/Assets/StreamingAssets/materials.manifest
+MCFramework/Assets/StreamingAssets/materials.manifest.meta
+MCFramework/Assets/StreamingAssets/materials.meta
+MCFramework/Assets/StreamingAssets/teachmodelprefab
+MCFramework/Assets/StreamingAssets/teachmodelprefab.manifest
+MCFramework/Assets/StreamingAssets/teachmodelprefab.manifest.meta
+MCFramework/Assets/StreamingAssets/teachmodelprefab.meta
+MCFramework/Assets/StreamingAssets/texture
+MCFramework/Assets/StreamingAssets/texture.manifest
+MCFramework/Assets/StreamingAssets/texture.manifest.meta
+MCFramework/Assets/StreamingAssets/texture.meta
+MCFramework/Assets/TestScripts.meta
+MCFramework/Assets/TestScripts/ArrangeChildTrans.cs
+MCFramework/Assets/TestScripts/ArrangeChildTrans.cs.meta
+MCFramework/Assets/TestScripts/ChangeTextToTMP.cs
+MCFramework/Assets/TestScripts/ChangeTextToTMP.cs.meta
+MCFramework/Assets/TestScripts/CheckHardwareSignalPanelCtrl.cs
+MCFramework/Assets/TestScripts/CheckHardwareSignalPanelCtrl.cs.meta
+MCFramework/Assets/TestScripts/DrawCircle.cs
+MCFramework/Assets/TestScripts/DrawCircle.cs.meta
+MCFramework/Assets/TestScripts/DropdownTest.cs
+MCFramework/Assets/TestScripts/DropdownTest.cs.meta
+MCFramework/Assets/TestScripts/FitCtrl.cs
+MCFramework/Assets/TestScripts/FitCtrl.cs.meta
+MCFramework/Assets/TestScripts/Fsm.meta
+MCFramework/Assets/TestScripts/Fsm/AttackState.cs
+MCFramework/Assets/TestScripts/Fsm/AttackState.cs.meta
+MCFramework/Assets/TestScripts/Fsm/BackState.cs
+MCFramework/Assets/TestScripts/Fsm/BackState.cs.meta
+MCFramework/Assets/TestScripts/Fsm/BaseState.cs
+MCFramework/Assets/TestScripts/Fsm/BaseState.cs.meta
+MCFramework/Assets/TestScripts/Fsm/ChaseState.cs
+MCFramework/Assets/TestScripts/Fsm/ChaseState.cs.meta
+MCFramework/Assets/TestScripts/Fsm/Enemy.cs
+MCFramework/Assets/TestScripts/Fsm/Enemy.cs.meta
+MCFramework/Assets/TestScripts/Fsm/EnemyContext.cs
+MCFramework/Assets/TestScripts/Fsm/EnemyContext.cs.meta
+MCFramework/Assets/TestScripts/Fsm/FsmScene.unity
+MCFramework/Assets/TestScripts/Fsm/FsmScene.unity.meta
+MCFramework/Assets/TestScripts/Fsm/IState.cs
+MCFramework/Assets/TestScripts/Fsm/IState.cs.meta
+MCFramework/Assets/TestScripts/Fsm/IdleState.cs
+MCFramework/Assets/TestScripts/Fsm/IdleState.cs.meta
+MCFramework/Assets/TestScripts/Fsm/StateCtrl.cs
+MCFramework/Assets/TestScripts/Fsm/StateCtrl.cs.meta
+MCFramework/Assets/TestScripts/Fsm/StateEnum.cs
+MCFramework/Assets/TestScripts/Fsm/StateEnum.cs.meta
+MCFramework/Assets/TestScripts/LogTransState.cs
+MCFramework/Assets/TestScripts/LogTransState.cs.meta
+MCFramework/Assets/TestScripts/MineClearance.meta
+MCFramework/Assets/TestScripts/MineClearance/MineClearanceGameCtrl.cs
+MCFramework/Assets/TestScripts/MineClearance/MineClearanceGameCtrl.cs.meta
+MCFramework/Assets/TestScripts/MineClearance/MineClearanceItemCtrl.cs
+MCFramework/Assets/TestScripts/MineClearance/MineClearanceItemCtrl.cs.meta
+MCFramework/Assets/TestScripts/MoveCtrl.cs
+MCFramework/Assets/TestScripts/MoveCtrl.cs.meta
+MCFramework/Assets/TestScripts/NewBehaviourScript.cs
+MCFramework/Assets/TestScripts/NewBehaviourScript.cs.meta
+MCFramework/Assets/TestScripts/NewbieTips.meta
+MCFramework/Assets/TestScripts/NewbieTips/UIEvents.cs
+MCFramework/Assets/TestScripts/NewbieTips/UIEvents.cs.meta
+MCFramework/Assets/TestScripts/Parabola.meta
+MCFramework/Assets/TestScripts/Parabola/ParabolaCalculator.cs
+MCFramework/Assets/TestScripts/Parabola/ParabolaCalculator.cs.meta
+MCFramework/Assets/TestScripts/Parabola/ParabolaTrajectory.cs
+MCFramework/Assets/TestScripts/Parabola/ParabolaTrajectory.cs.meta
+MCFramework/Assets/TestScripts/Parabola/ParabolaUtils.cs
+MCFramework/Assets/TestScripts/Parabola/ParabolaUtils.cs.meta
+MCFramework/Assets/TestScripts/Parabola/ProjectileLauncher.cs
+MCFramework/Assets/TestScripts/Parabola/ProjectileLauncher.cs.meta
+MCFramework/Assets/TestScripts/PinYin.meta
+MCFramework/Assets/TestScripts/PinYin/PinYinCtrl.cs
+MCFramework/Assets/TestScripts/PinYin/PinYinCtrl.cs.meta
+MCFramework/Assets/TestScripts/SignatureGenerator.cs
+MCFramework/Assets/TestScripts/SignatureGenerator.cs.meta
+MCFramework/Assets/TestScripts/StreamRequestExample.cs
+MCFramework/Assets/TestScripts/StreamRequestExample.cs.meta
+MCFramework/Assets/TestScripts/Test.meta
+MCFramework/Assets/TestScripts/Test/CameraCtrl.cs
+MCFramework/Assets/TestScripts/Test/CameraCtrl.cs.meta
+MCFramework/Assets/TestScripts/Test/Test2.cs
+MCFramework/Assets/TestScripts/Test/Test2.cs.meta
+MCFramework/Assets/TestScripts/Test/Test3.cs
+MCFramework/Assets/TestScripts/Test/Test3.cs.meta
+MCFramework/Assets/TestScripts/Test/Test4.cs
+MCFramework/Assets/TestScripts/Test/Test4.cs.meta
+MCFramework/Assets/TestScripts/Test/Test5.cs
+MCFramework/Assets/TestScripts/Test/Test5.cs.meta
+MCFramework/Assets/TestScripts/Test/Test6.cs
+MCFramework/Assets/TestScripts/Test/Test6.cs.meta
+MCFramework/Assets/TestScripts/TestKeyboard.cs
+MCFramework/Assets/TestScripts/TestKeyboard.cs.meta
+MCFramework/Assets/TestScripts/UiShowFirst.cs
+MCFramework/Assets/TestScripts/UiShowFirst.cs.meta
+MCFramework/Assets/TestScripts/Video.meta
+MCFramework/Assets/TestScripts/Video/Viedo.unity
+MCFramework/Assets/TestScripts/Video/Viedo.unity.meta
+MCFramework/Assets/TestScripts/ViewOfViewCtrl.cs
+MCFramework/Assets/TestScripts/ViewOfViewCtrl.cs.meta
+MCFramework/Assets/TestScripts/VoiceLayerHelper.cs
+MCFramework/Assets/TestScripts/VoiceLayerHelper.cs.meta
+MCFramework/Assets/labelXOfLinkNamePrefab.prefab
+MCFramework/Assets/labelXOfLinkNamePrefab.prefab.meta
+MCFramework/Assets/矩形 479@1x.png
+MCFramework/Assets/矩形 479@1x.png.meta
+-- 消失 --
+BaseRes/BasePrefabs/CaseSelect/BranchCaseZhaoHuItem.prefab
+BaseRes/BasePrefabs/CaseSelect/BranchCaseZhaoHuItem.prefab.meta
+BaseRes/BasePrefabs/PatientCommunication/AiChatPanel.prefab
+BaseRes/BasePrefabs/PatientCommunication/AiChatPanel.prefab.meta
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationArrow.prefab
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationArrow.prefab.meta
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationOrder.prefab
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentCorrectOperationOrder.prefab.meta
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationArrow.prefab
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationArrow.prefab.meta
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationOrder.prefab
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/PracticalSkillsAssessmentUserOperationOrder.prefab.meta
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/CameraFilterBtnPrefab.prefab
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplayVideo/CameraFilterBtnPrefab.prefab.meta
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplyVideoMenuItem.prefab
+BaseRes/Chart and Graph Res/Prefabs/ReportPanel/ReplyVideoMenuItem.prefab.meta
+BaseRes/Chart and Graph Res/Textures/Video_SingleModel.renderTexture
+BaseRes/Chart and Graph Res/Textures/Video_SingleModel.renderTexture.meta
+BaseRes/TestVideo/screenshot_1.mp4
+BaseRes/TestVideo/screenshot_1.mp4.meta
+BaseRes/TestVideo/screenshot_2.mp4
+BaseRes/TestVideo/screenshot_2.mp4.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.controller
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.controller.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪1@1x.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪2@1x.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪2@1x.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪3@1x.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪3@1x.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪4@1x.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪4@1x.png.meta
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪5@1x.png
+BaseRes/Texture/PatientCommunication/病患沟通-音频序列帧/音浪5@1x.png.meta
+BaseRes/Texture/TableSceneUI/联集 18.png
+BaseRes/Texture/TableSceneUI/联集 18.png.meta
+MCFramework/Runtime/BaseLibrary/Config/BaseTimelineEventConfig.cs
+MCFramework/Runtime/BaseLibrary/Config/BaseTimelineEventConfig.cs.meta
+MCFramework/Runtime/BaseLibrary/Control/AI/BaiDuAsr.cs
+MCFramework/Runtime/BaseLibrary/Control/AI/BaiDuAsr.cs.meta
+MCFramework/Runtime/BaseLibrary/Control/AI/KeDaXunFeiAsr.cs
+MCFramework/Runtime/BaseLibrary/Control/AI/KeDaXunFeiAsr.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/LocalReportBuilder.cs
+MCFramework/Runtime/BaseLibrary/Model/LocalReportBuilder.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/LocalScoreCalculator.cs
+MCFramework/Runtime/BaseLibrary/Model/LocalScoreCalculator.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/MockTrainReportFactory.cs
+MCFramework/Runtime/BaseLibrary/Model/MockTrainReportFactory.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/ScoreDataTypes.cs
+MCFramework/Runtime/BaseLibrary/Model/ScoreDataTypes.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Record.cs
+MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Record.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Report.cs
+MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Report.cs.meta
+MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Submit.cs
+MCFramework/Runtime/BaseLibrary/Model/ScoreModel.Submit.cs.meta
+MCFramework/Runtime/BaseLibrary/Operation/AllPowerfulOperation.cs
+MCFramework/Runtime/BaseLibrary/Operation/AllPowerfulOperation.cs.meta
+MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionInBaseSelectToolsOperation.cs
+MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionInBaseSelectToolsOperation.cs.meta
+MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionOperation.cs
+MCFramework/Runtime/BaseLibrary/Operation/BaseChoiceQuestionOperation.cs.meta
+MCFramework/Runtime/BaseLibrary/Operation/BaseClickObjOperation.cs
+MCFramework/Runtime/BaseLibrary/Operation/BaseClickObjOperation.cs.meta
+MCFramework/Runtime/BaseLibrary/Operation/BasePlayTimelineOperation.cs
+MCFramework/Runtime/BaseLibrary/Operation/BasePlayTimelineOperation.cs.meta
+MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashLine.cs
+MCFramework/Runtime/BaseLibrary/Utils/UI/Image/ImageCreator/DashLine.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoControlBar.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoControlBar.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoFrameSegment.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoFrameSegment.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMagnifyView.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMagnifyView.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuItemCtrl.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuItemCtrl.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuPanelCtrl.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoMenuPanelCtrl.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoPlayerUiView.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/RelayVideo/ReplayVideoPlayerUiView.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/Top/ReportPanelPracticalSkillsAssessmentUiCtrl.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/ReportPanelCtrlScripts/ReportPanel/Top/ReportPanelPracticalSkillsAssessmentUiCtrl.cs.meta
+MCFramework/Runtime/Chart and Graph/Chart and Graph/Utils/FlowLayoutGroup.cs
+MCFramework/Runtime/Chart and Graph/Chart and Graph/Utils/FlowLayoutGroup.cs.meta
+MatchingQuestionPanel.prefab
+MatchingQuestionPanel.prefab.meta
+New Terrain.asset
+New Terrain.asset.meta
+Resources.meta
+Resources/BigCheckSingleItem.prefab
+Resources/BigCheckSingleItem.prefab.meta
+Resources/SmallCheckSingleItem.prefab
+Resources/SmallCheckSingleItem.prefab.meta
+Resources/TextProUguiFitHeight.cs
+Resources/TextProUguiFitHeight.cs.meta
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/85317b2843174754d81fc042fcdd2f50.userdata
+RiderFlow.UserData/Editor/Scenes/Bookmarks.Map/85317b2843174754d81fc042fcdd2f50.userdata.meta
+Scenes/SampleSceneSettings.lighting
+Scenes/SampleSceneSettings.lighting.meta
+Scenes/TestScene.meta
+Scenes/TestScene/BrokenLineGraphScene.unity
+Scenes/TestScene/BrokenLineGraphScene.unity.meta
+Scenes/TestScene/Chat.unity
+Scenes/TestScene/Chat.unity.meta
+Scenes/TestScene/EventManager.unity
+Scenes/TestScene/EventManager.unity.meta
+Scenes/TestScene/MineGame.meta
+Scenes/TestScene/MineGame.unity
+Scenes/TestScene/MineGame.unity.meta
+Scenes/TestScene/MineGame/GlobalVolumeProfile.asset
+Scenes/TestScene/MineGame/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/MineItem.prefab
+Scenes/TestScene/MineItem.prefab.meta
+Scenes/TestScene/ReportPanel.prefab
+Scenes/TestScene/ReportPanel.prefab.meta
+Scenes/TestScene/ReportPanelCanvas.prefab
+Scenes/TestScene/ReportPanelCanvas.prefab.meta
+Scenes/TestScene/TableSceneTest.unity
+Scenes/TestScene/TableSceneTest.unity.meta
+Scenes/TestScene/TeachModelTestScene.meta
+Scenes/TestScene/TeachModelTestScene.unity
+Scenes/TestScene/TeachModelTestScene.unity.meta
+Scenes/TestScene/TeachModelTestScene/GlobalVolumeProfile.asset
+Scenes/TestScene/TeachModelTestScene/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/TestUIScene.unity
+Scenes/TestScene/TestUIScene.unity.meta
+Scenes/TestScene/UI2.0修改适配题.meta
+Scenes/TestScene/UI2.0修改适配题.unity
+Scenes/TestScene/UI2.0修改适配题.unity.meta
+Scenes/TestScene/UI2.0修改适配题/GlobalVolumeProfile.asset
+Scenes/TestScene/UI2.0修改适配题/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/测试键盘.meta
+Scenes/TestScene/测试键盘.unity
+Scenes/TestScene/测试键盘.unity.meta
+Scenes/TestScene/测试键盘/GlobalVolumeProfile.asset
+Scenes/TestScene/测试键盘/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/画中画Scene.meta
+Scenes/TestScene/画中画Scene.unity
+Scenes/TestScene/画中画Scene.unity.meta
+Scenes/TestScene/画中画Scene/GlobalVolumeProfile.asset
+Scenes/TestScene/画中画Scene/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/病患沟通.unity
+Scenes/TestScene/病患沟通.unity.meta
+Scenes/TestScene/知识点面板.meta
+Scenes/TestScene/知识点面板.unity
+Scenes/TestScene/知识点面板.unity.meta
+Scenes/TestScene/知识点面板/GlobalVolumeProfile.asset
+Scenes/TestScene/知识点面板/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/硬件检测.unity
+Scenes/TestScene/硬件检测.unity.meta
+Scenes/TestScene/语音助手.meta
+Scenes/TestScene/语音助手.unity
+Scenes/TestScene/语音助手.unity.meta
+Scenes/TestScene/语音助手/GlobalVolumeProfile.asset
+Scenes/TestScene/语音助手/GlobalVolumeProfile.asset.meta
+Scenes/TestScene/选择用物面板Scene.unity
+Scenes/TestScene/选择用物面板Scene.unity.meta
+Scenes/拼音.meta
+Scenes/拼音.unity
+Scenes/拼音.unity.meta
+Scenes/拼音/GlobalVolumeProfile.asset
+Scenes/拼音/GlobalVolumeProfile.asset.meta
+Scenes/拼音/VideoController.cs
+Scenes/拼音/VideoController.cs.meta
+Scenes/拼音/VideoUIController.cs
+Scenes/拼音/VideoUIController.cs.meta
+Scenes/新手提示.unity
+Scenes/新手提示.unity.meta
+StreamingAssets/AsrConfig.json
+StreamingAssets/AsrConfig.json.meta
+StreamingAssets/EmergencyAudio.mp4
+StreamingAssets/EmergencyAudio.mp4.meta
+StreamingAssets/HospitalAceneAudio.mp4
+StreamingAssets/HospitalAceneAudio.mp4.meta
+StreamingAssets/PunctureOperation_1_Position_20260325_135457.mp4
+StreamingAssets/PunctureOperation_1_Position_20260325_135457.mp4.meta
+StreamingAssets/PunctureOperation_1_Position_20260325_141139.mp4
+StreamingAssets/PunctureOperation_1_Position_20260325_141139.mp4.meta
+TestScripts.meta
+TestScripts/ArrangeChildTrans.cs
+TestScripts/ArrangeChildTrans.cs.meta
+TestScripts/ChangeTextToTMP.cs
+TestScripts/ChangeTextToTMP.cs.meta
+TestScripts/CheckHardwareSignalPanelCtrl.cs
+TestScripts/CheckHardwareSignalPanelCtrl.cs.meta
+TestScripts/DrawCircle.cs
+TestScripts/DrawCircle.cs.meta
+TestScripts/DropdownTest.cs
+TestScripts/DropdownTest.cs.meta
+TestScripts/FitCtrl.cs
+TestScripts/FitCtrl.cs.meta
+TestScripts/Fsm.meta
+TestScripts/Fsm/AttackState.cs
+TestScripts/Fsm/AttackState.cs.meta
+TestScripts/Fsm/BackState.cs
+TestScripts/Fsm/BackState.cs.meta
+TestScripts/Fsm/BaseState.cs
+TestScripts/Fsm/BaseState.cs.meta
+TestScripts/Fsm/ChaseState.cs
+TestScripts/Fsm/ChaseState.cs.meta
+TestScripts/Fsm/Enemy.cs
+TestScripts/Fsm/Enemy.cs.meta
+TestScripts/Fsm/EnemyContext.cs
+TestScripts/Fsm/EnemyContext.cs.meta
+TestScripts/Fsm/FsmScene.unity
+TestScripts/Fsm/FsmScene.unity.meta
+TestScripts/Fsm/IState.cs
+TestScripts/Fsm/IState.cs.meta
+TestScripts/Fsm/IdleState.cs
+TestScripts/Fsm/IdleState.cs.meta
+TestScripts/Fsm/StateCtrl.cs
+TestScripts/Fsm/StateCtrl.cs.meta
+TestScripts/Fsm/StateEnum.cs
+TestScripts/Fsm/StateEnum.cs.meta
+TestScripts/LogTransState.cs
+TestScripts/LogTransState.cs.meta
+TestScripts/MineClearance.meta
+TestScripts/MineClearance/MineClearanceGameCtrl.cs
+TestScripts/MineClearance/MineClearanceGameCtrl.cs.meta
+TestScripts/MineClearance/MineClearanceItemCtrl.cs
+TestScripts/MineClearance/MineClearanceItemCtrl.cs.meta
+TestScripts/MoveCtrl.cs
+TestScripts/MoveCtrl.cs.meta
+TestScripts/NewBehaviourScript.cs
+TestScripts/NewBehaviourScript.cs.meta
+TestScripts/NewbieTips.meta
+TestScripts/NewbieTips/UIEvents.cs
+TestScripts/NewbieTips/UIEvents.cs.meta
+TestScripts/Parabola.meta
+TestScripts/Parabola/ParabolaCalculator.cs
+TestScripts/Parabola/ParabolaCalculator.cs.meta
+TestScripts/Parabola/ParabolaTrajectory.cs
+TestScripts/Parabola/ParabolaTrajectory.cs.meta
+TestScripts/Parabola/ParabolaUtils.cs
+TestScripts/Parabola/ParabolaUtils.cs.meta
+TestScripts/Parabola/ProjectileLauncher.cs
+TestScripts/Parabola/ProjectileLauncher.cs.meta
+TestScripts/PinYin.meta
+TestScripts/PinYin/PinYinCtrl.cs
+TestScripts/PinYin/PinYinCtrl.cs.meta
+TestScripts/SignatureGenerator.cs
+TestScripts/SignatureGenerator.cs.meta
+TestScripts/StreamRequestExample.cs
+TestScripts/StreamRequestExample.cs.meta
+TestScripts/Test.meta
+TestScripts/Test/CameraCtrl.cs
+TestScripts/Test/CameraCtrl.cs.meta
+TestScripts/Test/Test2.cs
+TestScripts/Test/Test2.cs.meta
+TestScripts/Test/Test3.cs
+TestScripts/Test/Test3.cs.meta
+TestScripts/Test/Test4.cs
+TestScripts/Test/Test4.cs.meta
+TestScripts/Test/Test5.cs
+TestScripts/Test/Test5.cs.meta
+TestScripts/Test/Test6.cs
+TestScripts/Test/Test6.cs.meta
+TestScripts/TestKeyboard.cs
+TestScripts/TestKeyboard.cs.meta
+TestScripts/UiShowFirst.cs
+TestScripts/UiShowFirst.cs.meta
+TestScripts/Video.meta
+TestScripts/Video/Viedo.unity
+TestScripts/Video/Viedo.unity.meta
+TestScripts/ViewOfViewCtrl.cs
+TestScripts/ViewOfViewCtrl.cs.meta
+TestScripts/VoiceLayerHelper.cs
+TestScripts/VoiceLayerHelper.cs.meta
+labelXOfLinkNamePrefab.prefab
+labelXOfLinkNamePrefab.prefab.meta
+矩形 479@1x.png
+矩形 479@1x.png.meta

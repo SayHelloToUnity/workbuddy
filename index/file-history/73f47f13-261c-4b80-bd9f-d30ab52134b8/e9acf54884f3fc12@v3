@@ -1,0 +1,163 @@
+# 两个 clone 的 Assets 合并预演报告
+
+生成时间：2026-11-12 16:24
+分析范围：`MCFramework/Assets`（用户指定）
+
+| | 路径 | HEAD | 分支 |
+|---|---|---|---|
+| A（桌面） | `C:\Users\56583\Desktop\mcframework` | `6454fa6` | master |
+| B（D盘） | `D:\Work\Unity\CompanyOperationPrj\CommonPrj\mcframework` | `6454fa6` | master |
+
+两侧基点完全相同，可以做标准三方合并。Unity 版本一致：`2022.3.20f1c1`。
+
+---
+
+## 一、改动规模
+
+| | 跟踪文件改动 | 新增未跟踪 | 去重路径合计 |
+|---|---|---|---|
+| A | 57 | 36 | 93 |
+| B | 126 | 262 | 388 |
+
+交集与差集：
+
+- **两边都改过（潜在冲突）**：25 个
+- 仅 A 改过：68 个（多为 `BaseRes/Texture`、`MCFramework/Runtime`）
+- 仅 B 改过：363 个（多为 `Scenes/TestScene` 57、`TestScripts/*` 40+、`MCFramework/Runtime` 92）
+
+明细见同目录 `both.txt` / `onlyA.txt` / `onlyB.txt`。
+
+> 注意：两个仓库都没有忽略 `MCFramework/Library`、`MCFramework/obj`，各有约 4 万个未跟踪文件。**任何 `git add -A` 都会把整个 Library 提交进版本库**，后文命令一律使用显式路径。
+
+---
+
+## 二、25 个重叠文件的合并判定
+
+（先做换行归一：两侧 `core.autocrlf=true`，工作区为 CRLF、blob 为 LF，未归一时会把整文件误判为冲突）
+
+### 2.1 两侧内容完全相同（8 个，无需处理）
+
+`BaseVoskHelper.asset`、`ErrorCorrectionTextItemText.prefab` 及其 `.meta`、`Generated/Course.cs`、`New Universal Render Pipeline Asset.asset`、`SseSceneTest.cs`、`LiberationSans SDF - Fallback.asset`、`luaIde/xluaApi.lua`
+
+两侧做的是同一件事，取任意一侧即可。
+
+### 2.2 换行归一后可自动合并（3 个，无需人工）
+
+`Generated/Service.cs`、`Net/ProtobufRpcRequest.cs`、`Operation/BaseOperation.cs`
+
+### 2.3 真实冲突（需决策）
+
+| # | 文件 | 冲突块 | 性质 | 建议 |
+|---|---|---|---|---|
+| 1 | `BaseRes/BasePrefabs/PatientCommunication/PatientChatPanel.prefab` | 8 | 结构性：A 侧出现 `&77200000001` / `&77200000002` / `&77200000011` 这类非随机 fileID（Unity 正常为随机 64 位），且新增 GameObject 块 270/135/135 行；B 侧为常规 `Animator` 组件 | **不要文本合并**。以一侧为底（建议 B），A 的改动在 Editor 内重做；合并后必须打开 prefab 目视检查组件是否齐全 |
+| 2 | `BaseRes/Scene/TableScene.unity` | 5 | 全部是 `m_Father`（A 改了父节点）与 `m_RootOrder`（B 侧新增）紧邻导致的交错。**B 侧全文有 369 处 `m_RootOrder`，base 与 A 只有 5 处**——说明 B 的场景被整体重写过 | 取 **A** 版本。若 B 确有场景改动，需在 Editor 内对比后手工迁移，切勿直接把 B 覆盖回来 |
+| 3 | `MCFramework/Runtime/BaseLibrary/Model/Generated/Tc.cs` | 2 | protobuf 生成的 base64 描述符。A 17358 行、B 17389 行，`public sealed partial class` 集合两侧一致 | **整体取一侧**（取决于哪边的 `.proto` 更新，B 的描述符更长，倾向 B），选定后重新生成，不要手解 base64 |
+| 4 | `MCFramework/Runtime/BaseLibrary/Model/GlobalModel.cs` | 1 | 语义冲突：A 把 `SurgeryTypeValue` 收窄为 `{ get; private set; }`；B 新增 `IsGuide` / `IsTrain` / `IsExam` 三个模式属性并保留 `set` | 合并为：保留 B 的三个属性 + 采用 A 的 `private set` |
+| 5 | `AddressableAssetsData/AssetGroups/BaseUIPrefab.asset` | 1 | A 的地址集合是 B 的子集（B 多一条 `BranchCaseZhaoHuItem.prefab`），条目数 base 45 / A 46 / B 47 | 直接取 **B** 整个文件，无信息损失 |
+| 6 | `RiderFlow.UserData*`（6 个：4 个 `.meta` + 1 个 `.userdata` + 其 `.meta`） | each 1 | 两侧各自**新增**同一路径、GUID 不同（base 为空）。内容为 Rider 的编辑器本地状态（书签、GlobalObjectId） | 本来就不该进版本库。建议移除跟踪 + 加入 `.gitignore`，或统一取一侧 |
+| 7 | `luaIde/readMe` | 1 | 文件内容只有一行机器绝对路径（A: `C:/Users/56583/Desktop/...`，base: `E:/UnityProject/...`，B: `D:/Work/...`） | 与合并无关，取 A 或直接忽略 |
+| 8 | `AddressableAssetsData/Windows/addressables_content_state.bin` | 二进制 | 构建产物 | 取一侧，并考虑加入 `.gitignore` |
+| 9 | `MCFramework/Addressable.unitypackage` | 二进制 | 包文件 | 取较大/较新一侧 |
+
+---
+
+## 三、合并后会产生 Missing 引用（重要）
+
+A 侧删除了以下资产，但 B 侧**未修改**的文件仍在引用它们的 GUID，合并后这些引用会变成 Missing：
+
+| A 删除的资产 | 仍引用它的 B 侧文件 |
+|---|---|
+| `音浪1@1x.controller` | `OperationChatPanel.prefab`、`PatientChatPanel.prefab`、`AiChatPanel.prefab` |
+| `音浪1@1x.png` | 同上 |
+| `音浪2~5@1x.png` | `病患沟通-音频序列帧/AudioWave.anim` |
+| `AiChatPanel.prefab` | 自身（作为整体删除，无外部影响） |
+| `BaiDuAsr.cs`、`KeDaXunFeiAsr.cs` | 仅自身 meta，无外部引用 |
+
+结论：合并后 `AudioWave.anim` 会丢失 4 个 Sprite 帧；`OperationChatPanel.prefab`、`PatientChatPanel.prefab` 的音浪引用需确认是否已被 A 侧改成新资源（A 侧这两个文件也是修改状态，可能已替换）。
+
+---
+
+## 四、建议的执行顺序
+
+### 阶段 0：先清理噪声（低风险，建议先做）
+
+```bash
+# 在 A 侧：把机器本地状态移出版本库并忽略
+git -C "C:/Users/56583/Desktop/mcframework" rm -r --cached -- "MCFramework/Assets/RiderFlow.UserData" "MCFramework/Assets/RiderFlow.UserData.meta" "MCFramework/Assets/RiderFlow.UserData/Editor.meta" 2>/dev/null
+printf '\n# Unity generated\nMCFramework/Library/\nMCFramework/obj/\nMCFramework/Temp/\nMCFramework/Logs/\nMCFramework/UserSettings/\nMCFramework/Assets/RiderFlow.UserData*/\nMCFramework/Assets/AddressableAssetsData/Windows/*.bin\n' >> "C:/Users/56583/Desktop/mcframework/.gitignore"
+```
+
+两侧都要做这一步，否则合并时会持续产生无效冲突。
+
+### 阶段 1：固化两侧改动（只提交 Assets）
+
+```bash
+# A 侧
+git -C "C:/Users/56583/Desktop/mcframework" checkout -b wip-a
+git -C "C:/Users/56583/Desktop/mcframework" add -- "MCFramework/Assets"
+git -C "C:/Users/56583/Desktop/mcframework" commit -m "wip: A 侧本地改动"
+
+# B 侧
+git -C "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework" checkout -b wip-b
+git -C "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework" add -- "MCFramework/Assets"
+git -C "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework" commit -m "wip: B 侧本地改动"
+```
+
+必须带 `-- "MCFramework/Assets"`，不要用 `-A`。
+
+### 阶段 2：合并
+
+```bash
+git -C "C:/Users/56583/Desktop/mcframework" remote add localb "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework"
+git -C "C:/Users/56583/Desktop/mcframework" fetch localb
+git -C "C:/Users/56583/Desktop/mcframework" merge --no-commit --no-ff localb/wip-b
+git -C "C:/Users/56583/Desktop/mcframework" diff --name-only --diff-filter=U
+```
+
+按第二节的表格逐项处理，然后 `git add <具体文件>` + `git commit`。任何时刻可 `git merge --abort` 整体回退。
+
+### 阶段 3：Unity 侧验证
+
+1. 打开 Unity，等待全量导入完成，检查 Console 是否有 Missing 引用 / 脚本丢失警告
+2. 打开 `TableScene.unity`，确认层级与 A 侧预期一致
+3. 打开 `PatientChatPanel.prefab`，逐个确认 Inspector 组件与引用
+4. Addressables 窗口检查 `BaseUIPrefab` 组未报错
+5. 运行一次主流程并重新构建 Addressables
+
+---
+
+## 五、废弃提示
+
+上一轮对话中给出的 `git add -A` 不适用于本仓库（会把 4 万个 `Library` 文件纳入版本库），已在本报告中改为显式路径。
+
+---
+
+## 六、全量哈希复核（第二次比对，覆盖未改动文件）
+
+方法：对两侧 `MCFramework/Assets` 下**全部文件**逐个计算 SHA-1（不是只看相对 HEAD 的改动），再剔除纯换行差异。
+
+| 分类 | 数量 | 处理方式 |
+|---|---|---|
+| 两侧同名且字节完全相同 | 5292 | 无需处理 |
+| 同名、仅换行符不同（CRLF/LF） | 10 | 内容实质相同，可忽略 |
+| 同名、内容实质不同但**仅一侧改动过** | 89 | git 自动取改动侧，**无冲突** |
+| 同名、内容实质不同且**两侧都改动过** | 17 | 见第二节判定表（其中 8 项相同/可自动，9 项需决策） |
+| 仅 A 存在 | 72 | 纯新增/删除，不冲突 |
+| 仅 B 存在 | 272 | 纯新增/删除，不冲突 |
+
+两侧共同存在的文件合计 5408 = 5292 + 10 + 106；A 侧 5480 = 5408 + 72；B 侧 5680 = 5408 + 272。
+17 个双侧改动文件与第一节的 25 个重叠文件完全一致（25 − 8 个两侧相同 = 17），两次独立分析结果自洽。
+
+**结论：真正需要人工决策的仍然只有 9 项，占 5480 个文件的 0.16%。**
+
+明细：`real_diff.txt`（106 个实质不同）、`eol_only.txt`（10 个纯换行差异）、`onlyA.txt` / `onlyB.txt`。
+
+---
+
+## 七、沙箱演练方案（不动原仓库）
+
+两侧 `.git` 各 2.8 GB，而 C 盘仅剩 2.6 GB、D 盘仅剩 1.8 GB，**无法做完整仓库副本**。
+
+可行替代：新建一个临时仓库，只纳入约 460 个有差异的文件（其余 5292 个两侧完全相同，与合并结果无关），在其中复现 base → A → B → merge 的完整过程，产出一个可检视的合并结果。磁盘占用几十 MB，原仓库零改动。
+
+前置建议：先清理磁盘（两侧 `Library/PackageCache` 可由 Unity 重新生成），至少腾出 5 GB，否则合并后 Unity 重建 `Library`（当前 4.8 GB）会因空间不足中断。

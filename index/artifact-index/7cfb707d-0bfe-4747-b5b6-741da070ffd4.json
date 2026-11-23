@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "lastUpdated": 1794904689596,
+  "artifacts": [
+    {
+      "name": "00-电荷-电场-电势.md",
+      "title": "00-电荷-电场-电势.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 15953,
+      "createdAt": 1794900315651,
+      "updatedAt": 1794900315652,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/notes/00-%E7%94%B5%E8%8D%B7-%E7%94%B5%E5%9C%BA-%E7%94%B5%E5%8A%BF.md",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "7cfb707d-0bfe-4747-b5b6-741da070ffd4",
+        "requestId": "01a1e89fc3257670807b489c9c7587fb",
+        "codebuddy.ai/requestId": "01a1e89fc3257670807b489c9c7587fb",
+        "createdByRequestId": "01a1e89fc3257670807b489c9c7587fb",
+        "touchedByRequestIds": [
+          "01a1e89fc3257670807b489c9c7587fb"
+        ]
+      }
+    },
+    {
+      "name": "01-电压-电流-电阻.md",
+      "title": "01-电压-电流-电阻.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 12014,
+      "createdAt": 1794898843173,
+      "updatedAt": 1794900320071,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/notes/01-%E7%94%B5%E5%8E%8B-%E7%94%B5%E6%B5%81-%E7%94%B5%E9%98%BB.md",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "7cfb707d-0bfe-4747-b5b6-741da070ffd4",
+        "requestId": "01a1e89fc3257670807b489c9c7587fb",
+        "codebuddy.ai/requestId": "01a1e89fc3257670807b489c9c7587fb",
+        "createdByRequestId": "01a1e89fc3257670807b489c9c7587fb",
+        "touchedByRequestIds": [
+          "01a1e89fc3257670807b489c9c7587fb"
+        ]
+      }
+    },
+    {
+      "name": "学习启动脚本.md",
+      "title": "学习启动脚本.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 5574,
+      "createdAt": 1794904178171,
+      "updatedAt": 1794904689595,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/%E5%AD%A6%E4%B9%A0%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_HNkVCbofKKzX1PrTVxwB2498",
+        "ownerConversationId": "7cfb707d-0bfe-4747-b5b6-741da070ffd4",
+        "requestId": "01a1e8a7cb6b756babac65f537003f10",
+        "codebuddy.ai/requestId": "01a1e8a7cb6b756babac65f537003f10",
+        "createdByRequestId": "01a1e89fc3257670807b489c9c7587fb",
+        "touchedByRequestIds": [
+          "01a1e89fc3257670807b489c9c7587fb",
+          "01a1e8a4b1977177a5bc39dcafaf2826",
+          "01a1e8a7cb6b756babac65f537003f10"
+        ]
+      }
+    }
+  ]
+}

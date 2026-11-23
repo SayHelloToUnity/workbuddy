@@ -1,0 +1,32 @@
+import zipfile
+from xml.etree import ElementTree as ET
+from collections import Counter, defaultdict
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+p = r'C:/Users/56583/Desktop/静脉输液手术数据/静脉 输液2026.10.22.xlsx'
+z = zipfile.ZipFile(p)
+ss = [''.join(t.text or '' for t in si.iter(NS + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml'))]
+sh = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+cells = {}
+for row in sh.iter(NS + 'row'):
+    for c in row.findall(NS + 'c'):
+        ref = c.get('r')
+        col = ''.join(ch for ch in ref if ch.isalpha())
+        rn = int(''.join(ch for ch in ref if ch.isdigit()))
+        v = c.find(NS + 'v')
+        t = c.get('t')
+        val = None
+        if v is not None:
+            val = ss[int(v.text)] if t == 's' else v.text
+        cells[(rn, col)] = val
+
+def g(r, col):
+    v = cells.get((r, col))
+    return '' if v is None else str(v)
+
+cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
+rows = list(range(2, 173))
+print('=== 第109-160行明细 (A/B/E/F/G/H/I/J/L/O) ===')
+print('行 | A编码 | B | E | F所属操作 | G | H所属步骤 | I | J所属环节 | L阶段 | O关键')
+for r in range(108, 161):
+    print(r, '|', g(r,'A'), '|', g(r,'B'), '|', g(r,'E'), '|', g(r,'F'), '|', g(r,'G'), '|', g(r,'H'), '|', g(r,'I'), '|', g(r,'J'), '|', g(r,'L'), '|', repr(g(r,'O')))

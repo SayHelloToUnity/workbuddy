@@ -1,0 +1,83 @@
+import zipfile
+from xml.etree import ElementTree as ET
+from collections import Counter, defaultdict
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+p = r'C:/Users/56583/Desktop/静脉输液手术数据/静脉 输液2026.10.22.xlsx'
+z = zipfile.ZipFile(p)
+ss = [''.join(t.text or '' for t in si.iter(NS + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml'))]
+sh = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+cells = {}
+for row in sh.iter(NS + 'row'):
+    for c in row.findall(NS + 'c'):
+        ref = c.get('r')
+        col = ''.join(ch for ch in ref if ch.isalpha())
+        rn = int(''.join(ch for ch in ref if ch.isdigit()))
+        v = c.find(NS + 'v')
+        t = c.get('t')
+        val = None
+        if v is not None:
+            val = ss[int(v.text)] if t == 's' else v.text
+        cells[(rn, col)] = val
+
+
+def g(r, col):
+    v = cells.get((r, col))
+    return '' if v is None else str(v).strip()
+
+
+last = max(r for (r, c) in cells)
+rows = [r for r in range(2, last + 1) if g(r, 'A')]
+print('最后有内容行:', last, ' 有编码的行数:', len(rows))
+
+print('\n=== 1. 空行 / 编码为空的行 ===')
+blanks = [r for r in range(2, last + 1) if not g(r, 'A') and any(g(r, c) for c in 'BCDEFGHIJKLMNO')]
+empty_all = [r for r in range(2, last + 1) if not g(r, 'A') and not any(g(r, c) for c in 'BCDEFGHIJKLMNO')]
+print('完全空行:', empty_all)
+print('无编码但有其它内容:', blanks)
+
+print('\n=== 2. A 列前缀分布 ===')
+print(Counter(g(r, 'A').split('-')[0] for r in rows))
+
+print('\n=== 3. A 列段数/重复 ===')
+badseg = [(r, g(r, 'A')) for r in rows if len(g(r, 'A').split('-')) != 6]
+print('非6段:', badseg)
+dup = [k for k, v in Counter(g(r, 'A') for r in rows).items() if v > 1]
+print('重复编码数:', len(dup))
+for d in dup:
+    print('  ', d, '出现在行', [r for r in rows if g(r, 'A') == d])
+
+print('\n=== 4. 环节编号(I) 与 环节名(J) 对应 ===')
+m = defaultdict(set)
+for r in rows:
+    m[g(r, 'I')].add(g(r, 'J'))
+for k in sorted(m):
+    print(' I=', k, '->', sorted(m[k]))
+
+print('\n=== 5. A 第2段 与 I 列不一致 ===')
+x = [(r, g(r, 'A'), g(r, 'I'), g(r, 'J')) for r in rows if g(r, 'A').split('-')[1] != g(r, 'I')]
+print('数量:', len(x))
+for i in x:
+    print('  ', i)
+
+print('\n=== 6. A 第3段 与 G 列不一致 ===')
+x = [(r, g(r, 'A'), g(r, 'G'), g(r, 'H')) for r in rows if g(r, 'A').split('-')[2] != g(r, 'G')]
+print('数量:', len(x))
+for i in x:
+    print('  ', i)
+
+print('\n=== 7. A 第4段 与 E 列不一致 ===')
+x = [(r, g(r, 'A'), g(r, 'E'), g(r, 'F')) for r in rows if g(r, 'A').split('-')[3] != g(r, 'E')]
+print('数量:', len(x))
+for i in x:
+    print('  ', i)
+
+print('\n=== 8. A 第5段 与 B 列不一致 ===')
+x = [(r, g(r, 'A'), g(r, 'B')) for r in rows if g(r, 'A').split('-')[4] != g(r, 'B')]
+print('数量:', len(x))
+for i in x:
+    print('  ', i)
+
+print('\n=== 9. A 第6段 与 K 列 ===')
+print('K 分布:', Counter(g(r, 'K') for r in rows))
+print('第6段分布:', Counter(g(r, 'A').split('-')[5] for r in rows))

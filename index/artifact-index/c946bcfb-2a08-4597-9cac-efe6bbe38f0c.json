@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "lastUpdated": 1795411745626,
+  "artifacts": [
+    {
+      "name": "wbmigrate.py",
+      "title": "wbmigrate.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 33781,
+      "createdAt": 1795411531477,
+      "updatedAt": 1795411745625,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-17-09-55-25/wbmigrate.py",
+      "_meta": {
+        "sourceTool": "Edit",
+        "codebuddy.ai/toolName": "Edit",
+        "toolCallId": "call_00_nccqbgMMRyAQ6Y3c59bZ8367",
+        "ownerConversationId": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
+        "requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "codebuddy.ai/requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "createdByRequestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "touchedByRequestIds": [
+          "01a206dc8d8174d3867d8f53b2084e06"
+        ]
+      }
+    },
+    {
+      "name": "sync.cmd",
+      "title": "sync.cmd",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 949,
+      "createdAt": 1795411717734,
+      "updatedAt": 1795411723952,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-17-09-55-25/sync.cmd",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_kMBVZbuE6vFWdty0vC2H5581",
+        "ownerConversationId": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
+        "requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "codebuddy.ai/requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "createdByRequestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "touchedByRequestIds": [
+          "01a206dc8d8174d3867d8f53b2084e06"
+        ]
+      }
+    }
+  ]
+}

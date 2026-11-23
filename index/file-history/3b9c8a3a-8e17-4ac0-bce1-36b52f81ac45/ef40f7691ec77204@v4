@@ -1,0 +1,99 @@
+# -*- coding: utf-8 -*-
+import re
+import json, datetime
+
+d = json.load(open('share_content.json', encoding='utf-8'))
+msgs = d['data']['biz_data']['messages']
+
+def ts(x):
+    return datetime.datetime.fromtimestamp(x).strftime('%Y-%m-%d %H:%M')
+
+pairs = []
+cur_user = None
+for m in msgs:
+    reqs, files, resp = [], [], []
+    for f in m['fragments']:
+        if f['type'] == 'REQUEST':
+            reqs.append(f.get('content') or '')
+        elif f['type'] == 'RESPONSE':
+            resp.append(f.get('content') or '')
+        elif f['type'] == 'FILE':
+            for fl in f.get('files', []):
+                files.append(fl['file_name'])
+    if m['role'] == 'USER':
+        cur_user = {'time': ts(m['inserted_at']), 'req': '\n'.join(reqs).strip(), 'files': files}
+        pairs.append({'user': cur_user, 'ai': None})
+    else:
+        if pairs and pairs[-1]['ai'] is None:
+            pairs[-1]['ai'] = {'time': ts(m['inserted_at']), 'resp': '\n'.join(resp).strip()}
+
+first_t = ts(msgs[0]['inserted_at'])
+last_t = ts(msgs[-1]['inserted_at'])
+
+out = []
+out.append('# Git 多平台 SSH 配置 · 完整对话记录\n')
+out.append('> 本文档由 DeepSeek 分享对话导出整理，保留原始问答内容与顺序，仅去除模型检索/思考过程、合并附件标记。\n')
+out.append('| 项目 | 说明 |')
+out.append('|---|---|')
+out.append('| 原始链接 | https://chat.deepseek.com/share/ich67h1s65g5qtiobk |')
+out.append('| 对话时间 | %s — %s |' % (first_t, last_t))
+out.append('| 对话轮次 | %d 轮（用户 %d 条 / 回复 %d 条） |' % (len(pairs), len(pairs), len([p for p in pairs if p['ai']])))
+out.append('| 截图附件 | 18 张（原对话附件，需登录 DeepSeek 后方可查看，本文以占位标记保留位置） |')
+out.append('| 主题 | TortoiseGit 同时使用 GitLab（内网）与 GitHub（公网）的 OpenSSH 多密钥配置 |')
+out.append('\n---\n')
+
+for i, p in enumerate(pairs, 1):
+    u = p['user']
+    out.append('\n## 第 %d 轮\n' % i)
+    out.append('### 🧑 用户 · %s\n' % u['time'])
+    if u['files']:
+        out.append('> 📎 附件：%s（截图，内容未随文本导出）\n' % '、'.join(u['files']))
+    if u['req']:
+        out.append(u['req'] + '\n')
+    if p['ai']:
+        out.append('\n### 🤖 DeepSeek · %s\n' % p['ai']['time'])
+        out.append(p['ai']['resp'] + '\n')
+        out.append('\n---\n')
+
+def wrap_doc(resp):
+    """把回复中内嵌的整份 md 文档用四级围栏包裹，避免与内部代码块冲突、并保持大纲层级。"""
+    m = re.search(r'(?m)^```markdown[ \t]*$', resp)
+    if m:
+        prose = resp[:m.start()].rstrip()
+        rest = resp[m.end():]
+        ends = [x.start() for x in re.finditer(r'(?m)^```[ \t]*$', rest)]
+        if not ends:
+            return resp
+        body = rest[:ends[-1]].strip('\n')
+        tail = rest[ends[-1]:].lstrip('`').strip()
+        return prose + '\n\n````markdown\n' + body + '\n````' + ('\n\n' + tail if tail else '')
+    h = '\n# Git 配置与多平台 SSH 密钥管理指南'
+    if h in resp:
+        i = resp.index(h)
+        prose, body = resp[:i].rstrip(), resp[i + 1:].strip('\n')
+        return prose + '\n\n````markdown\n' + body + '\n````'
+    return resp
+
+for p in pairs:
+    if p['ai']:
+        p['ai']['resp'] = wrap_doc(p['ai']['resp'])
+
+out2 = []
+for i, p in enumerate(pairs, 1):
+    u = p['user']
+    out2.append('\n## 第 %d 轮\n' % i)
+    out2.append('### 🧑 用户 · %s\n' % u['time'])
+    if u['files']:
+        out2.append('> 📎 附件：%s（截图，内容未随文本导出）\n' % '、'.join(u['files']))
+    if u['req']:
+        out2.append(u['req'] + '\n')
+    if p['ai']:
+        out2.append('\n### 🤖 DeepSeek · %s\n' % p['ai']['time'])
+        out2.append(p['ai']['resp'] + '\n')
+        out2.append('\n---\n')
+
+out = out2
+text = '\n'.join(out)
+text = text.replace('\n---\n\n---\n', '\n---\n')
+open('Git多平台SSH配置_完整对话记录.md', 'w', encoding='utf-8').write(text)
+print('written', len(text))

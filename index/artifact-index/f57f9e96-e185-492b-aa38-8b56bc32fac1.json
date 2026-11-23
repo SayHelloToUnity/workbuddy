@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "lastUpdated": 1792659760663,
+  "artifacts": [
+    {
+      "name": "静脉 输液2026.10.22.xlsx",
+      "title": "静脉 输液2026.10.22.xlsx",
+      "mimeType": "application/octet-stream",
+      "contentType": "spreadsheet",
+      "size": 33131,
+      "createdAt": 1792636937220,
+      "updatedAt": 1792659708339,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%20%E8%BE%93%E6%B6%B22026.10.22.xlsx",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_LjkLyUDXydlaze4CIPjV6726",
+        "ownerConversationId": "f57f9e96-e185-492b-aa38-8b56bc32fac1",
+        "requestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "codebuddy.ai/requestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "createdByRequestId": "01a161958c73760eb51602ec51d29374",
+        "touchedByRequestIds": [
+          "01a161958c73760eb51602ec51d29374",
+          "01a162d6e6ee7c22b6aa3d3c5c64db82"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液评分结构图.xmind",
+      "title": "静脉输液评分结构图.xmind",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 2049,
+      "createdAt": 1792657883640,
+      "updatedAt": 1792657913549,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE.xmind",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_rAeyo0AVATrAymb5dUmb2066",
+        "ownerConversationId": "f57f9e96-e185-492b-aa38-8b56bc32fac1",
+        "requestId": "01a162bba01d749bbb4a42e7b578f979",
+        "codebuddy.ai/requestId": "01a162bba01d749bbb4a42e7b578f979",
+        "createdByRequestId": "01a162bba01d749bbb4a42e7b578f979",
+        "touchedByRequestIds": [
+          "01a162bba01d749bbb4a42e7b578f979"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液评分结构图.mm",
+      "title": "静脉输液评分结构图.mm",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 4201,
+      "createdAt": 1792657883641,
+      "updatedAt": 1792657913551,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE.mm",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_rAeyo0AVATrAymb5dUmb2066",
+        "ownerConversationId": "f57f9e96-e185-492b-aa38-8b56bc32fac1",
+        "requestId": "01a162bba01d749bbb4a42e7b578f979",
+        "codebuddy.ai/requestId": "01a162bba01d749bbb4a42e7b578f979",
+        "createdByRequestId": "01a162bba01d749bbb4a42e7b578f979",
+        "touchedByRequestIds": [
+          "01a162bba01d749bbb4a42e7b578f979"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液评分结构图_大纲.txt",
+      "title": "静脉输液评分结构图_大纲.txt",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 1895,
+      "createdAt": 1792657883642,
+      "updatedAt": 1792657913562,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE_%E5%A4%A7%E7%BA%B2.txt",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_rAeyo0AVATrAymb5dUmb2066",
+        "ownerConversationId": "f57f9e96-e185-492b-aa38-8b56bc32fac1",
+        "requestId": "01a162bba01d749bbb4a42e7b578f979",
+        "codebuddy.ai/requestId": "01a162bba01d749bbb4a42e7b578f979",
+        "createdByRequestId": "01a162bba01d749bbb4a42e7b578f979",
+        "touchedByRequestIds": [
+          "01a162bba01d749bbb4a42e7b578f979"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液评分结构图_100分定稿.xmind",
+      "title": "静脉输液评分结构图_100分定稿.xmind",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 2018,
+      "createdAt": 1792659745837,
+      "updatedAt": 1792659745837,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE_100%E5%88%86%E5%AE%9A%E7%A8%BF.xmind",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_LjkLyUDXydlaze4CIPjV6726",
+        "ownerConversationId": "f57f9e96-e185-492b-aa38-8b56bc32fac1",
+        "requestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "codebuddy.ai/requestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "createdByRequestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "touchedByRequestIds": [
+          "01a162d6e6ee7c22b6aa3d3c5c64db82"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液评分结构图_100分定稿.mm",
+      "title": "静脉输液评分结构图_100分定稿.mm",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 4175,
+      "createdAt": 1792659745839,
+      "updatedAt": 1792659745839,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E6%89%8B%E6%9C%AF%E6%95%B0%E6%8D%AE/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2%E8%AF%84%E5%88%86%E7%BB%93%E6%9E%84%E5%9B%BE_100%E5%88%86%E5%AE%9A%E7%A8%BF.mm",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_LjkLyUDXydlaze4CIPjV6726",
+        "ownerConversationId": "f57f9e96-e185-492b-aa38-8b56bc32fac1",
+        "requestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "codebuddy.ai/requestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "createdByRequestId": "01a162d6e6ee7c22b6aa3d3c5c64db82",
+        "touchedByRequestIds": [
+          "01a162d6e6ee7c22b6aa3d3c5c64db82"
+        ]
+      }
+    }
+  ]
+}
