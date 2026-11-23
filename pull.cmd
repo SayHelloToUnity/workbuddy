@@ -1,8 +1,6 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-chcp 65001 >nul 2>nul
-set "PYTHONIOENCODING=utf-8"
 set "ERRLOG=%~dp0last-error.log"
 
 echo ==================================================
@@ -10,8 +8,20 @@ echo  WorkBuddy PULL : remote --^> this PC
 echo ==================================================
 echo.
 
-where python >nul 2>nul
-if errorlevel 1 goto no_python
+rem ---- locate a real python (skip the Microsoft Store stub) ----
+set "PY="
+for /f "delims=" %%p in ('where python 2^>nul') do (
+  echo %%p | "%SystemRoot%\System32\find.exe" /i "WindowsApps" >nul || set "PY=%%p"
+)
+if not defined PY for /f "delims=" %%p in ('where py 2^>nul') do if not defined PY set "PY=%%p"
+if not defined PY for /d %%d in ("%USERPROFILE%\.workbuddy\binaries\python\versions\*") do if not defined PY if exist "%%~fd\python.exe" set "PY=%%~fd\python.exe"
+if not defined PY goto no_python
+
+echo   python: %PY%
+"%PY%" -c "import sys;print('   version:',sys.version.split()[0])"
+if errorlevel 1 goto bad_python
+echo.
+
 where git >nul 2>nul
 if errorlevel 1 goto no_git
 
@@ -29,17 +39,13 @@ echo [2/3] Fetching and resetting to origin/main...
 echo [3/3] Writing chats into this PC (overwrite + auto backup)...
 echo       Close WorkBuddy now if it is running.
 echo.
-python "%~dp0wbmigrate.py" pull --repo "%~dp0." %*
-if errorlevel 1 goto py_failed
+"%PY%" "%~dp0wbmigrate.py" pull --repo "%~dp0." %*
+set "RC=%ERRORLEVEL%"
+if not "%RC%"=="0" goto py_failed
 
 echo.
 echo Done.
 goto fin
-
-:no_python
-echo [ERROR] python not found in PATH.
-echo         Install Python 3.8+ and tick "Add python.exe to PATH".
-goto fail
 
 :no_git
 echo [ERROR] git not found in PATH. Install Git for Windows.
@@ -76,13 +82,30 @@ goto fail
 
 :py_failed
 echo.
-echo [ERROR] pull failed. Look for lines starting with [ERROR] above.
+echo [ERROR] pull failed, exit code %RC%.
+echo         Interpretation:
+echo           exit 2 = app error, read the [ERROR] line above
+echo         Full log: %~dp0last-run.log
+goto fail
+
+:no_python
+echo [ERROR] No usable Python found.
+echo         Checked: where python (excluding WindowsApps), where py,
+echo                  %USERPROFILE%\.workbuddy\binaries\python\versions
+echo         Fix: install Python 3.8+ from python.org and tick
+echo              "Add python.exe to PATH", then reopen this window.
+goto fail
+
+:bad_python
+echo [ERROR] That python cannot run: %PY%
+echo         If the path contains WindowsApps it is a Microsoft Store stub.
+echo         Install real Python 3.8+ from python.org and retry.
 goto fail
 
 :fail
 echo.
 echo FAILED - see the message above.
-echo A full copy is saved in: %~dp0last-run.log
+echo If nothing is shown, open: %~dp0last-run.log
 goto fin
 
 :fin

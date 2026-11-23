@@ -1,9 +1,0 @@
-pull.cmd
-sync.cmd
-wbmigrate.py
-=== 执行同步 ===
-last-run.log
-pull.cmd
-sync.cmd
-wbmigrate.py
-=== 执行同步 ===

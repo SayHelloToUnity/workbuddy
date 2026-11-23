@@ -22,3 +22,21 @@
 - 工作区文件不进该仓库：hardware-foundations-lab 2.9G、mcframework 8.7G，需各自用 git/云盘管理。
 
 **待办**：用户提供私有仓库地址后可绑定 origin 并推送；目标机需按 `--map-cwd` 处理用户名差异。
+
+## 14:40 升级为双向同步（远端为准）
+
+- 远端已绑定：`git@github.com:SayHelloToUnity/workbuddy.git`（SSH 已可用，账号 SayHelloToUnity），仓库根即包目录 `_wb-sync/snapshot`。
+- 用户明确要求"两边都能看到 + 以 git 为准 + 拉取直接覆盖"，据此新增两个子命令：
+  - `sync --repo`：先 `fetch` + `reset --hard origin/main` 对齐远端，再整体重建快照、提交、推送；推送被拒时自动重试（最多 3 次）。
+  - `pull --repo`：同样先对齐远端，再 `import --overwrite` 覆盖本机；自动识别用户名差异并生成 `--map-cwd`。
+- 覆盖安全网：`import` 在覆盖前把本机旧文件备份到 `~/.workbuddy/backups/<ts>/files/`，已验证可回退。
+- 包内自动生成跨机通用 `sync.cmd` / `pull.cmd`（用 `%~dp0` 定位，已入库），修复了"另一台机器没有 sync.cmd"的问题。
+- 已知取舍：同一会话在两台机器分别续聊时，后推送方整体覆盖，另一方续聊内容丢失（有备份）。用户已接受该语义。
+
+## 21:20-21:30 另一台机器 pull.cmd 报 FAILED 的排查与加固
+- 现象：另一台执行 `pull.cmd` 只输出 `FAILED. Read the output above.`，用户未看到真实错误；本机无任何操作痕迹（无备份目录、repo reflog 停在 17:47），确认失败发生在对端且在写盘之前。
+- 教训 1：`pull` 内部会 `git reset --hard origin/main`，**手工替换进克隆目录的脚本会被还原**；脚本只能通过仓库发布（`SYNC_CMD`/`PULL_CMD` 常量 → `write_repo_meta` 写盘）。
+- 教训 2：`python ... > log` 后用 `type` 回显，在 `chcp 65001` 下会丢输出；改为脚本内部 tee 日志（`init_log()` + `_tee()` 挂到 `info()`/`die()`），控制台直出。
+- 加固内容（提交 `81bbaad`）：两个 .cmd 增加 6 项前置检查（python/git/是否仓库/manifest/.workbuddy/workbuddy.db）、远端连通性预检（错误写入 `last-error.log`）、`chcp 65001` + `PYTHONIOENCODING=utf-8`；`find` 改绝对路径 `%SystemRoot%\System32\find.exe`（Git Bash 下会被 Unix find 抢走）；`.gitignore` 增加 `last-run.log`/`last-error.log`。
+- 验证：全新克隆 → `pull.cmd --dry-run` 走通、日志落盘且被 git 忽略；伪造 `USERPROFILE` 验证缺 `.workbuddy` 时给出明确提示。
+
