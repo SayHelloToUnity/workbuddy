@@ -1,6 +1,0 @@
-[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":834,"threshold":50,"scope":"turn","targets":["C:/Users/56583/WorkBuddy/_t"],"targetCount":1}
-本地 8e0e3ec / 远端 8e0e3ec
-session_usage.json
-sessions.json
-spaces.json
-workspaces.json

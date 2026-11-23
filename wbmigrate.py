@@ -138,6 +138,29 @@ def norm_path(p: str) -> str:
     return s.rstrip("/")
 
 
+def win_long(path) -> str:
+    r"""Windows 长路径支持：绝对路径加 \\?\ 前缀，突破 260 字符限制。
+    非 Windows 或已是前缀时原样返回。
+    """
+    s = str(path)
+    if os.name != "nt":
+        return s
+    s = os.path.abspath(s)
+    if s.startswith("\\\\?\\"):
+        return s
+    if s.startswith("\\\\"):
+        return "\\\\?\\UNC" + s[1:]
+    return "\\\\?\\" + s
+
+
+def lp_makedirs(path) -> None:
+    os.makedirs(win_long(path), exist_ok=True)
+
+
+def lp_copy(src, dst) -> None:
+    shutil.copy2(win_long(src), win_long(dst))
+
+
 def connect_ro(db: Path) -> sqlite3.Connection:
     if not db.exists():
         die(f"找不到数据库：{db}")
@@ -789,6 +812,8 @@ def cmd_import(home: Path, args) -> None:
     # 复制正文
     copied = 0
     overwritten = 0
+    backup_failed: list[tuple[str, str]] = []
+    copy_failed: list[tuple[str, str]] = []
     file_bk_root = (bk or home / "backups") / "files"
     for p in plan:
         p["dst_dir"].mkdir(parents=True, exist_ok=True)
@@ -800,19 +825,25 @@ def cmd_import(home: Path, args) -> None:
                 rel_path = Path("projects") / p["new_enc"] / Path(*parts[2:])
             src = pkg / rel
             dst = home / rel_path
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            # 覆盖前先备份本机旧文件 —— 「远端为准」策略下的可回退保障
-            if dst.exists():
-                try:
-                    stored = dst.relative_to(home)
-                except ValueError:
-                    stored = Path("_external") / dst.name
-                bk_file = file_bk_root / stored
-                bk_file.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(dst, bk_file)
-                overwritten += 1
-            shutil.copy2(src, dst)
-            copied += 1
+            try:
+                lp_makedirs(dst.parent)
+                # 覆盖前先备份本机旧文件 —— 「远端为准」策略下的可回退保障
+                if dst.exists():
+                    try:
+                        stored = dst.relative_to(home)
+                    except ValueError:
+                        stored = Path("_external") / dst.name
+                    bk_file = file_bk_root / stored
+                    try:
+                        lp_makedirs(bk_file.parent)
+                        lp_copy(dst, bk_file)
+                        overwritten += 1
+                    except OSError as e:
+                        backup_failed.append((str(dst), str(e)))
+                lp_copy(src, dst)
+                copied += 1
+            except OSError as e:
+                copy_failed.append((str(dst), str(e)))
 
     if getattr(args, "create_dirs", False):
         for pl in plan:
@@ -839,6 +870,16 @@ def cmd_import(home: Path, args) -> None:
     info(f"  workspaces    {stats['workspaces']}")
     info(f"  session_usage {stats['session_usage']}")
     info(f"  正文文件      {copied}（其中 {overwritten} 个覆盖了本机旧版本，已备份）")
+    if backup_failed:
+        info(f"  [警告] {len(backup_failed)} 个旧文件备份失败（已照常写入远端版本）：")
+        for path, err in backup_failed[:3]:
+            info(f"    - {path}")
+            info(f"      {err}")
+    if copy_failed:
+        info(f"  [警告] {len(copy_failed)} 个文件写入失败：")
+        for path, err in copy_failed[:5]:
+            info(f"    - {path}")
+            info(f"      {err}")
     if overwritten:
         info(f"  被覆盖文件备份 -> {file_bk_root}")
     info("")

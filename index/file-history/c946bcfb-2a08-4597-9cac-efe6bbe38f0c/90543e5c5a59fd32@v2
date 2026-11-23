@@ -1,0 +1,124 @@
+from pathlib import Path
+import importlib.util
+
+p = Path("wbmigrate.py")
+s = p.read_text(encoding="utf-8")
+
+# ---------- 1. 导出：新增 space_folders ----------
+old = '''    usage_rows = fetch_rows(con, "session_usage", f"session_id IN ({marks})", ids)
+    con.close()'''
+new = '''    sf_rows = []
+    if space_ids:
+        m4 = ",".join("?" * len(space_ids))
+        sf_rows = fetch_rows(con, "space_folders", f"space_id IN ({m4})", space_ids)
+
+    usage_rows = fetch_rows(con, "session_usage", f"session_id IN ({marks})", ids)
+    con.close()'''
+assert old in s
+s = s.replace(old, new, 1)
+
+old = '''        ("spaces", space_rows),
+        ("workspaces", ws_rows),
+        ("session_usage", usage_rows),'''
+new = '''        ("spaces", space_rows),
+        ("space_folders", sf_rows),
+        ("workspaces", ws_rows),
+        ("session_usage", usage_rows),'''
+assert old in s
+s = s.replace(old, new, 1)
+
+# ---------- 2. 导入：表清单 + 路径重映射 ----------
+old = '''        stats = {"spaces": 0, "sessions": 0, "workspaces": 0, "session_usage": 0}'''
+new = '''        stats = {"spaces": 0, "sessions": 0, "workspaces": 0, "session_usage": 0, "space_folders": 0}
+    dirs_to_create: set[str] = set()'''
+assert old in s
+s = s.replace(old, new, 1)
+
+old = '''        for table in ("spaces", "sessions", "workspaces", "session_usage"):'''
+new = '''        for table in ("spaces", "space_folders", "sessions", "workspaces", "session_usage"):'''
+assert old in s
+s = s.replace(old, new, 1)
+
+old = '''                elif table == "spaces":
+                    if reassign and target_user:
+                        r["user_id"] = target_user'''
+new = '''                elif table == "spaces":
+                    if reassign and target_user:
+                        r["user_id"] = target_user
+                    for col in ("primary_folder_path", "create_folder_path"):
+                        if r.get(col):
+                            r[col], _ = remap_cwd(r[col], mapping)
+                            dirs_to_create.add(r[col])
+                elif table == "space_folders":
+                    new_path, _ = remap_cwd(r.get("path") or "", mapping)
+                    r["path"] = new_path
+                    dirs_to_create.add(new_path)'''
+assert old in s
+s = s.replace(old, new, 1)
+
+# ---------- 3. 导入：按需创建缺失目录 ----------
+old = '''    info("")
+    info("导入完成：")
+    info(f"  sessions      {stats['sessions']}")'''
+new = '''    if getattr(args, "create_dirs", False):
+        made = 0
+        for p_new in plan:
+            if p_new.get("new_cwd"):
+                dirs_to_create.add(p_new["new_cwd"])
+        for d in sorted(dirs_to_create):
+            if not d:
+                continue
+            target = Path(d)
+            if target.exists():
+                continue
+            try:
+                target.mkdir(parents=True, exist_ok=True)
+                made += 1
+            except Exception as e:  # noqa: BLE001
+                info(f"[提示] 无法创建目录 {d}：{e}")
+        if made:
+            info(f"已补建缺失目录 {made} 个（否则侧边栏对应项目可能不显示）")
+
+    info("")
+    info("导入完成：")
+    info(f"  sessions      {stats['sessions']}")
+    info(f"  spaces        {stats['spaces']}")
+    info(f"  space_folders {stats.get('space_folders', 0)}")'''
+assert old in s
+s = s.replace(old, new, 1)
+
+# 去掉原来重复的 spaces 行（新块里已打印）
+old = '''    info(f"  spaces        {stats['spaces']}")
+    info(f"  workspaces    {stats['workspaces']}")'''
+new = '''    info(f"  workspaces    {stats['workspaces']}")'''
+assert old in s
+s = s.replace(old, new, 1)
+
+# ---------- 4. 参数：--create-dirs ----------
+old = '''    i.add_argument("--map-cwd", action="append", help="路径重映射 旧=新，可重复")'''
+new = '''    i.add_argument("--map-cwd", action="append", help="路径重映射 旧=新，可重复")
+    i.add_argument("--create-dirs", action="store_true", help="补建目标机缺失的项目目录（避免侧边栏不显示）")'''
+assert old in s
+s = s.replace(old, new, 1)
+
+# ---------- 5. pull 默认开启 ----------
+old = '''        overwrite=True,
+        reassign_user=False,
+        auto_user=True,
+        map_cwd=maps,
+    )'''
+new = '''        overwrite=True,
+        reassign_user=False,
+        auto_user=True,
+        map_cwd=maps,
+        create_dirs=True,
+    )'''
+assert old in s
+s = s.replace(old, new, 1)
+
+p.write_text(s, encoding="utf-8")
+print("patched, size:", len(s))
+
+import py_compile
+py_compile.compile("wbmigrate.py", doraise=True)
+print("compile ok")

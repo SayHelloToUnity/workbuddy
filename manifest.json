@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-23T22:27:51+08:00",
+  "created_at": "2026-11-23T23:23:57+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -56,7 +56,7 @@
     "sessions": 13,
     "spaces": 4,
     "workspaces": 9,
-    "files": 271
+    "files": 273
   },
   "sessions": [
     {
@@ -368,11 +368,10 @@
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
       "status": "working",
-      "updated_at": 1795444053449,
+      "updated_at": 1795447417216,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
-        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_4lPkLYAgYe5AoNNyYGFs7871.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_K6rKJpX4QiFoSJ25aqg36980-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_xw5jnT06U3TA33OUdG532271-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_JOdhUfv2ApYkYVRWNGLA0800-render.txt",
@@ -380,6 +379,7 @@
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_MASdEJgTi8GeJ1BWEAHl2038-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_sYipiniQbeuAfmYrn8dv6151-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_TVGV4IV1d844w6zw4C5c5824-render.txt",
+        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_TVJjIAHNbXr5XgLsS89a7928.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.file-rollback.ndjson",
         "index/artifact-index/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.json",
         "index/changes-index/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.json",
@@ -413,10 +413,12 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v1",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v3",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v4",
-        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v5"
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v5",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/90543e5c5a59fd32@v2"
       ]
     },
     {
