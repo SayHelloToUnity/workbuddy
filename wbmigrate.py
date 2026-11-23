@@ -480,6 +480,8 @@ def cmd_export(home: Path, args) -> None:
     except Exception as e:  # noqa: BLE001
         info(f"[提示] 未能把工具复制进包：{e}")
 
+    write_repo_meta(pkg)
+
     write_restore_readme(pkg, manifest)
 
     size = sum(f.stat().st_size for f in pkg.rglob("*") if f.is_file())
@@ -492,6 +494,7 @@ def cmd_export(home: Path, args) -> None:
     info("下一步（二选一）：")
     info(f"  1) 直接拷走这个文件夹，在目标机运行：python wbmigrate.py import \"{pkg}\" --apply")
     info(f"  2) 走 git：python wbmigrate.py git \"{pkg}\" --remote <你的私有仓库地址>")
+    return pkg
 
 
 def write_restore_readme(pkg: Path, manifest: dict) -> None:
@@ -718,6 +721,8 @@ def cmd_import(home: Path, args) -> None:
 
     # 复制正文
     copied = 0
+    overwritten = 0
+    file_bk_root = (bk or home / "backups") / "files"
     for p in plan:
         p["dst_dir"].mkdir(parents=True, exist_ok=True)
         for rel in p["files"]:
@@ -729,6 +734,16 @@ def cmd_import(home: Path, args) -> None:
             src = pkg / rel
             dst = home / rel_path
             dst.parent.mkdir(parents=True, exist_ok=True)
+            # 覆盖前先备份本机旧文件 —— 「远端为准」策略下的可回退保障
+            if dst.exists():
+                try:
+                    stored = dst.relative_to(home)
+                except ValueError:
+                    stored = Path("_external") / dst.name
+                bk_file = file_bk_root / stored
+                bk_file.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(dst, bk_file)
+                overwritten += 1
             shutil.copy2(src, dst)
             copied += 1
 
@@ -738,7 +753,9 @@ def cmd_import(home: Path, args) -> None:
     info(f"  spaces        {stats['spaces']}")
     info(f"  workspaces    {stats['workspaces']}")
     info(f"  session_usage {stats['session_usage']}")
-    info(f"  正文文件      {copied}")
+    info(f"  正文文件      {copied}（其中 {overwritten} 个覆盖了本机旧版本，已备份）")
+    if overwritten:
+        info(f"  被覆盖文件备份 -> {file_bk_root}")
     info("")
     info("请完全退出并重新启动 WorkBuddy，侧边栏才会刷新出这些会话。")
 
@@ -748,6 +765,105 @@ def cmd_import(home: Path, args) -> None:
 # --------------------------------------------------------------------------- #
 GITATTRIBUTES = "*.jsonl text eol=lf\n*.json text eol=lf\n"
 GITIGNORE = "*.tmp\n.DS_Store\nThumbs.db\n"
+GIT_ID = ["-c", "user.name=wbmigrate", "-c", "user.email=wbmigrate@local"]
+
+
+SYNC_CMD = r"""@echo off
+setlocal
+rem WorkBuddy: push local chats to remote (remote is source of truth)
+where python >nul 2>nul
+if errorlevel 1 (
+  echo Python not found. Install Python 3.8+ first.
+  goto fail
+)
+python "%~dp0wbmigrate.py" sync --repo "%~dp0."
+if errorlevel 1 goto fail
+echo.
+echo Done.
+goto fin
+
+:fail
+echo.
+echo FAILED. Read the output above.
+
+:fin
+echo %cmdcmdline% | find /i "%~nx0" >nul && pause
+endlocal
+"""
+
+PULL_CMD = r"""@echo off
+setlocal
+rem WorkBuddy: pull remote chats into this machine (overwrite, auto backup)
+where python >nul 2>nul
+if errorlevel 1 (
+  echo Python not found. Install Python 3.8+ first.
+  goto fail
+)
+python "%~dp0wbmigrate.py" pull --repo "%~dp0." %*
+if errorlevel 1 goto fail
+echo.
+echo Done.
+goto fin
+
+:fail
+echo.
+echo FAILED. Read the output above.
+
+:fin
+echo %cmdcmdline% | find /i "%~nx0" >nul && pause
+endlocal
+"""
+
+
+def write_repo_meta(pkg: Path) -> None:
+    """在包内写入 git 元数据与一键脚本（每次重建后仍然存在，且跨机通用）。"""
+    (pkg / ".gitattributes").write_text(GITATTRIBUTES, encoding="utf-8")
+    gi = pkg / ".gitignore"
+    if not gi.exists():
+        gi.write_text(GITIGNORE, encoding="utf-8")
+    (pkg / "sync.cmd").write_text(SYNC_CMD.replace("\n", "\r\n"), encoding="ascii")
+    (pkg / "pull.cmd").write_text(PULL_CMD.replace("\n", "\r\n"), encoding="ascii")
+
+
+def host_slug() -> str:
+    name = os.environ.get("COMPUTERNAME") or os.environ.get("HOSTNAME") or "pc"
+    s = "".join(ch if (ch.isalnum() or ch in "-_") else "-" for ch in name).lower()
+    return s[:32] or "pc"
+
+
+def find_git_root(p: Path) -> Path | None:
+    cur = p
+    for _ in range(6):
+        if (cur / ".git").exists():
+            return cur
+        if cur.parent == cur:
+            break
+        cur = cur.parent
+    return None
+
+
+def resolve_pkg(repo: Path, dir_name: str | None) -> Path:
+    """定位包目录：仓库根即包，或仓库根下的子目录。"""
+    if (repo / "manifest.json").exists() or (repo / "db").is_dir():
+        return repo
+    return repo / (dir_name or "snapshot")
+
+
+def has_origin_main(gitroot: Path) -> bool:
+    code, _ = run_git(["rev-parse", "--verify", "origin/main"], gitroot)
+    return code == 0
+
+
+def commit_all(gitroot: Path, msg: str) -> tuple[bool, str]:
+    run_git(["add", "-A"], gitroot)
+    code, out = run_git(["commit", "-m", msg], gitroot)
+    if code != 0 and ("user.email" in out or "tell me who you are" in out.lower()):
+        code, out = run_git([*GIT_ID, "commit", "-m", msg], gitroot)
+    if code == 0:
+        return True, out
+    if "nothing to commit" in out or "无文件要提交" in out or "working tree clean" in out:
+        return True, "nothing to commit"
+    return False, out
 
 
 def run_git(args: list[str], cwd: Path) -> tuple[int, str]:
@@ -820,6 +936,125 @@ def cmd_git(home: Path, args) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# sync / pull —— 双向同步（远端为准）
+# --------------------------------------------------------------------------- #
+def cmd_sync(home: Path, args) -> None:
+    """本机 → 远端。每次先对齐 origin/main，再整体重建快照并推送。"""
+    repo = Path(args.repo).expanduser().resolve()
+    pkg = resolve_pkg(repo, args.dir_name)
+    gitroot = find_git_root(pkg) or pkg
+
+    if shutil.which("git") is None:
+        die("未检测到 git，请先安装 Git for Windows。")
+    if not (gitroot / ".git").exists():
+        code, _ = run_git(["init", "-b", "main"], gitroot)
+        if code != 0:
+            run_git(["init"], gitroot)
+        info(f"已初始化仓库：{gitroot}")
+
+    ns = argparse.Namespace(
+        all=True,
+        project=None,
+        session=None,
+        output=str(pkg.parent),
+        name=None,
+        dir_name=pkg.name,
+        replace=True,
+        with_files=args.with_files,
+    )
+
+    last_out = ""
+    for attempt in range(1, 4):
+        # 远端为准：先丢弃仓库里的本地快照，避免与远端分叉
+        if has_origin_main(gitroot):
+            run_git(["fetch", "origin"], gitroot)
+            run_git(["reset", "--hard", "origin/main"], gitroot)
+            info("已对齐远端（reset --hard origin/main）")
+
+        cmd_export(home, ns)
+
+        ok, cmsg = commit_all(
+            gitroot, f"wb chat snapshot {time.strftime('%Y-%m-%d %H:%M')} from {host_slug()}"
+        )
+        if not ok:
+            die(f"git commit 失败：{cmsg}")
+        info(f"git commit: {cmsg if cmsg.startswith('nothing') else 'ok'}")
+
+        code, out = run_git(["push", "-u", "origin", "HEAD"], gitroot)
+        if code == 0:
+            info("")
+            info(f"已推送到远端（{host_slug()}）。")
+            return
+
+        last_out = out
+        retryable = any(
+            k in out
+            for k in ("reject", "fetch first", "non-fast-forward", "remote contains work", "failed to push")
+        )
+        if not retryable:
+            break
+        info(f"远端有新提交，第 {attempt} 次重试…")
+
+    die(
+        "推送失败：\n"
+        f"{last_out}\n\n"
+        "排查顺序：\n"
+        "  1) ssh -T git@github.com   确认 SSH 通道\n"
+        "  2) git remote -v           确认地址正确\n"
+        "  3) 网络 / 代理"
+    )
+
+
+def cmd_pull(home: Path, args) -> None:
+    """远端 → 本机。强制对齐远端，再以覆盖方式写入本机。"""
+    repo = Path(args.repo).expanduser().resolve()
+    pkg = resolve_pkg(repo, args.dir_name)
+    gitroot = find_git_root(pkg) or pkg
+
+    if (gitroot / ".git").exists():
+        code, out = run_git(["fetch", "origin"], gitroot)
+        if code != 0:
+            die(f"git fetch 失败：\n{out}")
+        if has_origin_main(gitroot):
+            code, out = run_git(["reset", "--hard", "origin/main"], gitroot)
+            if code != 0:
+                die(f"git reset 失败：\n{out}")
+            info("已对齐远端（reset --hard origin/main）")
+
+    if not (pkg / "manifest.json").exists():
+        die(f"找不到 manifest.json，无法还原：{pkg}")
+
+    manifest = json.loads((pkg / "manifest.json").read_text(encoding="utf-8"))
+    created = manifest.get("created_at", "?")
+    src = manifest.get("source") or {}
+    info(f"远端快照时间：{created}")
+    info(f"生成方：{src.get('host')} / 账号 {src.get('user_id')}")
+
+    maps = list(args.map_cwd or [])
+    if not maps:
+        src_home = src.get("home") or ""
+        tgt_base = os.environ.get("USERPROFILE") if os.name == "nt" else str(Path.home())
+        if src_home and tgt_base:
+            try:
+                src_base = str(Path(src_home).parent)
+            except Exception:  # noqa: BLE001
+                src_base = ""
+            if src_base and norm_path(src_base) != norm_path(tgt_base):
+                maps.append(f"{src_base.replace(os.sep, '/')}={tgt_base.replace(os.sep, '/')}")
+                info(f"检测到用户名不同，自动映射：{src_base} -> {tgt_base}")
+
+    ns = argparse.Namespace(
+        package=str(pkg),
+        apply=not args.dry_run,
+        overwrite=True,
+        reassign_user=False,
+        auto_user=True,
+        map_cwd=maps,
+    )
+    cmd_import(home, ns)
+
+
+# --------------------------------------------------------------------------- #
 # main
 # --------------------------------------------------------------------------- #
 def build_parser() -> argparse.ArgumentParser:
@@ -857,6 +1092,17 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("package", help="迁移包目录")
     g.add_argument("--remote", help="远端仓库地址，给出则直接 push")
 
+    s = sub.add_parser("sync", help="本机 → 远端：重建快照、提交、推送（远端为准）")
+    s.add_argument("--repo", required=True, help="仓库或包目录")
+    s.add_argument("--dir-name", help="仓库根不是包时，指定子目录名")
+    s.add_argument("--with-files", action="store_true", help="一并同步工作区文件")
+
+    pl = sub.add_parser("pull", help="远端 → 本机：拉取并以覆盖方式写入")
+    pl.add_argument("--repo", required=True, help="仓库或包目录")
+    pl.add_argument("--dir-name", help="仓库根不是包时，指定子目录名")
+    pl.add_argument("--dry-run", action="store_true", help="只预览不写入")
+    pl.add_argument("--map-cwd", action="append", help="手动指定路径映射 旧=新")
+
     return p
 
 
@@ -879,6 +1125,8 @@ def main(argv: list[str] | None = None) -> int:
         "export": cmd_export,
         "import": cmd_import,
         "git": cmd_git,
+        "sync": cmd_sync,
+        "pull": cmd_pull,
     }
     handlers[args.cmd](home, args)
     return 0

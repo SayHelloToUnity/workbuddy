@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-23T14:29:29+08:00",
+  "created_at": "2026-11-23T14:40:59+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -56,7 +56,7 @@
     "sessions": 13,
     "spaces": 4,
     "workspaces": 9,
-    "files": 250
+    "files": 261
   },
   "sessions": [
     {
@@ -368,13 +368,14 @@
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
       "status": "working",
-      "updated_at": 1795415364446,
+      "updated_at": 1795416044331,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
-        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_9Ob4sKcBsqKZEIH70GLi0522.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_K6rKJpX4QiFoSJ25aqg36980-render.txt",
+        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_hOf9NzlNsh8YIzYeePIi3855.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_JOdhUfv2ApYkYVRWNGLA0800-render.txt",
+        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_MASdEJgTi8GeJ1BWEAHl2038-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.file-rollback.ndjson",
         "index/artifact-index/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.json",
         "index/changes-index/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.json",
@@ -385,7 +386,16 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v14",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v15",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v16",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v17",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v18",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v19",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v2",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v20",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v21",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v22",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v23",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v24",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v25",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v5",
@@ -395,7 +405,8 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v9",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v2",
-        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v3"
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v3",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v4"
       ]
     },
     {

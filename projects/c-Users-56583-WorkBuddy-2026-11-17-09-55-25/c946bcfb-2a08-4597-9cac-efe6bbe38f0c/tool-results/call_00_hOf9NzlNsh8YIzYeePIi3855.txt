@@ -1,0 +1,2 @@
+[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":138,"threshold":50,"scope":"turn","targets":["C:\\Users\\56583\\WorkBuddy\\_wb-sync\\snapshot\\index"],"targetCount":1}
+已对齐远端（reset --hard origin/main）
