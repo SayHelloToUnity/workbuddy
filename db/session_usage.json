@@ -50,10 +50,10 @@
   },
   {
     "session_id": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
-    "used": 91157,
+    "used": 97574,
     "size": 300000,
-    "updated_at": 1795411748188,
-    "credit_json": "{\"01a1e738db4e78bc9db2ac2748219292\":4.1,\"01a206dc8d8174d3867d8f53b2084e06\":6.270000000000001}"
+    "updated_at": 1795412821872,
+    "credit_json": "{\"01a1e738db4e78bc9db2ac2748219292\":4.1,\"01a206dc8d8174d3867d8f53b2084e06\":7.050000000000002,\"01a206f0b8057d13bcf7a86a9afd360c\":0.61}"
   },
   {
     "session_id": "f57f9e96-e185-492b-aa38-8b56bc32fac1",

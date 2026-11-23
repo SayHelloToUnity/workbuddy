@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdated": 1795411745626,
+  "lastUpdated": 1795412817734,
   "artifacts": [
     {
       "name": "wbmigrate.py",
@@ -8,21 +8,22 @@
       "mimeType": "text/plain",
       "contentType": "code",
       "language": "python",
-      "size": 33781,
+      "size": 33920,
       "createdAt": 1795411531477,
-      "updatedAt": 1795411745625,
+      "updatedAt": 1795412817734,
       "type": "media",
       "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-17-09-55-25/wbmigrate.py",
       "_meta": {
-        "sourceTool": "Edit",
-        "codebuddy.ai/toolName": "Edit",
-        "toolCallId": "call_00_nccqbgMMRyAQ6Y3c59bZ8367",
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ksK8PsHc3eEcjy7tbkTS7378",
         "ownerConversationId": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
-        "requestId": "01a206dc8d8174d3867d8f53b2084e06",
-        "codebuddy.ai/requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "requestId": "01a206f0b8057d13bcf7a86a9afd360c",
+        "codebuddy.ai/requestId": "01a206f0b8057d13bcf7a86a9afd360c",
         "createdByRequestId": "01a206dc8d8174d3867d8f53b2084e06",
         "touchedByRequestIds": [
-          "01a206dc8d8174d3867d8f53b2084e06"
+          "01a206dc8d8174d3867d8f53b2084e06",
+          "01a206f0b8057d13bcf7a86a9afd360c"
         ]
       }
     },
@@ -37,9 +38,32 @@
       "type": "media",
       "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-17-09-55-25/sync.cmd",
       "_meta": {
-        "sourceTool": "Write",
-        "codebuddy.ai/toolName": "Write",
-        "toolCallId": "call_00_kMBVZbuE6vFWdty0vC2H5581",
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_7FbwlQn6TGGKnCcz9qjA0181",
+        "ownerConversationId": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
+        "requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "codebuddy.ai/requestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "createdByRequestId": "01a206dc8d8174d3867d8f53b2084e06",
+        "touchedByRequestIds": [
+          "01a206dc8d8174d3867d8f53b2084e06"
+        ]
+      }
+    },
+    {
+      "name": "RESTORE.md",
+      "title": "RESTORE.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 2230,
+      "createdAt": 1795411604204,
+      "updatedAt": 1795411751952,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/_wb-sync/snapshot/RESTORE.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_7FbwlQn6TGGKnCcz9qjA0181",
         "ownerConversationId": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
         "requestId": "01a206dc8d8174d3867d8f53b2084e06",
         "codebuddy.ai/requestId": "01a206dc8d8174d3867d8f53b2084e06",

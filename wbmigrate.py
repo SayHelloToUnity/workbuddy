@@ -557,6 +557,8 @@ def write_restore_readme(pkg: Path, manifest: dict) -> None:
         "",
     ]
     (pkg / "RESTORE.md").write_text("\n".join(lines), encoding="utf-8")
+    # README.md 同内容 —— GitHub 仓库首页会直接渲染
+    (pkg / "README.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 # --------------------------------------------------------------------------- #

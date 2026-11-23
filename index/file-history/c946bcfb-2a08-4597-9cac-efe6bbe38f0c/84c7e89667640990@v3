@@ -1,0 +1,39 @@
+@echo off
+setlocal
+
+rem ============================================================
+rem  WorkBuddy chat sync: incremental snapshot + git commit/push
+rem  First time only, bind the remote:
+rem    cd "%REPO%\snapshot"
+rem    git remote add origin <your-private-repo-url>
+rem    git push -u origin HEAD
+rem ============================================================
+
+set "SCRIPT=%~dp0wbmigrate.py"
+set "REPO=C:\Users\56583\WorkBuddy\_wb-sync"
+
+where python >nul 2>nul
+if errorlevel 1 (
+  set "PY=C:\Users\56583\.workbuddy\binaries\python\versions\3.13.12\python.exe"
+) else (
+  set "PY=python"
+)
+
+echo [1/2] Export snapshot ...
+"%PY%" "%SCRIPT%" export --all -o "%REPO%" --dir-name snapshot --replace
+if errorlevel 1 (
+  echo Export failed. Aborted.
+  exit /b 1
+)
+
+echo.
+echo [2/2] Commit and push ...
+"%PY%" "%SCRIPT%" git "%REPO%\snapshot"
+if errorlevel 1 (
+  echo Commit or push failed. See output above.
+  exit /b 1
+)
+
+echo.
+echo Done.
+endlocal

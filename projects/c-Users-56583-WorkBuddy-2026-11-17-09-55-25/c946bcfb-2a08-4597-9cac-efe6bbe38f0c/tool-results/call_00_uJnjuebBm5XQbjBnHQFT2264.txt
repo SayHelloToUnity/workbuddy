@@ -1,0 +1,4 @@
+=== 状态 ===
+c98840f wb chat snapshot 2026-11-23 13:29
+## main...origin/main
+ D .gitattributes
