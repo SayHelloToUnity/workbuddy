@@ -28,6 +28,20 @@
     "credit_json": "{\"01a18106ba097aacbc57036d927817d1\":0.17,\"01a1cf0775ee74a6990e15653d717f87\":1.58}"
   },
   {
+    "session_id": "51fb1f8a-3086-492c-91ad-8331d8bec3f6",
+    "used": 30888,
+    "size": 300000,
+    "updated_at": 1795232029174,
+    "credit_json": "{\"01a1fc2a7da17a25acb9dfcb9d31c9a3\":15.53}"
+  },
+  {
+    "session_id": "5f439e9e-23cd-48d8-9610-680eaeea14c4",
+    "used": 37888,
+    "size": 300000,
+    "updated_at": 1795449373399,
+    "credit_json": "{\"01a2091e7b307f1f8f4966179dcd21fd\":33.769999999999996}"
+  },
+  {
     "session_id": "73f47f13-261c-4b80-bd9f-d30ab52134b8",
     "used": 115816,
     "size": 300000,
@@ -47,6 +61,13 @@
     "size": 300000,
     "updated_at": 1794914201720,
     "credit_json": "{\"01a1e84ccfb87438ade4a1d09b756961\":8.59,\"01a1e863496479a2b760a8663e26a872\":7.55,\"01a1e936932a749cabe2377668b8b77e\":2.2300000000000004}"
+  },
+  {
+    "session_id": "ad454cbc-f47a-424d-9d3b-ee50f741d338",
+    "used": 42050,
+    "size": 300000,
+    "updated_at": 1795009899230,
+    "credit_json": null
   },
   {
     "session_id": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
