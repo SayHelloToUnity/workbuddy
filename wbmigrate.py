@@ -452,12 +452,18 @@ def cmd_export(home: Path, args) -> None:
         wanted = {norm_path(c) for c in cwds}
         ws_rows = [r for r in fetch_rows(con, "workspaces") if norm_path(r.get("path") or "") in wanted]
 
+    sf_rows = []
+    if space_ids:
+        m4 = ",".join("?" * len(space_ids))
+        sf_rows = fetch_rows(con, "space_folders", f"space_id IN ({m4})", space_ids)
+
     usage_rows = fetch_rows(con, "session_usage", f"session_id IN ({marks})", ids)
     con.close()
 
     for name, rows in (
         ("sessions", session_rows),
         ("spaces", space_rows),
+        ("space_folders", sf_rows),
         ("workspaces", ws_rows),
         ("session_usage", usage_rows),
     ):
@@ -729,10 +735,12 @@ def cmd_import(home: Path, args) -> None:
 
     # 写入数据库
     con = connect_rw(home / "workbuddy.db")
-    stats = {"spaces": 0, "sessions": 0, "workspaces": 0, "session_usage": 0}
+    stats = {"spaces": 0, "sessions": 0, "workspaces": 0, "session_usage": 0, "space_folders": 0}
+    dirs_to_create = set()
+    sf_cleared = set()
     try:
         con.execute("BEGIN")
-        for table in ("spaces", "sessions", "workspaces", "session_usage"):
+        for table in ("spaces", "space_folders", "sessions", "workspaces", "session_usage"):
             f = pkg / "db" / f"{table}.json"
             if not f.exists():
                 continue
@@ -746,8 +754,27 @@ def cmd_import(home: Path, args) -> None:
                 elif table == "spaces":
                     if reassign and target_user:
                         r["user_id"] = target_user
+                    for col in ("primary_folder_path", "create_folder_path"):
+                        if r.get(col):
+                            r[col], _ = remap_cwd(r[col], mapping)
+                            dirs_to_create.add(r[col])
+                elif table == "space_folders":
+                    new_path, _ = remap_cwd(r.get("path") or "", mapping)
+                    r["path"] = new_path
+                    dirs_to_create.add(new_path)
+                    if args.overwrite and r.get("space_id") not in sf_cleared:
+                        try:
+                            con.execute("DELETE FROM space_folders WHERE space_id=?", (r["space_id"],))
+                            sf_cleared.add(r["space_id"])
+                        except sqlite3.Error:
+                            pass
                 elif table == "workspaces":
                     new_cwd, _ = remap_cwd(r.get("path") or "", mapping)
+                    if args.overwrite and new_cwd != r.get("path"):
+                        try:
+                            con.execute("DELETE FROM workspaces WHERE path=?", (r.get("path"),))
+                        except sqlite3.Error:
+                            pass
                     r["path"] = new_cwd
                 res = insert_row(con, table, r, overwrite=args.overwrite)
                 if res != "skipped":
@@ -787,10 +814,28 @@ def cmd_import(home: Path, args) -> None:
             shutil.copy2(src, dst)
             copied += 1
 
+    if getattr(args, "create_dirs", False):
+        for pl in plan:
+            if pl.get("new_cwd"):
+                dirs_to_create.add(pl["new_cwd"])
+        made = 0
+        for d in sorted(x for x in dirs_to_create if x):
+            target = Path(d)
+            if target.exists():
+                continue
+            try:
+                target.mkdir(parents=True, exist_ok=True)
+                made += 1
+            except Exception as e:  # noqa: BLE001
+                info(f"[提示] 无法创建目录 {d}：{e}")
+        if made:
+            info(f"已补建缺失目录 {made} 个（项目文件夹不存在时侧边栏不会显示该项目）")
+
     info("")
     info("导入完成：")
     info(f"  sessions      {stats['sessions']}")
     info(f"  spaces        {stats['spaces']}")
+    info(f"  space_folders {stats.get('space_folders', 0)}")
     info(f"  workspaces    {stats['workspaces']}")
     info(f"  session_usage {stats['session_usage']}")
     info(f"  正文文件      {copied}（其中 {overwritten} 个覆盖了本机旧版本，已备份）")
@@ -1265,6 +1310,7 @@ def cmd_pull(home: Path, args) -> None:
         reassign_user=False,
         auto_user=True,
         map_cwd=maps,
+        create_dirs=True,
     )
     cmd_import(home, ns)
 
@@ -1302,6 +1348,7 @@ def build_parser() -> argparse.ArgumentParser:
     i.add_argument("--reassign-user", action="store_true", help="把 user_id 改写为本机账号")
     i.add_argument("--auto-user", action="store_true", help="账号不同时自动改写 user_id")
     i.add_argument("--map-cwd", action="append", help="路径重映射 旧=新，可重复")
+    i.add_argument("--create-dirs", action="store_true", help="补建目标机缺失的项目目录（否则侧边栏可能不显示该项目）")
 
     g = sub.add_parser("git", help="把迁移包初始化成 git 仓库并（可选）推送")
     g.add_argument("package", help="迁移包目录")

@@ -33,3 +33,17 @@
 - 包内自动生成跨机通用 `sync.cmd` / `pull.cmd`（用 `%~dp0` 定位，已入库），修复了"另一台机器没有 sync.cmd"的问题。
 - 已知取舍：同一会话在两台机器分别续聊时，后推送方整体覆盖，另一方续聊内容丢失（有备份）。用户已接受该语义。
 
+## 21:20-21:30 另一台机器 pull.cmd 报 FAILED 的排查与加固
+- 现象：另一台执行 `pull.cmd` 只输出 `FAILED. Read the output above.`，用户未看到真实错误；本机无任何操作痕迹（无备份目录、repo reflog 停在 17:47），确认失败发生在对端且在写盘之前。
+- 教训 1：`pull` 内部会 `git reset --hard origin/main`，**手工替换进克隆目录的脚本会被还原**；脚本只能通过仓库发布（`SYNC_CMD`/`PULL_CMD` 常量 → `write_repo_meta` 写盘）。
+- 教训 2：`python ... > log` 后用 `type` 回显，在 `chcp 65001` 下会丢输出；改为脚本内部 tee 日志（`init_log()` + `_tee()` 挂到 `info()`/`die()`），控制台直出。
+- 加固内容（提交 `81bbaad`）：两个 .cmd 增加 6 项前置检查（python/git/是否仓库/manifest/.workbuddy/workbuddy.db）、远端连通性预检（错误写入 `last-error.log`）、`chcp 65001` + `PYTHONIOENCODING=utf-8`；`find` 改绝对路径 `%SystemRoot%\System32\find.exe`（Git Bash 下会被 Unix find 抢走）；`.gitignore` 增加 `last-run.log`/`last-error.log`。
+- 验证：全新克隆 → `pull.cmd --dry-run` 走通、日志落盘且被 git 忽略；伪造 `USERPROFILE` 验证缺 `.workbuddy` 时给出明确提示。
+
+## 21:36 根因确认：对端没有真正的 Python
+- 对端（`C:\Users\Administrator\WorkBuddy\wb-chat`）现象：前置检查全过、python 阶段**零输出**且退出码非 0。
+- 根因：`where python` 命中 Windows 应用商店占位符 `%LOCALAPPDATA%\Microsoft\WindowsApps\python.exe`，执行返回 9009 且不打印内容，因此旧脚本"检查通过但执行失败"。
+- 本机可复现该 PATH 形态：`where python` 返回两条（真实解释器 + WindowsApps 占位符）。
+- 解决方案（提交 `8e0e3ec`）：`.cmd` 内三级解析解释器 —— ① `where python` 但用 `findstr` 排除 `WindowsApps`；② `where py`；③ 回退到 WorkBuddy 自带 `%USERPROFILE%\.workbuddy\binaries\python\versions\*\python.exe`（**无需安装 Python**）。实测把 PATH 里的 python 全部移除后仍能跑通。
+- 附带修复：① 去掉 `chcp 65001`/`PYTHONIOENCODING`，Python 改为 `reconfigure(errors="replace")` 保留控制台原生编码（cp936 下中文正常，且不会 UnicodeEncodeError）；② 每次运行打印解释器路径与版本，便于远端排查；③ 末尾 `endlocal & exit /b %RC_SCRIPT%`，避免 `find` 返回 1 污染退出码。
+
