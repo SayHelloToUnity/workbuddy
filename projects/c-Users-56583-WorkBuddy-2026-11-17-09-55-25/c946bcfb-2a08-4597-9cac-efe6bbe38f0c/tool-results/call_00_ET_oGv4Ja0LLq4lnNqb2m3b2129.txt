@@ -1,4 +1,0 @@
-[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":571,"threshold":50,"scope":"turn","targets":["C:/Users/56583/WorkBuddy/_pulltest"],"targetCount":1}
-语法 OK
-已对齐远端（reset --hard origin/main）
-语法 OK
