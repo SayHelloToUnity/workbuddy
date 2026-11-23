@@ -57,13 +57,44 @@ TABLES = {
 # --------------------------------------------------------------------------- #
 # 基础工具
 # --------------------------------------------------------------------------- #
+LOG_PATH: Path | None = None
+
+
+def init_log() -> Path | None:
+    """把本次运行输出同步落一份到脚本所在目录的 last-run.log。"""
+    global LOG_PATH
+    try:
+        target = Path(__file__).resolve().parent / "last-run.log"
+        target.write_text(
+            "# wbmigrate " + now_iso() + "  argv=" + " ".join(sys.argv[1:]) + "\n",
+            encoding="utf-8",
+        )
+        LOG_PATH = target
+    except Exception:  # noqa: BLE001
+        LOG_PATH = None
+    return LOG_PATH
+
+
+def _tee(line: str) -> None:
+    if LOG_PATH is None:
+        return
+    try:
+        with LOG_PATH.open("a", encoding="utf-8", errors="replace") as f:
+            f.write(line + "\n")
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def die(msg: str, code: int = 2):
-    print(f"[错误] {msg}", file=sys.stderr)
+    line = f"[错误] {msg}"
+    print(line, file=sys.stderr)
+    _tee(line)
     raise SystemExit(code)
 
 
 def info(msg: str):
     print(msg)
+    _tee(msg)
 
 
 def human(n: int) -> str:
@@ -773,53 +804,181 @@ def cmd_import(home: Path, args) -> None:
 # git
 # --------------------------------------------------------------------------- #
 GITATTRIBUTES = "*.jsonl text eol=lf\n*.json text eol=lf\n"
-GITIGNORE = "*.tmp\n.DS_Store\nThumbs.db\n"
+GITIGNORE = "*.tmp\n.DS_Store\nThumbs.db\nlast-run.log\nlast-error.log\n"
 GIT_ID = ["-c", "user.name=wbmigrate", "-c", "user.email=wbmigrate@local"]
 
 
 SYNC_CMD = r"""@echo off
 setlocal
-rem WorkBuddy: push local chats to remote (remote is source of truth)
+cd /d "%~dp0"
+chcp 65001 >nul 2>nul
+set "PYTHONIOENCODING=utf-8"
+set "ERRLOG=%~dp0last-error.log"
+
+echo ==================================================
+echo  WorkBuddy SYNC : this PC --^> remote
+echo ==================================================
+echo.
+
 where python >nul 2>nul
-if errorlevel 1 (
-  echo Python not found. Install Python 3.8+ first.
-  goto fail
-)
-python "%~dp0wbmigrate.py" sync --repo "%~dp0."
-if errorlevel 1 goto fail
+if errorlevel 1 goto no_python
+where git >nul 2>nul
+if errorlevel 1 goto no_git
+
+set "REPO=%~dp0."
+if not exist "%~dp0manifest.json" set "REPO=C:\Users\56583\WorkBuddy\_wb-sync\snapshot"
+if not exist "%REPO%\manifest.json" goto no_snapshot
+if not exist "%USERPROFILE%\.workbuddy\workbuddy.db" goto no_db
+
+echo   repo: %REPO%
+echo.
+echo [1/2] Checking remote access...
+git -C "%REPO%" ls-remote origin > "%ERRLOG%" 2>&1
+if errorlevel 1 goto bad_remote
+echo       ok
+
+echo [2/2] Exporting and pushing...
+echo.
+python "%~dp0wbmigrate.py" sync --repo "%REPO%" %*
+if errorlevel 1 goto py_failed
+
 echo.
 echo Done.
 goto fin
 
+:no_python
+echo [ERROR] python not found in PATH.
+echo         Install Python 3.8+ and tick "Add python.exe to PATH".
+goto fail
+
+:no_git
+echo [ERROR] git not found in PATH. Install Git for Windows.
+goto fail
+
+:no_snapshot
+echo [ERROR] No snapshot folder found.
+echo         Looked in: %~dp0
+echo         Looked in: C:\Users\56583\WorkBuddy\_wb-sync\snapshot
+goto fail
+
+:no_db
+echo [ERROR] workbuddy.db missing in %USERPROFILE%\.workbuddy
+echo         Start WorkBuddy once and sign in, then retry.
+goto fail
+
+:bad_remote
+echo [ERROR] Cannot reach the git remote. git said:
+echo.
+type "%ERRLOG%"
+echo.
+echo   Test SSH:  ssh -T git@github.com
+goto fail
+
+:py_failed
+echo.
+echo [ERROR] sync failed. Look for lines starting with [ERROR] above.
+goto fail
+
 :fail
 echo.
-echo FAILED. Read the output above.
+echo FAILED - see the message above.
+echo A full copy is saved in: %~dp0last-run.log
+goto fin
 
 :fin
-echo %cmdcmdline% | find /i "%~nx0" >nul && pause
+echo %cmdcmdline% | "%SystemRoot%\System32\find.exe" /i "%~nx0" >nul 2>nul && pause
 endlocal
 """
 
 PULL_CMD = r"""@echo off
 setlocal
-rem WorkBuddy: pull remote chats into this machine (overwrite, auto backup)
+cd /d "%~dp0"
+chcp 65001 >nul 2>nul
+set "PYTHONIOENCODING=utf-8"
+set "ERRLOG=%~dp0last-error.log"
+
+echo ==================================================
+echo  WorkBuddy PULL : remote --^> this PC
+echo ==================================================
+echo.
+
 where python >nul 2>nul
-if errorlevel 1 (
-  echo Python not found. Install Python 3.8+ first.
-  goto fail
-)
+if errorlevel 1 goto no_python
+where git >nul 2>nul
+if errorlevel 1 goto no_git
+
+if not exist "%~dp0.git" goto no_repo
+if not exist "%~dp0manifest.json" goto no_manifest
+if not exist "%USERPROFILE%\.workbuddy" goto no_data
+if not exist "%USERPROFILE%\.workbuddy\workbuddy.db" goto no_db
+
+echo [1/3] Checking remote access...
+git -C "%~dp0." ls-remote origin > "%ERRLOG%" 2>&1
+if errorlevel 1 goto bad_remote
+echo       ok
+
+echo [2/3] Fetching and resetting to origin/main...
+echo [3/3] Writing chats into this PC (overwrite + auto backup)...
+echo       Close WorkBuddy now if it is running.
+echo.
 python "%~dp0wbmigrate.py" pull --repo "%~dp0." %*
-if errorlevel 1 goto fail
+if errorlevel 1 goto py_failed
+
 echo.
 echo Done.
 goto fin
 
+:no_python
+echo [ERROR] python not found in PATH.
+echo         Install Python 3.8+ and tick "Add python.exe to PATH".
+goto fail
+
+:no_git
+echo [ERROR] git not found in PATH. Install Git for Windows.
+goto fail
+
+:no_repo
+echo [ERROR] This folder is not a git clone: %~dp0
+echo         Run: git clone git@github.com:SayHelloToUnity/workbuddy.git wb-chat
+goto fail
+
+:no_manifest
+echo [ERROR] manifest.json missing - clone incomplete or wrong branch.
+echo         Run: git -C "%~dp0." fetch origin ^&^& git -C "%~dp0." reset --hard origin/main
+goto fail
+
+:no_data
+echo [ERROR] %USERPROFILE%\.workbuddy not found.
+echo         Start WorkBuddy once and sign in, then retry.
+goto fail
+
+:no_db
+echo [ERROR] workbuddy.db missing in %USERPROFILE%\.workbuddy
+echo         Start WorkBuddy once and sign in, then retry.
+goto fail
+
+:bad_remote
+echo [ERROR] Cannot reach the git remote. git said:
+echo.
+type "%ERRLOG%"
+echo.
+echo   Test SSH:  ssh -T git@github.com
+echo   Expected:  Hi SayHelloToUnity! ...
+goto fail
+
+:py_failed
+echo.
+echo [ERROR] pull failed. Look for lines starting with [ERROR] above.
+goto fail
+
 :fail
 echo.
-echo FAILED. Read the output above.
+echo FAILED - see the message above.
+echo A full copy is saved in: %~dp0last-run.log
+goto fin
 
 :fin
-echo %cmdcmdline% | find /i "%~nx0" >nul && pause
+echo %cmdcmdline% | "%SystemRoot%\System32\find.exe" /i "%~nx0" >nul 2>nul && pause
 endlocal
 """
 
@@ -1123,6 +1282,7 @@ def main(argv: list[str] | None = None) -> int:
         except Exception:  # noqa: BLE001
             pass
 
+    init_log()
     args = build_parser().parse_args(argv)
     home = find_home(args.home)
     if not home.exists():
