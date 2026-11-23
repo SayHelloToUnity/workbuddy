@@ -817,6 +817,7 @@ echo ==================================================
 echo  WorkBuddy SYNC : this PC --^> remote
 echo ==================================================
 echo.
+set "RC_SCRIPT=0"
 
 rem ---- locate a real python (skip the Microsoft Store stub) ----
 set "PY="
@@ -904,11 +905,12 @@ goto fail
 echo.
 echo FAILED - see the message above.
 echo If nothing is shown, open: %~dp0last-run.log
+set "RC_SCRIPT=1"
 goto fin
 
 :fin
 echo %cmdcmdline% | "%SystemRoot%\System32\find.exe" /i "%~nx0" >nul 2>nul && pause
-endlocal
+endlocal & exit /b %RC_SCRIPT%
 """
 
 PULL_CMD = r"""@echo off
@@ -1019,11 +1021,12 @@ goto fail
 echo.
 echo FAILED - see the message above.
 echo If nothing is shown, open: %~dp0last-run.log
+set "RC_SCRIPT=1"
 goto fin
 
 :fin
 echo %cmdcmdline% | "%SystemRoot%\System32\find.exe" /i "%~nx0" >nul 2>nul && pause
-endlocal
+endlocal & exit /b %RC_SCRIPT%
 """
 
 

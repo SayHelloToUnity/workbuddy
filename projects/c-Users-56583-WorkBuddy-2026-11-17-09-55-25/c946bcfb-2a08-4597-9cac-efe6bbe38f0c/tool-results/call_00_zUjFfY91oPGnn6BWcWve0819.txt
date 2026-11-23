@@ -1,1 +1,0 @@
-[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":319,"threshold":50,"scope":"turn","targets":["C:/Users/56583/WorkBuddy/_pt4"],"targetCount":1}
