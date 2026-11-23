@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""SRT 片段解析与文本重排的公共工具。"""
+import os
+import re
+
+
+def srt_segments(path):
+    """读取 srt，返回 [(start_sec, text), ...]。"""
+    out = []
+    if not os.path.exists(path):
+        return out
+    for block in open(path, encoding="utf-8").read().split("\n\n"):
+        lines = [l.strip() for l in block.strip().split("\n") if l.strip()]
+        if len(lines) < 3:
+            continue
+        m = re.match(r"(\d+):(\d+):([\d.]+)\s*-->", lines[1])
+        if not m:
+            continue
+        text = "".join(lines[2:]).strip()
+        if text:
+            out.append((int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3)), text))
+    return out
+
+
+def repack(segs, lo=45, hi=120):
+    """把短片段合并成 lo—hi 字的自然段。"""
+    paras, buf = [], ""
+    for _, t in segs:
+        t = t.strip()
+        if not t:
+            continue
+        if not buf:
+            buf = t
+        elif len(buf) + len(t) <= hi:
+            buf += t
+        else:
+            paras.append(buf)
+            buf = t
+        if len(buf) >= lo and re.search(r"[。？！?!]$", buf):
+            paras.append(buf)
+            buf = ""
+    if buf:
+        paras.append(buf)
+    return paras

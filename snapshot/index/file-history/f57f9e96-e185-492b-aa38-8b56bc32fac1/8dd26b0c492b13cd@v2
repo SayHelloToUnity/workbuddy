@@ -1,0 +1,37 @@
+import zipfile
+from xml.etree import ElementTree as ET
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+z = zipfile.ZipFile(r'C:/Users/56583/Desktop/静脉输液手术数据/静脉 输液2026.10.22.xlsx')
+ss = [''.join(t.text or '' for t in si.iter(NS + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml'))]
+sh = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+cells = {}
+for row in sh.iter(NS + 'row'):
+    for c in row.findall(NS + 'c'):
+        ref = c.get('r')
+        col = ''.join(ch for ch in ref if ch.isalpha())
+        rn = int(''.join(ch for ch in ref if ch.isdigit()))
+        v = c.find(NS + 'v')
+        t = c.get('t')
+        val = None
+        if v is not None:
+            val = ss[int(v.text)] if t == 's' else v.text
+        cells[(rn, col)] = val
+
+env = {}
+for r in range(2, 173):
+    env[cells.get((r, 'J'))] = cells.get((r, 'S'))
+total = 0.0
+for k, v in env.items():
+    print('环节', k, '总分', v)
+    total += float(v)
+print('合计', total)
+
+bad = 0
+for r in range(2, 173):
+    s = sum(float(cells.get((r, c)) or 0) for c in ['Y', 'Z', 'AA', 'AB', 'AC'])
+    if abs(s - 1) > 1e-9:
+        bad += 1
+print('维度合计不等于1的行数', bad)
+print('有效行数', sum(1 for r in range(2, 173) if cells.get((r, 'A'))))
+print('列数', len({c for (_, c) in cells}))

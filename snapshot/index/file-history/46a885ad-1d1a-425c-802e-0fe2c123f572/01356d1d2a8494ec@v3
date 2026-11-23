@@ -1,0 +1,23 @@
+# 2026-11-18
+
+## B站《电路原理、电工学》105集合集内容提取
+
+- 目标视频：BV1Lb4y1m7vD（UP：老游真是太菜了），单稿件 105 个分P，总时长 35.4 小时。
+- 关键结论：该稿件**无公开字幕**（player/v2 返回 need_login_subtitle=true，字幕列表为空）；B站 AI 摘要接口（view/conclusion）需登录态，报 -101；内置 AudioTranscribe 工具对 6 分钟音频 10 分钟无返回，不可用。
+- 可行方案：匿名 playurl 取 DASH 音频（约 67kbps，全量约 1GB）→ 本地 faster-whisper 转写。
+- 环境要点（重要，便于复用）：
+  - 本机 RTX 3050 8GB，但物理内存常只剩 1.5GB，medium 模型 int8 加载会报 `mkl_malloc: failed to allocate memory`，需等内存释放后重试。
+  - 必须 pip 安装 `nvidia-cublas-cu12`、`nvidia-cudnn-cu12`，并在导入 faster_whisper **之前** 把 `site-packages/nvidia/*/bin` 同时加入 `os.add_dll_directory` 与 `PATH`，否则报 cublas64_12.dll 找不到。
+  - PyAV 新版 `av.open` 无 `metadata_errors` 参数，faster-whisper 的 decode_audio 会 TypeError；改为自行用 av.AudioResampler 解码为 16k float32 数组。
+  - GPU 显存被其他程序占用约 3.7GB，batch_size=8 会 OOM 并导致 CUDA 上下文损坏（cudaErrorInvalidDevice）；用 batch_size=4 + 分块独立进程可稳定。
+  - 速度：medium int8_float16 + BatchedInferencePipeline + batch4 ≈ 15—21 倍速。
+- 产物目录：`bili/`（fetch_meta.py、audio_dl.py、asr_batch.py、merge.py、run_all.sh、models/、audio/、text/）。
+- 交付物：`bili/电路原理105集内容梳理.md`（结构+知识点）、`bili/逐字讲稿合集.md`（转写合并，可断点续跑）。
+
+## 完成情况（13:34 全部跑完）
+
+- 105/105 集转写完成，讲稿合计 61.8 万字；质量核查：各集字/分钟均在 80—420 正常区间，无重复循环或空转。
+- 新增 `common.py`（SRT 解析 + 分句重排）、`digest.py`；输出 `逐集内容摘录.md`。
+- 注意：批量推理产出的 SRT 片段长达 20—30 秒且几乎无标点，重排时需按字数硬切（common.clauses 的 hi*1.6 逻辑），否则段落不可读。
+- 中间文件占用：audio 855MB、models 1.9GB，交付后可清理。
+

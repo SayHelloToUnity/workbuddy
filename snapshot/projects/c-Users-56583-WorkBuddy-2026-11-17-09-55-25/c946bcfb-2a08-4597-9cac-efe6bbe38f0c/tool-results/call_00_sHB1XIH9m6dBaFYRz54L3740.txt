@@ -1,0 +1,9 @@
+已对齐远端（reset --hard origin/main）
+=== 仓库状态 ===
+脚本: pull.cmd sync.cmd wbmigrate.py 
+Connection reset by 20.205.243.160 port 443
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+local b58fce7 / remote 

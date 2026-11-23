@@ -1,0 +1,10 @@
+# 2026-11-16
+
+## mcframework 双仓库 Assets 合并（待正式提交）
+- A=`C:/Users/56583/Desktop/mcframework`，B=`D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework`；用户要求工作区文件改动仅限 `MCFramework/Assets`，不改 `.gitignore`，不 push。
+- 预检用固定沙箱提交核实两侧与演练一致：A 原始 `72dc9ad`、B 原始 `8b7449b`；分支名 `side-a` 已指向沙箱最终合并结果，不能再当作原始 A。
+- 已创建本地快照：A `wip-a`=`3fdf88bde3c2adec96e5bea89e57c020cdccf9e2`（80 路径），B `wip-b`=`c9e793cb67455377514f569b65eb01f705df5ac8`（381 路径），提交路径全部仅 Assets。
+- A 已添加本地远程 `localb` 并执行 `merge --no-ff --no-commit localb/wip-b`，共同基点 `6454fa60ddf21825da7c5536ab0a14d038cb00d8`，冲突恰好 14 项。
+- 已按用户决策解决：TableScene/Tc/BaseUIPrefab 取 B；PatientChatPanel/addressables_content_state/Addressable.unitypackage/luaIde readMe 取 A；GlobalModel 用沙箱语义合并版；Service.cs 保留自动合并；RiderFlow 仅移出索引，磁盘 11 文件保留。
+- 当前合并尚未提交。校验：未解决冲突 0、冲突标记 0、暂存 367 路径且越界 0、Assets 未暂存修改 0；Service.cs 流式接口保留，GlobalModel 三模式属性和 private set 均在。
+- 等待用户确认阶段 6 正式合并提交。回退：`git -C A merge --abort` 回到 wip-a。

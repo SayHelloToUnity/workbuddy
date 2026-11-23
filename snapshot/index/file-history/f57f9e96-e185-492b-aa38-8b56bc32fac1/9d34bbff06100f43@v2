@@ -1,0 +1,44 @@
+import zipfile
+from xml.etree import ElementTree as ET
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+p = r'C:/Users/56583/Desktop/静脉输液手术数据/静脉 输液2026.10.22.xlsx'
+z = zipfile.ZipFile(p)
+ss = [''.join(t.text or '' for t in si.iter(NS + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml'))]
+sh = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+cells = {}
+for row in sh.iter(NS + 'row'):
+    for c in row.findall(NS + 'c'):
+        ref = c.get('r')
+        col = ''.join(ch for ch in ref if ch.isalpha())
+        rn = int(''.join(ch for ch in ref if ch.isdigit()))
+        v = c.find(NS + 'v')
+        t = c.get('t')
+        val = None
+        if v is not None:
+            val = ss[int(v.text)] if t == 's' else v.text
+        cells[(rn, col)] = val
+
+
+def g(r, col):
+    v = cells.get((r, col))
+    return '' if v is None else str(v).strip()
+
+
+print('行号范围 2..188 结构（按连续分组压缩显示）')
+prev = None
+start = None
+end = None
+lines = []
+for r in range(2, 189):
+    key = (g(r, 'I'), g(r, 'J'), g(r, 'G'), g(r, 'H'), g(r, 'E'), g(r, 'F'))
+    if key != prev:
+        if prev is not None:
+            lines.append((start, end, prev))
+        start = r
+        prev = key
+    end = r
+if prev is not None:
+    lines.append((start, end, prev))
+for s, e, k in lines:
+    print(f'{s:>3}-{e:>3}  环节{k[0]} {k[1]:<6} 步骤{k[2]} {k[3]:<6} 操作{k[4]} {k[5]}')

@@ -1,0 +1,103 @@
+import zipfile
+from xml.etree import ElementTree as ET
+from collections import Counter, defaultdict
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+p = r'C:/Users/56583/Desktop/静脉输液手术数据/静脉 输液2026.10.22.xlsx'
+z = zipfile.ZipFile(p)
+ss = [''.join(t.text or '' for t in si.iter(NS + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml'))]
+sh = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+cells = {}
+for row in sh.iter(NS + 'row'):
+    for c in row.findall(NS + 'c'):
+        ref = c.get('r')
+        col = ''.join(ch for ch in ref if ch.isalpha())
+        rn = int(''.join(ch for ch in ref if ch.isdigit()))
+        v = c.find(NS + 'v')
+        t = c.get('t')
+        val = None
+        if v is not None:
+            val = ss[int(v.text)] if t == 's' else v.text
+        cells[(rn, col)] = val
+
+
+def g(r, col):
+    v = cells.get((r, col))
+    return '' if v is None else str(v).strip()
+
+
+rows = [r for r in range(2, 189) if g(r, 'A')]
+
+print('=== G/H 步骤编号与步骤名（按环节）===')
+m = defaultdict(lambda: defaultdict(set))
+for r in rows:
+    m[g(r, 'I')][g(r, 'G')].add(g(r, 'H'))
+for i in sorted(m):
+    print(' 环节I=', i)
+    for gnum in sorted(m[i]):
+        print('   步骤G=', gnum, '->', sorted(m[i][gnum]))
+
+print('\n=== E/F 操作编号与操作名（按 环节I+步骤G）===')
+m2 = defaultdict(lambda: defaultdict(set))
+for r in rows:
+    m2[(g(r, 'I'), g(r, 'G'))][g(r, 'E')].add(g(r, 'F'))
+conf = 0
+for k in sorted(m2):
+    for e in sorted(m2[k]):
+        names = sorted(m2[k][e])
+        if len(names) > 1:
+            conf += 1
+            lines = [r for r in rows if (g(r, 'I'), g(r, 'G')) == k and g(r, 'E') == e]
+            print('冲突 环节', k[0], '步骤', k[1], '操作号', e, '->', names, '行', lines)
+print('操作号一名多义冲突数:', conf)
+print('同一操作名对应多个操作号:')
+rev = defaultdict(set)
+for r in rows:
+    rev[(g(r, 'I'), g(r, 'G'), g(r, 'F'))].add(g(r, 'E'))
+for k, v in rev.items():
+    if len(v) > 1:
+        print('  ', k, sorted(v))
+
+print('\n=== L 阶段 与 J 环节名 ===')
+m3 = defaultdict(set)
+for r in rows:
+    m3[g(r, 'J')].add(g(r, 'L'))
+for k in m3:
+    print(' ', k, '->', sorted(m3[k]))
+print('L 分布:', Counter(g(r, 'L') for r in rows))
+
+print('\n=== M/N 统一值 ===')
+print('M:', Counter(g(r, 'M') for r in rows))
+print('N:', Counter(g(r, 'N') for r in rows))
+print('M 异常行:', [(r, g(r, 'A'), g(r, 'M'), g(r, 'N')) for r in rows if g(r, 'M') != 'JMSY2' or g(r, 'N') != '静脉 输液'])
+
+print('\n=== O 关键步骤 ===')
+print('分布:', Counter(g(r, 'O') for r in rows))
+print('O 为否/空的行:')
+for r in rows:
+    if g(r, 'O') != '是':
+        print('  ', r, g(r, 'A'), '|J=', g(r, 'J'), '|H=', g(r, 'H'), '|O=', repr(g(r, 'O')))
+m4 = defaultdict(set)
+for r in rows:
+    m4[(g(r, 'J'), g(r, 'H'))].add(g(r, 'O'))
+print('同一步骤内 O 混用:')
+for k, v in m4.items():
+    if len(v) > 1:
+        print('  ', k, sorted(v))
+
+print('\n=== C 空值 / 同操作重名 ===')
+print('C 空值行:', [r for r in rows if not g(r, 'C')])
+dup = defaultdict(list)
+for r in rows:
+    dup[(g(r, 'I'), g(r, 'G'), g(r, 'E'), g(r, 'C'))].append(r)
+print('同操作内同名子项:')
+for k, v in dup.items():
+    if len(v) > 1 and g(v[0], 'C'):
+        print('  ', k, '行', v)
+
+print('\n=== D 语音提示 ===')
+print('空值行数:', sum(1 for r in rows if not g(r, 'D')), '/', len(rows))
+
+print('\n=== 码位重复组 ===')
+c = Counter(g(r, 'A') for r in rows)
+print('重复:', {k: [r for r in rows if g(r, 'A') == k] for k, v in c.items() if v > 1})

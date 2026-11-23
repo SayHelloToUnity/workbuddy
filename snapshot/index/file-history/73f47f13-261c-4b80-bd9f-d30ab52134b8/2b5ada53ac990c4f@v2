@@ -1,0 +1,88 @@
+# 沙箱合并演练结果
+
+演练时间：2026-11-12 17:10
+沙箱位置：`D:\_mc-sandbox`（608 MB，可随时整个删除）
+**两个真实仓库全程零改动，未提交、未合并、未联网。**
+
+## 演练方法
+
+1. 取两侧 `Assets` 全量哈希比对得到的 **460 个有差异文件**（其余 5292 个两侧完全相同，与合并结果无关）
+2. 新建独立 git 仓库，落地 `base`（= 共同祖先 `6454fa6` 的版本）
+3. 分别重放 A、B 两侧工作区状态，提交为 `side-a` / `side-b`
+4. 执行真实 `git merge --no-ff --no-commit side-b`
+
+分支结构：
+
+```
+* 8b7449b side-b: D drive working tree
+| * 72dc9ad side-a: desktop working tree
+|/
+* 8c59daf base: 6454fa6 Assets diff subset
+```
+
+## 演练结果：与预测完全一致
+
+| 指标 | 数值 |
+|---|---|
+| A 侧相对 base 改动 | 72 个文件 |
+| B 侧相对 base 改动 | 373 个文件 |
+| 自动合并成功 | 359 项 |
+| **冲突** | **14 项** |
+
+此前独立分析预测的冲突清单与实际合并输出**逐项吻合**，包括三个可自动合并的文件（`Service.cs`、`ProtobufRpcRequest.cs`、`BaseOperation.cs`）也确实自动合并成功。这说明在真实仓库中执行同样的合并，冲突范围就是这 14 项，不会出现意外。
+
+## 已在沙箱中解决并验证的 10 项
+
+| 文件 | 处理 | 验证结果 |
+|---|---|---|
+| `BaseUIPrefab.asset` | 取 B | A 的 45 条地址**全部包含**在 B 的 46 条中，已用集合运算证明无信息损失 |
+| `GlobalModel.cs` | 语义合并 | 无冲突标记；B 的 `IsGuide`/`IsTrain`/`IsExam` 三属性保留（96/101/106 行），A 的 `private set` 保留（108 行） |
+| `luaIde/readMe` | 取 A | 该文件内容仅为机器绝对路径，与合并无关 |
+| `addressables_content_state.bin` | 取 A | A 修改于 2026-10-23，B 为 2026-09-04，取较新者 |
+| `RiderFlow.UserData*`（6 个） | 移出版本库 | 属 Rider 编辑器本地状态，已写入 `.gitignore` |
+
+同时写入了 `.gitignore`，排除 `Library/`、`obj/`、`Temp/`、`Logs/`、`UserSettings/`、`RiderFlow.UserData*`、Addressables 的 `.bin`。
+
+## 仍保留冲突、待你决策的 4 项
+
+| # | 文件 | 我的建议 | 依据 |
+|---|---|---|---|
+| 1 | `Generated/Tc.cs` | **取 B，且整个 `Generated` 目录同源** | 仓库内**没有 `.proto` 源文件**，无法重新生成。`Common.cs` 只有 B 改过、合并时已自动取 B，若 `Tc.cs` 取 A 会造成同目录内不同次生成产物混用，描述符可能不匹配 |
+| 2 | `TableScene.unity` | **取 A** | B 侧该文件被整体重写（369 处 `m_RootOrder`，base 与 A 仅 5 处），非同一 Unity 版本的正常保存结果 |
+| 3 | `PatientChatPanel.prefab` | **取 B 为底，A 的改动在 Editor 内重做** | 8 处结构性冲突；A 侧含非随机 fileID（`&77200000001` 等），文本合并极易产生组件丢失 |
+| 4 | `MCFramework/Addressable.unitypackage` | **取 A**（或移出版本库） | A 97.4 MB / 2026-10-15，B 100 MB / 2026-10-12。这是框架分发包的副本，通常无需纳入版本库 |
+
+第 1 项有一个需要你确认的前提：A 侧对 `Tc.cs` / `Service.cs` 的修改若包含**只有 A 才知道的协议字段**，取 B 会丢失。已比对过两侧的 `public sealed partial class` 集合，**完全一致、无独有类**，因此风险较低，但最终以你对后端协议的了解为准。
+
+## 在真实仓库复现的命令
+
+```bash
+# A 侧（桌面）
+git -C "C:/Users/56583/Desktop/mcframework" checkout -b wip-a
+git -C "C:/Users/56583/Desktop/mcframework" add -- "MCFramework/Assets"
+git -C "C:/Users/56583/Desktop/mcframework" commit -m "wip: A 侧改动快照"
+
+# B 侧（D盘）
+git -C "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework" checkout -b wip-b
+git -C "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework" add -- "MCFramework/Assets"
+git -C "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework" commit -m "wip: B 侧改动快照"
+
+# 在 A 侧合并
+git -C "C:/Users/56583/Desktop/mcframework" remote add localb "D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework"
+git -C "C:/Users/56583/Desktop/mcframework" fetch localb
+git -C "C:/Users/56583/Desktop/mcframework" merge --no-ff --no-commit localb/wip-b
+```
+
+冲突处理与沙箱完全一致。任何时刻可 `git merge --abort` 整体回退到 `wip-a`。
+
+## 注意事项
+
+- 沙箱只含 460 个差异文件，**不是完整 Unity 工程，不能用 Unity 打开**。它仅用于验证 git 合并行为。
+- `git status` 中可能出现 `R077` 之类的重命名显示，这是 git 把内容相似的空 `.meta` 文件配对所致，不影响实际内容。
+- 真实合并完成后必须在 Unity 中实测：打开 `TableScene`、检查 `PatientChatPanel` 组件、确认 `AudioWave.anim` 的序列帧引用（A 删除了音浪 1~5，B 侧动画仍引用其 GUID）。
+
+## 清理
+
+```bash
+rm -rf "D:/_mc-sandbox"
+```

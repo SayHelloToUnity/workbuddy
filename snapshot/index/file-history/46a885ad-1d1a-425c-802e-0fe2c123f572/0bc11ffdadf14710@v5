@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""从逐集讲稿中摘取代表性片段，生成「逐集内容摘录」。抽取式，不改写原话。"""
+import json
+import os
+import re
+
+from common import repack, srt_segments
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+TEXT = os.path.join(ROOT, "text")
+pages = json.load(open(os.path.join(ROOT, "meta", "pages.json"), encoding="utf-8"))["pages"]
+
+DOMAIN = ["定义", "定律", "定理", "公式", "结论", "概念", "注意", "关键", "重点",
+          "方法", "步骤", "思路", "求解", "推导", "所以", "因此", "必须", "不能",
+          "一定要", "容易错", "区别", "条件是", "我们来看"]
+CAP = 100
+
+
+def score(s):
+    v = sum(2 for k in DOMAIN if k in s)
+    if re.search(r"[=＝]", s):
+        v += 3
+    if re.search(r"第[一二三]步|首先|其次|最后|综上", s):
+        v += 2
+    return v
+
+
+def clip(s):
+    s = s.strip().rstrip("，,；")
+    return s if len(s) <= CAP else s[:CAP] + "……"
+
+
+out = ["# 《电路原理、电工学》逐集内容摘录", "",
+       "来源：BV1Lb4y1m7vD ｜ 105 集 ｜ 基于本地语音转写稿的原文摘录",
+       "用法：每集摘 3 段讲解原话，用于快速判断该集是否值得看；完整内容见《逐字讲稿合集》。", ""]
+
+cur = None
+for p in pages:
+    segs = srt_segments(os.path.join(TEXT, "p%03d.srt" % p["page"]))
+    if not segs:
+        continue
+    units = repack(segs, hi=100)
+    if not units:
+        continue
+    ranked = sorted(range(len(units)), key=lambda i: (-score(units[i]), i))[:2]
+    pick = sorted(set([0] + ranked))[:3]
+    m, s = divmod(p["duration"], 60)
+    ch = re.match(r"第([一二三四五六七八])章", p["part"])
+    head = "第%s章" % ch.group(1) if ch else ("复习卷与习题课" if p["page"] >= 88 else "其他")
+    if head != cur:
+        cur = head
+        out += ["", "## " + head, ""]
+    out += ["**第 %d 集　%s**（%d:%02d）" % (p["page"], p["part"], m, s), ""]
+    for i in pick:
+        out.append("> " + clip(units[i]))
+        out.append("")
+    out.append("")
+
+path = os.path.join(ROOT, "逐集内容摘录.md")
+with open(path, "w", encoding="utf-8") as f:
+    f.write("\n".join(out))
+print("生成 逐集内容摘录.md（105 集）")

@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "lastUpdated": 1792654815240,
+  "artifacts": [
+    {
+      "name": "gen_mindmap.py",
+      "title": "gen_mindmap.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 22984,
+      "createdAt": 1792653978240,
+      "updatedAt": 1792654017685,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/gen_mindmap.py",
+      "_meta": {
+        "sourceTool": "Edit",
+        "codebuddy.ai/toolName": "Edit",
+        "toolCallId": "call_00_GVjAFTv6Rzp1Rg0mv96L8517",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "codebuddy.ai/requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "createdByRequestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "touchedByRequestIds": [
+          "01a1627e05f77f57883a99ac6aad1b95"
+        ]
+      }
+    },
+    {
+      "name": "gen_preview.py",
+      "title": "gen_preview.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 4338,
+      "createdAt": 1792654002221,
+      "updatedAt": 1792654002224,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/gen_preview.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_vsGtDJMhKFYLIdg0yjQZ8410",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "codebuddy.ai/requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "createdByRequestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "touchedByRequestIds": [
+          "01a1627e05f77f57883a99ac6aad1b95"
+        ]
+      }
+    },
+    {
+      "name": "皮内注射-操作考核评分标准.mm",
+      "title": "皮内注射-操作考核评分标准.mm",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 22231,
+      "createdAt": 1792653982336,
+      "updatedAt": 1792654022110,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E7%9A%AE%E5%86%85%E6%B3%A8%E5%B0%84-%E6%93%8D%E4%BD%9C%E8%80%83%E6%A0%B8%E8%AF%84%E5%88%86%E6%A0%87%E5%87%86.mm",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_3S08GRiPNZX81i3dohRO7547",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "codebuddy.ai/requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "createdByRequestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "touchedByRequestIds": [
+          "01a1627e05f77f57883a99ac6aad1b95"
+        ]
+      }
+    },
+    {
+      "name": "皮内注射-操作考核评分标准.opml",
+      "title": "皮内注射-操作考核评分标准.opml",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 19790,
+      "createdAt": 1792653982337,
+      "updatedAt": 1792654022111,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E7%9A%AE%E5%86%85%E6%B3%A8%E5%B0%84-%E6%93%8D%E4%BD%9C%E8%80%83%E6%A0%B8%E8%AF%84%E5%88%86%E6%A0%87%E5%87%86.opml",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_3S08GRiPNZX81i3dohRO7547",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "codebuddy.ai/requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "createdByRequestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "touchedByRequestIds": [
+          "01a1627e05f77f57883a99ac6aad1b95"
+        ]
+      }
+    },
+    {
+      "name": "皮内注射-树状图预览.html",
+      "title": "皮内注射-树状图预览.html",
+      "mimeType": "text/html",
+      "contentType": "document",
+      "size": 25887,
+      "createdAt": 1792654006184,
+      "updatedAt": 1792654022765,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E7%9A%AE%E5%86%85%E6%B3%A8%E5%B0%84-%E6%A0%91%E7%8A%B6%E5%9B%BE%E9%A2%84%E8%A7%88.html",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_3S08GRiPNZX81i3dohRO7547",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "codebuddy.ai/requestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "createdByRequestId": "01a1627e05f77f57883a99ac6aad1b95",
+        "touchedByRequestIds": [
+          "01a1627e05f77f57883a99ac6aad1b95"
+        ]
+      }
+    },
+    {
+      "name": "gen_jm.py",
+      "title": "gen_jm.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 31588,
+      "createdAt": 1792654549615,
+      "updatedAt": 1792654549615,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/gen_jm.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_INSn5xkYGQe8KgrFLv7v5444",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "codebuddy.ai/requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "createdByRequestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "touchedByRequestIds": [
+          "01a16286db5c7982b33c2539ce7ff83a"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液-操作考核评分标准.mm",
+      "title": "静脉输液-操作考核评分标准.mm",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 28145,
+      "createdAt": 1792654553329,
+      "updatedAt": 1792654553332,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2-%E6%93%8D%E4%BD%9C%E8%80%83%E6%A0%B8%E8%AF%84%E5%88%86%E6%A0%87%E5%87%86.mm",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_QZaOYSvQ3KAPVr7zlygd2482",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "codebuddy.ai/requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "createdByRequestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "touchedByRequestIds": [
+          "01a16286db5c7982b33c2539ce7ff83a"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液-操作考核评分标准.opml",
+      "title": "静脉输液-操作考核评分标准.opml",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 25216,
+      "createdAt": 1792654553333,
+      "updatedAt": 1792654553333,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2-%E6%93%8D%E4%BD%9C%E8%80%83%E6%A0%B8%E8%AF%84%E5%88%86%E6%A0%87%E5%87%86.opml",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_QZaOYSvQ3KAPVr7zlygd2482",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "codebuddy.ai/requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "createdByRequestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "touchedByRequestIds": [
+          "01a16286db5c7982b33c2539ce7ff83a"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液-树状图预览.html",
+      "title": "静脉输液-树状图预览.html",
+      "mimeType": "text/html",
+      "contentType": "document",
+      "size": 33008,
+      "createdAt": 1792654553334,
+      "updatedAt": 1792654553334,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2-%E6%A0%91%E7%8A%B6%E5%9B%BE%E9%A2%84%E8%A7%88.html",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_QZaOYSvQ3KAPVr7zlygd2482",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "codebuddy.ai/requestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "createdByRequestId": "01a16286db5c7982b33c2539ce7ff83a",
+        "touchedByRequestIds": [
+          "01a16286db5c7982b33c2539ce7ff83a"
+        ]
+      }
+    },
+    {
+      "name": "gen_jm_lite.py",
+      "title": "gen_jm_lite.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 9456,
+      "createdAt": 1792654765374,
+      "updatedAt": 1792654765375,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/gen_jm_lite.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_mBBDxZCghttFrDzcECme9279",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "codebuddy.ai/requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "createdByRequestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "touchedByRequestIds": [
+          "01a1628c9e667cc88e5190d25a88e4b4"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液-操作流程树状图.mm",
+      "title": "静脉输液-操作流程树状图.mm",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 9285,
+      "createdAt": 1792654776036,
+      "updatedAt": 1792654776037,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%A0%91%E7%8A%B6%E5%9B%BE.mm",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_xMRG0XQVGJrOPKLE4bNe5102",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "codebuddy.ai/requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "createdByRequestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "touchedByRequestIds": [
+          "01a1628c9e667cc88e5190d25a88e4b4"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液-操作流程树状图.opml",
+      "title": "静脉输液-操作流程树状图.opml",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 3847,
+      "createdAt": 1792654776037,
+      "updatedAt": 1792654776038,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%A0%91%E7%8A%B6%E5%9B%BE.opml",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_xMRG0XQVGJrOPKLE4bNe5102",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "codebuddy.ai/requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "createdByRequestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "touchedByRequestIds": [
+          "01a1628c9e667cc88e5190d25a88e4b4"
+        ]
+      }
+    },
+    {
+      "name": "静脉输液-操作流程树状图.html",
+      "title": "静脉输液-操作流程树状图.html",
+      "mimeType": "text/html",
+      "contentType": "document",
+      "size": 6496,
+      "createdAt": 1792654776038,
+      "updatedAt": 1792654776038,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-10-22-15-23-08/output/%E9%9D%99%E8%84%89%E8%BE%93%E6%B6%B2-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%A0%91%E7%8A%B6%E5%9B%BE.html",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_xMRG0XQVGJrOPKLE4bNe5102",
+        "ownerConversationId": "ad80aa4a-819a-4410-af9c-6d2237752bd7",
+        "requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "codebuddy.ai/requestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "createdByRequestId": "01a1628c9e667cc88e5190d25a88e4b4",
+        "touchedByRequestIds": [
+          "01a1628c9e667cc88e5190d25a88e4b4"
+        ]
+      }
+    }
+  ]
+}

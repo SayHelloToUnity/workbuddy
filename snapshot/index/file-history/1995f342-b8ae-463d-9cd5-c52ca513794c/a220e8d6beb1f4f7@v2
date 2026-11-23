@@ -1,0 +1,138 @@
+# -*- coding: utf-8 -*-
+"""按核查结论批量修 静脉输血表（直接改 sheet1.xml 的 <v>，保留 s 样式）"""
+import zipfile, re, shutil, os, sys
+
+SRC = r"C:/Users/56583/Desktop/手术数据/静脉输血/静脉输血2026.10.23.xlsx"
+TMP = r"C:/Users/56583/Desktop/手术数据/.workbuddy/tmp/_out.xlsx"
+
+# ---- 读取 ----
+z = zipfile.ZipFile(SRC)
+sheet = z.read('xl/worksheets/sheet1.xml').decode('utf-8')
+sstxml = z.read('xl/sharedStrings.xml').decode('utf-8')
+sis = re.findall(r'<si>.*?</si>', sstxml, re.S)
+
+def si_text(si):
+    parts = re.findall(r'<t[^>]*>(.*?)</t>', si, re.S)
+    return ''.join(parts)
+
+vals = [si_text(x) for x in sis]
+val2idx = {}
+for i, v in enumerate(vals):
+    if v not in val2idx:
+        val2idx[v] = i
+
+def get_cell(ref):
+    m = re.search(r'<c r="%s"(?![0-9])[^>]*>.*?</c>' % ref, sheet, re.S)
+    if not m:
+        m = re.search(r'<c r="%s"(?![0-9])[^>]*/>' % ref, sheet, re.S)
+    return m
+
+def cell_value(ref):
+    m = get_cell(ref)
+    if not m:
+        return None
+    t = re.search(r't="(\w+)"', m.group(0))
+    v = re.search(r'<v>(.*?)</v>', m.group(0), re.S)
+    if t and t.group(1) == 's' and v:
+        return vals[int(v.group(1))]
+    return v.group(1) if v else ''
+
+cur = {r: cell_value(r) for r in []}
+
+# ---- 变更清单 ----
+CH = []
+def add(pref, rows, new):
+    for r in rows:
+        CH.append(('%s%d' % (pref, r), new))
+
+# 1) 05-01 段 E 列跟上 A 编码
+add('E', [77, 78], '03')
+add('E', [81, 82], '05')
+add('E', [83, 84], '06')
+# 2) 81/82 的 I 列回到 05
+add('I', [81, 82], '05')
+# 3) A 前缀 JMSY3 -> JMSX3
+CH += [('A80', 'JMSX3-05-01-04-02-00'), ('A82', 'JMSX3-05-01-05-02-00')]
+add('M', [79, 80], 'JMSX3')
+# 4) 152-155 归入 06-03：撤离治疗巾=07、移除垫枕=08
+CH += [('A152', 'JMSX3-06-03-07-01-00'), ('A153', 'JMSX3-06-03-07-02-00'),
+       ('A154', 'JMSX3-06-03-08-01-00'), ('A155', 'JMSX3-06-03-08-02-00')]
+add('E', [152, 153], '07')
+add('E', [154, 155], '08')
+add('M', [152, 153, 154, 155], 'JMSX3')
+# 5) 156-163 顺延（清理用物 09 / 洗手 10 / 记录 11 / 续血 12）
+CH += [('A156', 'JMSX3-06-03-09-01-00'), ('A157', 'JMSX3-06-03-09-02-00'),
+       ('A158', 'JMSX3-06-03-10-01-00'), ('A159', 'JMSX3-06-03-10-02-00'),
+       ('A160', 'JMSX3-06-03-11-01-00'), ('A161', 'JMSX3-06-03-11-02-00'),
+       ('A162', 'JMSX3-06-03-12-01-00'), ('A163', 'JMSX3-06-03-12-02-00')]
+add('E', [156, 157], '09')
+add('E', [158, 159], '10')
+add('E', [160, 161], '11')
+add('E', [162, 163], '12')
+# 6) N 列残留
+add('N', [85, 86], '静脉 输血3')
+# 7) 知识点对调回来
+add('T', [152, 153], '移除治疗巾')
+add('T', [154, 155], '移除垫枕')
+# 8) 行 146 / 148 子项文案互换
+CH += [('C146', '未进行操作后查对'), ('C148', '未调节滴速')]
+# 9) U 列错误类型补空
+add('U', [3, 122, 133], '一般错误')
+# 10) X54 显示与"应用=否"对齐
+CH += [('X54', '否')]
+
+# ---- 执行 ----
+added = 0
+changed = []
+for ref, new in CH:
+    m = get_cell(ref)
+    if not m:
+        print('!! 找不到单元格', ref); continue
+    old = cell_value(ref)
+    if old == new:
+        continue
+    if new in val2idx:
+        idx = val2idx[new]
+    else:
+        vals.append(new)
+        sis.append('<si><t>%s</t></si>' % new)
+        val2idx[new] = len(vals) - 1
+        idx = val2idx[new]
+        added += 1
+    oldxml = m.group(0)
+    newxml = re.sub(r'<v>.*?</v>', '<v>%d</v>' % idx, oldxml, count=1, flags=re.S)
+    if 't="s"' not in newxml:
+        newxml = newxml.replace('<c r="%s"' % ref, '<c r="%s" t="s"' % ref, 1)
+    sheet = sheet.replace(oldxml, newxml, 1)
+    changed.append((ref, old, new))
+
+print('实改 %d 个单元格，新增共享字符串 %d 条' % (len(changed), added))
+for x in changed:
+    print('  %-6s %r -> %r' % x)
+
+# 回写 sharedStrings
+if added:
+    sstnew = sstxml
+    m = re.search(r'<sst([^>]*)>', sstnew)
+    attrs = m.group(1)
+    cu = int(re.search(r'uniqueCount="(\d+)"', attrs).group(1))
+    co = int(re.search(r'count="(\d+)"', attrs).group(1)) if 'count="' in attrs else cu
+    newattrs = attrs.replace('uniqueCount="%d"' % cu, 'uniqueCount="%d"' % (cu + added))
+    newattrs = newattrs.replace('count="%d"' % co, 'count="%d"' % (co + added))
+    sstnew = sstnew.replace('<sst%s>' % attrs, '<sst%s>' % newattrs, 1)
+    sstnew = sstnew.replace('</sst>', ''.join(sis[-added:]) + '</sst>', 1)
+else:
+    sstnew = sstxml
+
+# 打包（其余条目原样复制）
+zin = zipfile.ZipFile(SRC)
+with zipfile.ZipFile(TMP, 'w', zipfile.ZIP_DEFLATED) as zout:
+    for item in zin.infolist():
+        data = zin.read(item.filename)
+        if item.filename == 'xl/worksheets/sheet1.xml':
+            data = sheet.encode('utf-8')
+        elif item.filename == 'xl/sharedStrings.xml':
+            data = sstnew.encode('utf-8')
+        zout.writestr(item, data)
+zin.close(); z.close()
+print('已写出', TMP, os.path.getsize(TMP))
