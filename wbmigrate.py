@@ -556,14 +556,20 @@ def write_restore_readme(pkg: Path, manifest: dict) -> None:
         "`workbuddy.db` 本身**不在**包里——它是 SQLite 二进制且带 -wal/-shm，不适合 git 版本化。",
         "还原时由脚本按目标机的真实表结构插入，因此对版本差异更宽容。",
         "",
-        "## 日常增量同步（在源机执行）",
+        "## 双向同步（远端为准）",
         "",
-        "固定目录 + `--replace` 只保留一份最新快照，git 只记录差异，不会每次新增一个 16MB 的整包：",
+        "包内自带两个一键脚本，任意一台机器克隆后即可使用：",
         "",
-        "```bash",
-        "python wbmigrate.py export --all -o <仓库父目录> --dir-name snapshot --replace",
-        "python wbmigrate.py git <仓库父目录>/snapshot",
-        "```",
+        "| 脚本 | 作用 | 等价命令 |",
+        "|---|---|---|",
+        "| `sync.cmd` | 本机 → 远端 | `python wbmigrate.py sync --repo .` |",
+        "| `pull.cmd` | 远端 → 本机 | `python wbmigrate.py pull --repo .` |",
+        "",
+        "两条命令都会先 `reset --hard origin/main` 对齐远端，因此**远端始终是唯一事实来源**；",
+        "`pull` 以覆盖方式写入本机，被覆盖的本地文件自动备份到 `~/.workbuddy/backups/<时间戳>/files/`。",
+        "",
+        "> 注意：若两台机器在**同一个会话**里各自续聊，后上传者的版本会整体覆盖另一方的续聊内容。",
+        "> 覆盖前的本地版本已自动备份，可从 backups 目录取回。",
         "",
     ]
     (pkg / "RESTORE.md").write_text("\n".join(lines), encoding="utf-8")
@@ -674,7 +680,10 @@ def cmd_import(home: Path, args) -> None:
 
     dup = [p for p in plan if p["exists"]]
     if dup:
-        info(f"提示：{len(dup)} 个会话在本机已存在，默认跳过（加 --overwrite 覆盖）。")
+        if args.overwrite:
+            info(f"{len(dup)} 个会话本机已存在，将按远端版本覆盖（旧文件自动备份）。")
+        else:
+            info(f"提示：{len(dup)} 个会话在本机已存在，默认跳过（加 --overwrite 覆盖）。")
 
     if not args.apply:
         info("")
