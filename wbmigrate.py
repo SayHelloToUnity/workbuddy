@@ -841,6 +841,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     i = sub.add_parser("import", help="在目标机还原迁移包")
     i.add_argument("package", help="迁移包目录")
+    i.add_argument("--dry-run", action="store_true", help="只预览不写入（不加 --apply 时的默认行为）")
     i.add_argument("--apply", action="store_true", help="真正写入（默认 dry-run）")
     i.add_argument("--overwrite", action="store_true", help="覆盖已存在的同 id 会话")
     i.add_argument("--reassign-user", action="store_true", help="把 user_id 改写为本机账号")
