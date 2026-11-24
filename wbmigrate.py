@@ -163,6 +163,48 @@ def lp_copy(src, dst) -> None:
     shutil.copy2(win_long(src), win_long(dst))
 
 
+# GitHub Push Protection 会拦截含凭据的推送。导出时对文本文件做一次替换，
+# 既保证能推上去，也避免把密钥留在远端历史里。
+SECRET_PATTERNS = (
+    (re.compile(r"AKID[A-Za-z0-9]{16,}"), "AKID***REDACTED***"),
+    (re.compile(r"AKIA[0-9A-Z]{16}"), "AKIA***REDACTED***"),
+    (re.compile(r"github_pat_[A-Za-z0-9_]{40,}"), "github_pat_***REDACTED***"),
+    (re.compile(r"ghp_[A-Za-z0-9]{30,}"), "ghp_***REDACTED***"),
+    (re.compile(r"xox[baprs]-[A-Za-z0-9-]{10,}"), "xox***REDACTED***"),
+    (re.compile(r"sk-[A-Za-z0-9_-]{32,}"), "sk-***REDACTED***"),
+)
+
+SCRUB_SUFFIXES = {
+    ".jsonl", ".json", ".txt", ".md", ".log", ".csv", ".tsv",
+    ".html", ".htm", ".xml", ".yaml", ".yml", ".ini", ".cfg", ".env",
+}
+
+
+def scrub_text(text: str) -> tuple[str, int]:
+    hits = 0
+    for pat, repl in SECRET_PATTERNS:
+        text, n = pat.subn(repl, text)
+        hits += n
+    return text, hits
+
+
+def copy_scrubbed(src: Path, dst: Path) -> int:
+    """复制文件；文本类先脱敏再写。返回替换处数（0 表示原样复制）。"""
+    if src.suffix.lower() in SCRUB_SUFFIXES:
+        try:
+            raw = src.read_text(encoding="utf-8", errors="replace")
+            new, hits = scrub_text(raw)
+            if hits:
+                lp_makedirs(dst.parent)
+                with open(win_long(dst), "w", encoding="utf-8", newline="") as f:
+                    f.write(new)
+                return hits
+        except OSError:
+            pass
+    lp_copy(src, dst)
+    return 0
+
+
 def connect_ro(db: Path) -> sqlite3.Connection:
     if not db.exists():
         die(f"找不到数据库：{db}")
@@ -552,12 +594,17 @@ def cmd_export(home: Path, args) -> None:
     # 1) 复制文件
     manifest_sessions = []
     total_bytes = 0
+    redacted_total = 0
+    redacted_files: list[str] = []
     for s in selected:
         copied = []
         for src, rel in session_assets(home, s):
             dst = pkg / rel
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, dst)
+            lp_makedirs(dst.parent)
+            _hits = copy_scrubbed(src, dst)
+            if _hits:
+                redacted_total += _hits
+                redacted_files.append(rel.as_posix())
             copied.append(rel.as_posix())
             total_bytes += src.stat().st_size
         manifest_sessions.append(
@@ -677,6 +724,10 @@ def cmd_export(home: Path, args) -> None:
     size = sum(f.stat().st_size for f in pkg.rglob("*") if f.is_file())
     info("")
     info(f"导出完成：{pkg}")
+    if redacted_total:
+        info(f"  敏感信息脱敏 {redacted_total} 处 / {len(redacted_files)} 个文件（避免被 GitHub 拦截）")
+        for _f in redacted_files[:3]:
+            info(f"    - {_f}")
     info(f"  会话 {len(session_rows)} 个 / 文件 {manifest['counts']['files']} 个 / 合计 {human(size)}")
     if size > 40 * 1024 * 1024 and not args.with_files:
         info("  注意：包体积偏大，推送到 git 前请确认远端限额（GitHub 单文件 100MB）。")
