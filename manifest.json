@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-24T09:17:08+08:00",
+  "created_at": "2026-11-24T18:08:53+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -15,6 +15,10 @@
     "session": null
   },
   "projects_meta": [
+    {
+      "cwd": "C:\\Users\\56583\\WorkBuddy\\2026-11-24-14-33-08",
+      "last_opened_at": 1795501988666
+    },
     {
       "cwd": "C:\\Users\\56583\\WorkBuddy\\2026-10-22-15-23-08",
       "last_opened_at": 1792653788631
@@ -97,10 +101,10 @@
     }
   ],
   "counts": {
-    "sessions": 17,
+    "sessions": 18,
     "spaces": 4,
-    "workspaces": 20,
-    "files": 291
+    "workspaces": 21,
+    "files": 298
   },
   "sessions": [
     {
@@ -438,7 +442,7 @@
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
       "status": "working",
-      "updated_at": 1795482747743,
+      "updated_at": 1795514738860,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
@@ -449,6 +453,7 @@
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_K6rKJpX4QiFoSJ25aqg36980-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_ku11wDQzcnAU5hOzQNjF6550.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_ET_xw5jnT06U3TA33OUdG532271-render.txt",
+        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_FS8pg25jcLcjHx4D1l2E0107.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_JOdhUfv2ApYkYVRWNGLA0800-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_koTNq8g5gMH4Cxi9wyiO0816-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_leCaq4VpWWxiPmP98JOw1684.txt",
@@ -498,6 +503,7 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v5",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/8b2a002d3d479811@v1",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/8b2a002d3d479811@v2",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/8b2a002d3d479811@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/90543e5c5a59fd32@v2"
       ]
     },
@@ -548,6 +554,22 @@
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-21-11-33-25/51fb1f8a-3086-492c-91ad-8331d8bec3f6.jsonl",
         "projects/c-Users-56583-WorkBuddy-2026-11-21-11-33-25/51fb1f8a-3086-492c-91ad-8331d8bec3f6.file-rollback.ndjson"
+      ]
+    },
+    {
+      "id": "ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf",
+      "cwd": "C:/Users/56583/WorkBuddy/2026-11-24-14-33-08",
+      "encoded": "c-Users-56583-WorkBuddy-2026-11-24-14-33-08",
+      "title": "生成威武齐天大圣模型",
+      "status": "completed",
+      "updated_at": 1795502342954,
+      "space_id": null,
+      "files": [
+        "projects/c-Users-56583-WorkBuddy-2026-11-24-14-33-08/ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf.jsonl",
+        "projects/c-Users-56583-WorkBuddy-2026-11-24-14-33-08/ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf/tool-results/call_00_Fr6bwMw4m5gZUeUroMjG0387-render.txt",
+        "projects/c-Users-56583-WorkBuddy-2026-11-24-14-33-08/ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf.file-rollback.ndjson",
+        "index/artifact-index/ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf.json",
+        "index/changes-index/ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf.json"
       ]
     },
     {
