@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-24T09:06:48+08:00",
+  "created_at": "2026-11-24T09:13:05+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -100,7 +100,7 @@
     "sessions": 17,
     "spaces": 4,
     "workspaces": 20,
-    "files": 289
+    "files": 291
   },
   "sessions": [
     {
@@ -437,8 +437,8 @@
       "cwd": "C:/Users/56583/WorkBuddy/2026-11-17-09-55-25",
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
-      "status": "completed",
-      "updated_at": 1795482293819,
+      "status": "working",
+      "updated_at": 1795482747743,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
@@ -455,6 +455,7 @@
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_sYipiniQbeuAfmYrn8dv6151-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_TVGV4IV1d844w6zw4C5c5824-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_TVJjIAHNbXr5XgLsS89a7928.txt",
+        "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_00_yJGLWXQTqk2mJmaWkI0g0641.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/tool-results/call_01_oMUGwcrxuGBZM0z61yPk3059-render.txt",
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.file-rollback.ndjson",
         "index/artifact-index/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.json",
@@ -496,6 +497,7 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v5",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/8b2a002d3d479811@v1",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/8b2a002d3d479811@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/90543e5c5a59fd32@v2"
       ]
     },

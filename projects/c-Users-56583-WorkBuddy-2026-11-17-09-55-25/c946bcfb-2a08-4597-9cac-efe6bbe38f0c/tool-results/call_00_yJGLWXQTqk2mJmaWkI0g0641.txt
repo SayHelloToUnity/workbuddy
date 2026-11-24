@@ -1,0 +1,14 @@
+=== 在仓库目录内直接跑 sync.cmd（验证方案可行性）===
+  repo: C:\Users\56583\WorkBuddy\_wb-sync\snapshot\.
+[1/2] Checking remote access...
+[2/2] Exporting and pushing...
+已对齐远端（reset --hard origin/main）
+FAILED - see the message above.
+
+=== 脚本是否还在 ===
+pull.cmd
+sync.cmd
+wbmigrate.py
+=== 是否有残留嵌套 ===
+无嵌套
+=== 在仓库目录内直接跑 sync.cmd（验证方案可行性）===
