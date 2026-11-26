@@ -1709,9 +1709,21 @@ def stash_tool_edits(gitroot: Path) -> Path | None:
         return None
     if code != 0 or not out.strip():
         return None
+    # 只另存「确实被改过」的文件：把未改动的同名文件也一并写回，会覆盖远端
+    # 上更新的版本，反而制造回退。
+    dirty = set()
+    for line in out.splitlines():
+        # 注意 run_git 会 strip 整体输出，首行行首空格已丢失，不能按固定列位截取
+        parts = line.split()
+        if len(parts) >= 2:
+            dirty.add(parts[-1].strip('"'))
+    if not dirty:
+        return None
     tmp = Path(tempfile.mkdtemp(prefix="wbtool-"))
     saved = 0
     for name in TOOL_FILES:
+        if name not in dirty:
+            continue
         src = gitroot / name
         if src.is_file():
             try:
