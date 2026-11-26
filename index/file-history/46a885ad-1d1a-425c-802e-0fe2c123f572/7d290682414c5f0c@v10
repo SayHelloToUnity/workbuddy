@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""批量：下载分P音频 -> 本地 faster-whisper 转写 -> 落盘 txt/srt。
+
+用法:
+  python asr_batch.py 1-10            # 处理第 1..10 集
+  python asr_batch.py 1,5,9           # 指定集
+  python asr_batch.py all
+可选环境变量: ASR_MODEL(默认 small) / ASR_DEVICE(cuda|cpu) / ASR_COMPUTE(int8_float16|int8|float16)
+"""
+import json
+import os
+import sys
+import time
+import urllib.request
+
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+BV = "BV1Lb4y1m7vD"
+ROOT = os.path.dirname(os.path.abspath(__file__))
+AUDIO = os.path.join(ROOT, "audio")
+TEXT = os.path.join(ROOT, "text")
+os.makedirs(AUDIO, exist_ok=True)
+os.makedirs(TEXT, exist_ok=True)
+
+PROMPT = ("以下是电路原理与电工学课程的课堂讲解。涉及：电路模型、参考方向、电功率、"
+          "电阻元件、电压源、电流源、受控源、基尔霍夫电流定律、基尔霍夫电压定律、"
+          "等效变换、电阻星三角变换、输入电阻、支路电流法、网孔电流法、结点电压法、"
+          "回路电流法、叠加定理、替代定理、戴维南定理、诺顿定理、最大功率传输、"
+          "电容、电感、正弦交流电、相量、阻抗、感抗、容抗、功率因数、谐振、三相电路、"
+          "线电压、相电压、磁路、安培环路定律。")
+
+
+def get(url, binary=False, timeout=300):
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA, "Referer": "https://www.bilibili.com/video/" + BV,
+        "Origin": "https://www.bilibili.com", "Accept": "*/*"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        data = r.read()
+    return data if binary else json.loads(data.decode("utf-8"))
+
+
+def fetch_audio(cid, path):
+    if os.path.exists(path) and os.path.getsize(path) > 10000:
+        return os.path.getsize(path)
+    api = ("https://api.bilibili.com/x/player/playurl?bvid=%s&cid=%s&fnval=16&fourk=1"
+           % (BV, cid))
+    audios = get(api)["data"]["dash"]["audio"]
+    audios.sort(key=lambda a: a.get("bandwidth", 0))
+    blob = get(audios[0]["baseUrl"], binary=True)
+    tmp = path + ".part"
+    with open(tmp, "wb") as f:
+        f.write(blob)
+    os.replace(tmp, path)
+    return len(blob)
+
+
+def parse_sel(arg):
+    pages = json.load(open(os.path.join(ROOT, "meta", "pages.json"), encoding="utf-8"))["pages"]
+    n = len(pages)
+    if arg == "all":
+        want = list(range(1, n + 1))
+    elif "-" in arg:
+        a, b = arg.split("-")
+        want = list(range(int(a), int(b) + 1))
+    else:
+        want = [int(x) for x in arg.split(",") if x.strip()]
+    return [p for p in pages if p["page"] in want]
+
+
+def load_audio(path, sr=16000):
+    """用 PyAV 解码任意容器为 16k 单声道 float32，规避 av 版本差异。"""
+    import av
+    import numpy as np
+    chunks = []
+    with av.open(path) as container:
+        stream = container.streams.audio[0]
+        resampler = av.AudioResampler(format="fltp", layout="mono", rate=sr)
+        for frame in container.decode(stream):
+            for rf in resampler.resample(frame):
+                chunks.append(rf.to_ndarray())
+        for rf in resampler.resample(None):
+            chunks.append(rf.to_ndarray())
+    if not chunks:
+        raise RuntimeError("decode empty: %s" % path)
+    audio = np.concatenate(chunks, axis=1).reshape(-1).astype(np.float32)
+    return audio
+
+
+def prepare_cuda_dlls():
+    """把 pip 安装的 nvidia-* 轮子里的 DLL 目录挂进搜索路径。"""
+    import glob
+    import site
+    if not hasattr(os, "add_dll_directory"):
+        return []
+    added = []
+    roots = [site.getusersitepackages()] + list(site.getsitepackages())
+    for sp in roots:
+        for p in glob.glob(os.path.join(sp, "nvidia", "*", "bin")):
+            try:
+                os.add_dll_directory(p)
+                added.append(p)
+            except OSError:
+                pass
+    if added:
+        os.environ["PATH"] = ";".join(added) + ";" + os.environ.get("PATH", "")
+    return added
+
+
+def main():
+    sel = parse_sel(sys.argv[1] if len(sys.argv) > 1 else "all")
+    model_name = os.environ.get("ASR_MODEL", "small")
+    device = os.environ.get("ASR_DEVICE", "cuda")
+    compute = os.environ.get("ASR_COMPUTE", "int8_float16")
+
+    dirs = prepare_cuda_dlls() if device == "cuda" else []
+    if dirs:
+        print("dll dirs: %d" % len(dirs), flush=True)
+    from faster_whisper import WhisperModel
+    model = WhisperModel(model_name, device=device, compute_type=compute)
+    print("model ready: %s/%s/%s" % (model_name, device, compute), flush=True)
+
+    for p in sel:
+        tag = "p%03d" % p["page"]
+        mp3 = os.path.join(AUDIO, tag + ".m4a")
+        txt = os.path.join(TEXT, tag + ".txt")
+        srt = os.path.join(TEXT, tag + ".srt")
+        if os.path.exists(txt) and os.path.getsize(txt) > 200:
+            print("[skip] %s %s" % (tag, p["part"]), flush=True)
+            continue
+        t0 = time.time()
+        try:
+            nbytes = fetch_audio(p["cid"], mp3)
+        except Exception as e:
+            print("[dl-err] %s %s %s" % (tag, p["part"], e), flush=True)
+            continue
+        t1 = time.time()
+        try:
+            audio = load_audio(mp3)
+            segs, info = model.transcribe(
+                audio, language="zh", beam_size=5, vad_filter=True,
+                vad_parameters={"min_silence_duration_ms": 500},
+                condition_on_previous_text=False,
+                initial_prompt=PROMPT)
+            lines, srtlines = [], []
+            for i, s in enumerate(segs, 1):
+                lines.append(s.text.strip())
+                srtlines.append("%d\n%s --> %s\n%s\n" % (
+                    i, fmt(s.start), fmt(s.end), s.text.strip()))
+            body = "".join(lines)
+            with open(txt, "w", encoding="utf-8") as f:
+                f.write("【第%d集】%s\n时长: %s\n\n%s\n" % (
+                    p["page"], p["part"], hms(p["duration"]), body))
+            with open(srt, "w", encoding="utf-8") as f:
+                f.write("\n".join(srtlines))
+            t2 = time.time()
+            print("[ok] %s %s | %.1fMB dl %.1fs asr %.1fs | %d字" % (
+                tag, p["part"], nbytes / 1e6, t1 - t0, t2 - t1, len(body)), flush=True)
+        except Exception as e:
+            print("[asr-err] %s %s %r" % (tag, p["part"], e), flush=True)
+
+
+def fmt(t):
+    h = int(t // 3600)
+    m = int(t % 3600 // 60)
+    s = t % 60
+    return "%02d:%02d:%06.3f" % (h, m, s) if h else "%02d:%06.3f" % (m, s)
+
+
+def hms(sec):
+    m, s = divmod(int(sec), 60)
+    return "%d:%02d" % (m, s)
+
+
+if __name__ == "__main__":
+    main()

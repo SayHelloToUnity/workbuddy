@@ -1,0 +1,66 @@
+set -e
+A="C:/Users/56583/Desktop/mcframework"
+B="D:/Work/Unity/CompanyOperationPrj/CommonPrj/mcframework"
+S="D:/_mc-sandbox"
+T="/tmp/mcfull"
+PRE="MCFramework/Assets"
+
+cat "$T/diff.txt" "$T/onlyA.txt" "$T/onlyB.txt" | sort -u > "$T/sandbox_paths.txt"
+echo "沙箱纳入文件数: $(wc -l < "$T/sandbox_paths.txt")"
+
+rm -rf "$S"; mkdir -p "$S"
+git init -q "$S"
+git -C "$S" config core.autocrlf true
+git -C "$S" config user.name "$(git -C "$A" config user.name || echo sandbox)"
+git -C "$S" config user.email "$(git -C "$A" config user.email || echo sandbox@local)"
+
+echo "=== 1. 落地 base(6454fa6) 版本 ==="
+n=0; missing=0
+while IFS= read -r p; do
+  rel="$PRE/$p"
+  if git -C "$A" cat-file -e "HEAD:$rel" 2>/dev/null; then
+    mkdir -p "$S/$(dirname "$rel")"
+    git -C "$A" show "HEAD:$rel" > "$S/$rel"
+    n=$((n+1))
+  else
+    missing=$((missing+1))
+  fi
+done < "$T/sandbox_paths.txt"
+echo "base 文件 $n 个；HEAD 中不存在（属新增）$missing 个"
+git -C "$S" add -A
+git -C "$S" commit -q -m "base: 6454fa6 Assets diff subset"
+
+apply_side() {
+  while IFS= read -r p; do
+    rel="$PRE/$p"
+    if [ -f "$1/$rel" ]; then
+      mkdir -p "$S/$(dirname "$rel")"
+      cp "$1/$rel" "$S/$rel"
+    else
+      rm -f "$S/$rel"
+    fi
+  done < "$T/sandbox_paths.txt"
+}
+
+echo "=== 2. 重放 A 侧 ==="
+git -C "$S" checkout -q -b side-a
+apply_side "$A"
+git -C "$S" add -A
+git -C "$S" commit -q -m "side-a: desktop working tree"
+echo "A 侧提交: $(git -C "$S" rev-parse --short HEAD)，改动文件 $(git -C "$S" diff --name-only master side-a | wc -l) 个"
+
+echo "=== 3. 重放 B 侧 ==="
+git -C "$S" checkout -q master
+git -C "$S" checkout -q -b side-b
+apply_side "$B"
+git -C "$S" add -A
+git -C "$S" commit -q -m "side-b: D drive working tree"
+echo "B 侧提交: $(git -C "$S" rev-parse --short HEAD)，改动文件 $(git -C "$S" diff --name-only master side-b | wc -l) 个"
+
+echo "=== 4. 合并 side-b -> side-a ==="
+git -C "$S" checkout -q side-a
+git -C "$S" merge --no-ff --no-commit side-b > "$T/merge_out.txt" 2>&1 || true
+cat "$T/merge_out.txt"
+echo "--- 冲突文件 ---"
+git -C "$S" -c core.quotepath=false diff --name-only --diff-filter=U | tee "$T/conflicts.txt"
+echo "冲突数: $(wc -l < "$T/conflicts.txt")"

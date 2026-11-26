@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "lastUpdated": 1795502328436,
+  "artifacts": [
+    {
+      "name": "generated_model_20261124_143831_preview.png",
+      "title": "generated_model_20261124_143831_preview.png",
+      "mimeType": "image/png",
+      "contentType": "image",
+      "size": 97764,
+      "createdAt": 1795502312991,
+      "updatedAt": 1795502312996,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-24-14-33-08/generated_model_20261124_143831_preview.png",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "ownerConversationId": "ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf",
+        "requestId": "01a20c4295c676d99ce0c09e56843519",
+        "codebuddy.ai/requestId": "01a20c4295c676d99ce0c09e56843519",
+        "createdByRequestId": "01a20c4295c676d99ce0c09e56843519",
+        "touchedByRequestIds": [
+          "01a20c4295c676d99ce0c09e56843519"
+        ],
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_EygrdXWHL2e8EN4QlC4d7646"
+      }
+    },
+    {
+      "name": "generated_model_20261124_143831_viewer.html",
+      "title": "generated_model_20261124_143831_viewer.html",
+      "mimeType": "text/html",
+      "contentType": "document",
+      "size": 4891,
+      "createdAt": 1795502324424,
+      "updatedAt": 1795502324425,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-24-14-33-08/generated_model_20261124_143831_viewer.html",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "ownerConversationId": "ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf",
+        "requestId": "01a20c4295c676d99ce0c09e56843519",
+        "codebuddy.ai/requestId": "01a20c4295c676d99ce0c09e56843519",
+        "createdByRequestId": "01a20c4295c676d99ce0c09e56843519",
+        "touchedByRequestIds": [
+          "01a20c4295c676d99ce0c09e56843519"
+        ],
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_EygrdXWHL2e8EN4QlC4d7646"
+      }
+    },
+    {
+      "name": "generated_model_20261124_143831.glb",
+      "title": "generated_model_20261124_143831.glb",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 60240032,
+      "createdAt": 1795502312400,
+      "updatedAt": 1795502312689,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-24-14-33-08/generated_model_20261124_143831.glb",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_EygrdXWHL2e8EN4QlC4d7646",
+        "ownerConversationId": "ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf",
+        "requestId": "01a20c4295c676d99ce0c09e56843519",
+        "codebuddy.ai/requestId": "01a20c4295c676d99ce0c09e56843519",
+        "createdByRequestId": "01a20c4295c676d99ce0c09e56843519",
+        "touchedByRequestIds": [
+          "01a20c4295c676d99ce0c09e56843519"
+        ]
+      }
+    },
+    {
+      "name": "generated_model_20261124_143831_obj.zip",
+      "title": "generated_model_20261124_143831_obj.zip",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 48853858,
+      "createdAt": 1795502313891,
+      "updatedAt": 1795502313938,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/WorkBuddy/2026-11-24-14-33-08/generated_model_20261124_143831_obj.zip",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_EygrdXWHL2e8EN4QlC4d7646",
+        "ownerConversationId": "ad5e2f4f-47b5-4507-bfc6-c840a3daa9cf",
+        "requestId": "01a20c4295c676d99ce0c09e56843519",
+        "codebuddy.ai/requestId": "01a20c4295c676d99ce0c09e56843519",
+        "createdByRequestId": "01a20c4295c676d99ce0c09e56843519",
+        "touchedByRequestIds": [
+          "01a20c4295c676d99ce0c09e56843519"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "lastUpdated": 1794914123398,
+  "artifacts": [
+    {
+      "name": "README.md",
+      "title": "README.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 1099,
+      "createdAt": 1794882238185,
+      "updatedAt": 1794882247814,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/README.md",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "a4f03f6b-dcf7-4b4a-aa71-601d430c20a9",
+        "requestId": "01a1e84ccfb87438ade4a1d09b756961",
+        "codebuddy.ai/requestId": "01a1e84ccfb87438ade4a1d09b756961",
+        "createdByRequestId": "01a1e84ccfb87438ade4a1d09b756961",
+        "touchedByRequestIds": [
+          "01a1e84ccfb87438ade4a1d09b756961"
+        ]
+      }
+    },
+    {
+      "name": "01-电压-电流-电阻.md",
+      "title": "01-电压-电流-电阻.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 12014,
+      "createdAt": 1794898843173,
+      "updatedAt": 1794900320181,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/notes/01-%E7%94%B5%E5%8E%8B-%E7%94%B5%E6%B5%81-%E7%94%B5%E9%98%BB.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_gVLrAISMcRXkkFXfuL6p7516",
+        "ownerConversationId": "a4f03f6b-dcf7-4b4a-aa71-601d430c20a9",
+        "requestId": "01a1e863496479a2b760a8663e26a872",
+        "codebuddy.ai/requestId": "01a1e863496479a2b760a8663e26a872",
+        "createdByRequestId": "01a1e84ccfb87438ade4a1d09b756961",
+        "touchedByRequestIds": [
+          "01a1e84ccfb87438ade4a1d09b756961",
+          "01a1e863496479a2b760a8663e26a872"
+        ]
+      }
+    },
+    {
+      "name": "00-电荷-电场-电势.md",
+      "title": "00-电荷-电场-电势.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 15953,
+      "createdAt": 1794900315651,
+      "updatedAt": 1794900315652,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/notes/00-%E7%94%B5%E8%8D%B7-%E7%94%B5%E5%9C%BA-%E7%94%B5%E5%8A%BF.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "ownerConversationId": "a4f03f6b-dcf7-4b4a-aa71-601d430c20a9",
+        "requestId": "01a1e863496479a2b760a8663e26a872",
+        "codebuddy.ai/requestId": "01a1e863496479a2b760a8663e26a872",
+        "createdByRequestId": "01a1e863496479a2b760a8663e26a872",
+        "touchedByRequestIds": [
+          "01a1e863496479a2b760a8663e26a872"
+        ],
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_gVLrAISMcRXkkFXfuL6p7516"
+      }
+    },
+    {
+      "name": ".gitignore",
+      "title": ".gitignore",
+      "mimeType": "application/octet-stream",
+      "contentType": "file",
+      "size": 104,
+      "createdAt": 1794913938816,
+      "updatedAt": 1794914123123,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/.gitignore",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_ET_Arqac0FAsZN6BVEulNI24180",
+        "ownerConversationId": "a4f03f6b-dcf7-4b4a-aa71-601d430c20a9",
+        "requestId": "01a1e936932a749cabe2377668b8b77e",
+        "codebuddy.ai/requestId": "01a1e936932a749cabe2377668b8b77e",
+        "createdByRequestId": "01a1e936932a749cabe2377668b8b77e",
+        "touchedByRequestIds": [
+          "01a1e936932a749cabe2377668b8b77e"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""从逐集讲稿中抽取要点句，生成「逐集要点速览」。纯抽取式，不改写原意。"""
+import json
+import os
+import re
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+TEXT = os.path.join(ROOT, "text")
+pages = json.load(open(os.path.join(ROOT, "meta", "pages.json"), encoding="utf-8"))["pages"]
+
+DOMAIN = ["定义", "定律", "定理", "公式", "结论", "概念", "注意", "记住", "关键", "重点",
+          "方法", "步骤", "思路", "判断", "求解", "代入", "推导", "说明", "意味着",
+          "所以", "因此", "也就是", "必须", "不能", "一定要", "容易错", "区别"]
+STOP = re.compile(r"^(嗯|啊|好|那么|这个|就是|然后|我们|大家)")
+
+
+def sentences(t, lo=45, hi=120):
+    """转写稿几乎没有句号，按逗号等切成分句后再合并成 45—120 字的片段。"""
+    t = re.sub(r"\s+", "", t)
+    clauses = [c for c in re.split(r"[，,。？！；;]", t) if len(c) >= 6]
+    out, buf = [], ""
+    for c in clauses:
+        if not buf:
+            buf = c
+        elif len(buf) + len(c) + 1 <= hi:
+            buf += "，" + c
+        else:
+            out.append(buf)
+            buf = c
+        if len(buf) >= lo and c.endswith(("了", "吗", "呢")):
+            out.append(buf)
+            buf = ""
+    if len(buf) >= 10:
+        out.append(buf)
+    return [s + "。" for s in out if len(s) >= 12]
+
+
+def score(s):
+    v = sum(2 for k in DOMAIN if k in s)
+    if re.search(r"[=＝]", s):
+        v += 3
+    if re.search(r"第[一二三]|首先|其次|最后|综上", s):
+        v += 1
+    v -= len(s) // 120
+    return v
+
+
+out = ["# 《电路原理、电工学》逐集要点速览", "",
+       "来源：BV1Lb4y1m7vD ｜ 105 集 ｜ 基于本地语音转写稿的抽取式提要",
+       "说明：每集摘取 4—6 句讲解中的关键句，保留原话，仅作定位与回忆用。", ""]
+
+cur = None
+for p in pages:
+    f = os.path.join(TEXT, "p%03d.txt" % p["page"])
+    raw = open(f, encoding="utf-8").read()
+    body = raw.split("\n\n", 1)[-1]
+    ss = sentences(body)
+    if not ss:
+        continue
+    ranked = sorted(range(len(ss)), key=lambda i: -score(ss[i]))[:5]
+    pick = sorted(set([0] + ranked))[:6]
+    m, s = divmod(p["duration"], 60)
+    ch = re.match(r"第([一二三四五六七八])章", p["part"])
+    head = "第%s章" % ch.group(1) if ch else ("复习与习题" if p["page"] >= 88 else "其他")
+    if head != cur:
+        cur = head
+        out += ["", "## " + head, ""]
+    out.append("**第 %d 集　%s**（%d:%02d）" % (p["page"], p["part"], m, s))
+    out.append("")
+    for i in pick:
+        out.append("- " + ss[i])
+    out.append("")
+
+with open(os.path.join(ROOT, "逐集要点速览.md"), "w", encoding="utf-8") as f:
+    f.write("\n".join(out))
+print("生成 逐集要点速览.md，%d 集" % len(pages))

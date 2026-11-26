@@ -1,0 +1,1786 @@
+{
+  "version": 1,
+  "lastUpdated": 1794980329075,
+  "artifacts": [
+    {
+      "name": "audio_dl.py",
+      "title": "audio_dl.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 1620,
+      "createdAt": 1794970230402,
+      "updatedAt": 1794970230403,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio_dl.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_M2vhB53iaEdXCAJoDRYn1935",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ec8fb8327ab4a27ea8cba88023f3",
+        "codebuddy.ai/requestId": "01a1ec8fb8327ab4a27ea8cba88023f3",
+        "createdByRequestId": "01a1ec8fb8327ab4a27ea8cba88023f3",
+        "touchedByRequestIds": [
+          "01a1ec8fb8327ab4a27ea8cba88023f3"
+        ]
+      }
+    },
+    {
+      "name": "test_003.m4a",
+      "title": "test_003.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 2952103,
+      "createdAt": 1794970235693,
+      "updatedAt": 1794970235698,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/test_003.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ec8fb8327ab4a27ea8cba88023f3",
+        "codebuddy.ai/requestId": "01a1ec8fb8327ab4a27ea8cba88023f3",
+        "createdByRequestId": "01a1ec8fb8327ab4a27ea8cba88023f3",
+        "touchedByRequestIds": [
+          "01a1ec8fb8327ab4a27ea8cba88023f3",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "fetch_meta.py",
+      "title": "fetch_meta.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 1302,
+      "createdAt": 1794970706980,
+      "updatedAt": 1794970706980,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/fetch_meta.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_I10WLyM7guOtIng644BU7336",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ec9729f67c82b36250e02e52f1f2",
+        "codebuddy.ai/requestId": "01a1ec9729f67c82b36250e02e52f1f2",
+        "createdByRequestId": "01a1ec9729f67c82b36250e02e52f1f2",
+        "touchedByRequestIds": [
+          "01a1ec9729f67c82b36250e02e52f1f2"
+        ]
+      }
+    },
+    {
+      "name": "probe_conclusion.py",
+      "title": "probe_conclusion.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 2300,
+      "createdAt": 1794971603918,
+      "updatedAt": 1794971603920,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/probe_conclusion.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_R5ZhGwmCqeoN4dJy4CKU0146",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83"
+        ]
+      }
+    },
+    {
+      "name": "asr_batch.py",
+      "title": "asr_batch.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 7053,
+      "createdAt": 1794971630100,
+      "updatedAt": 1794973776206,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/asr_batch.py",
+      "_meta": {
+        "sourceTool": "Edit",
+        "codebuddy.ai/toolName": "Edit",
+        "toolCallId": "call_00_ET_typwQTOJSXB8IGGGtCr53541",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83"
+        ]
+      }
+    },
+    {
+      "name": "电路原理105集内容梳理.md",
+      "title": "电路原理105集内容梳理.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 15927,
+      "createdAt": 1794971787570,
+      "updatedAt": 1794980318502,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86105%E9%9B%86%E5%86%85%E5%AE%B9%E6%A2%B3%E7%90%86.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_vIUw7Yc6tBl9iEEniaEL9798",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p003.m4a",
+      "title": "p003.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 2952103,
+      "createdAt": 1794972552661,
+      "updatedAt": 1794972552668,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p003.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p001.m4a",
+      "title": "p001.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 5400992,
+      "createdAt": 1794972888410,
+      "updatedAt": 1794972888413,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p001.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p002.m4a",
+      "title": "p002.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 17288937,
+      "createdAt": 1794972951570,
+      "updatedAt": 1794972951578,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p002.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "run_all.sh",
+      "title": "run_all.sh",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "shell",
+      "size": 701,
+      "createdAt": 1794973780088,
+      "updatedAt": 1794973780089,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/run_all.sh",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_AQ3nmwjGNoXBdGelzP9w9168",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83"
+        ]
+      }
+    },
+    {
+      "name": "merge.py",
+      "title": "merge.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 1976,
+      "createdAt": 1794973786796,
+      "updatedAt": 1794980271345,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/merge.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_ET_GsuDFAKjevQo0HEdSViq2791",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "codebuddy.ai/requestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "逐字讲稿合集.md",
+      "title": "逐字讲稿合集.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 1650332,
+      "createdAt": 1794974908329,
+      "updatedAt": 1794980299585,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/%E9%80%90%E5%AD%97%E8%AE%B2%E7%A8%BF%E5%90%88%E9%9B%86.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_vIUw7Yc6tBl9iEEniaEL9798",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1eca4e1f175fb97c027758d25ec83",
+        "touchedByRequestIds": [
+          "01a1eca4e1f175fb97c027758d25ec83",
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p088.m4a",
+      "title": "p088.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 3887800,
+      "createdAt": 1794978748119,
+      "updatedAt": 1794978748122,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p088.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p089.m4a",
+      "title": "p089.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 3334265,
+      "createdAt": 1794978795102,
+      "updatedAt": 1794978795106,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p089.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p090.m4a",
+      "title": "p090.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 3683496,
+      "createdAt": 1794978835949,
+      "updatedAt": 1794978835952,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p090.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p091.m4a",
+      "title": "p091.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8212224,
+      "createdAt": 1794978878914,
+      "updatedAt": 1794978878919,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p091.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p092.m4a",
+      "title": "p092.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 4514506,
+      "createdAt": 1794978968009,
+      "updatedAt": 1794978968012,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p092.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p093.m4a",
+      "title": "p093.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 5749631,
+      "createdAt": 1794979018113,
+      "updatedAt": 1794979018117,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p093.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p094.m4a",
+      "title": "p094.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8026448,
+      "createdAt": 1794979080185,
+      "updatedAt": 1794979080190,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p094.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p095.m4a",
+      "title": "p095.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8169167,
+      "createdAt": 1794979176400,
+      "updatedAt": 1794979176405,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p095.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p096.m4a",
+      "title": "p096.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8566383,
+      "createdAt": 1794979268688,
+      "updatedAt": 1794979268693,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p096.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p097.m4a",
+      "title": "p097.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 4090662,
+      "createdAt": 1794979358715,
+      "updatedAt": 1794979358719,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p097.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p098.m4a",
+      "title": "p098.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 7246336,
+      "createdAt": 1794979405006,
+      "updatedAt": 1794979405009,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p098.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p099.m4a",
+      "title": "p099.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 4668015,
+      "createdAt": 1794979483284,
+      "updatedAt": 1794979483286,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p099.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p100.m4a",
+      "title": "p100.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9308671,
+      "createdAt": 1794979536065,
+      "updatedAt": 1794979536068,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p100.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p101.m4a",
+      "title": "p101.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 7751468,
+      "createdAt": 1794979650557,
+      "updatedAt": 1794979650562,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p101.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p102.m4a",
+      "title": "p102.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9083033,
+      "createdAt": 1794979744124,
+      "updatedAt": 1794979744131,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p102.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p103.m4a",
+      "title": "p103.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9691758,
+      "createdAt": 1794979851214,
+      "updatedAt": 1794979851219,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p103.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p104.m4a",
+      "title": "p104.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 4496653,
+      "createdAt": 1794979976754,
+      "updatedAt": 1794979976761,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p104.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p105.m4a",
+      "title": "p105.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 2797474,
+      "createdAt": 1794980035050,
+      "updatedAt": 1794980035053,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p105.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "digest.py",
+      "title": "digest.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 2270,
+      "createdAt": 1794980236696,
+      "updatedAt": 1794980305782,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/digest.py",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_vOqUVlg932fu4mzqjkjN9561",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "common.py",
+      "title": "common.py",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "python",
+      "size": 1663,
+      "createdAt": 1794980258013,
+      "updatedAt": 1794980297328,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/common.py",
+      "_meta": {
+        "sourceTool": "Edit",
+        "codebuddy.ai/toolName": "Edit",
+        "toolCallId": "call_00_y6FTHzIRJCb4oFbRiEzg0734",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "逐集内容摘录.md",
+      "title": "逐集内容摘录.md",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 72574,
+      "createdAt": 1794980309843,
+      "updatedAt": 1794980309848,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/%E9%80%90%E9%9B%86%E5%86%85%E5%AE%B9%E6%91%98%E5%BD%95.md",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ],
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "call_00_ET_vIUw7Yc6tBl9iEEniaEL9798"
+      }
+    },
+    {
+      "name": "p004.m4a",
+      "title": "p004.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 7672384,
+      "createdAt": 1794973632629,
+      "updatedAt": 1794973632633,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p004.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p005.m4a",
+      "title": "p005.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 3243274,
+      "createdAt": 1794973672936,
+      "updatedAt": 1794973672940,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p005.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p006.m4a",
+      "title": "p006.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 5409053,
+      "createdAt": 1794973692127,
+      "updatedAt": 1794973692131,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p006.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p007.m4a",
+      "title": "p007.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9750038,
+      "createdAt": 1794973719442,
+      "updatedAt": 1794973719449,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p007.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p008.m4a",
+      "title": "p008.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 5581281,
+      "createdAt": 1794973724466,
+      "updatedAt": 1794973724469,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p008.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p009.m4a",
+      "title": "p009.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6767522,
+      "createdAt": 1794973730211,
+      "updatedAt": 1794973730216,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p009.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p010.m4a",
+      "title": "p010.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 15962635,
+      "createdAt": 1794973734436,
+      "updatedAt": 1794973734443,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p010.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p012.m4a",
+      "title": "p012.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6696646,
+      "createdAt": 1794973748041,
+      "updatedAt": 1794973748047,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p012.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p011.m4a",
+      "title": "p011.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9079759,
+      "createdAt": 1794973744240,
+      "updatedAt": 1794973744243,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p011.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p013.m4a",
+      "title": "p013.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8232011,
+      "createdAt": 1794973765718,
+      "updatedAt": 1794973765725,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p013.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p014.m4a",
+      "title": "p014.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 3929214,
+      "createdAt": 1794974227208,
+      "updatedAt": 1794974227210,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p014.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p015.m4a",
+      "title": "p015.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 5280086,
+      "createdAt": 1794974275306,
+      "updatedAt": 1794974275310,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p015.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p016.m4a",
+      "title": "p016.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 7837016,
+      "createdAt": 1794974336818,
+      "updatedAt": 1794974336822,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p016.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p017.m4a",
+      "title": "p017.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9102581,
+      "createdAt": 1794974383122,
+      "updatedAt": 1794974383127,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p017.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p018.m4a",
+      "title": "p018.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 3512616,
+      "createdAt": 1794974437888,
+      "updatedAt": 1794974437891,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p018.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p019.m4a",
+      "title": "p019.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6204564,
+      "createdAt": 1794974457756,
+      "updatedAt": 1794974457760,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p019.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p020.m4a",
+      "title": "p020.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 11250012,
+      "createdAt": 1794974496448,
+      "updatedAt": 1794974496453,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p020.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p021.m4a",
+      "title": "p021.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 14341462,
+      "createdAt": 1794974570372,
+      "updatedAt": 1794974570377,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p021.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p022.m4a",
+      "title": "p022.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6748605,
+      "createdAt": 1794974655553,
+      "updatedAt": 1794974655556,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p022.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p023.m4a",
+      "title": "p023.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 12762336,
+      "createdAt": 1794974696214,
+      "updatedAt": 1794974696219,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p023.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p024.m4a",
+      "title": "p024.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 13513337,
+      "createdAt": 1794974768088,
+      "updatedAt": 1794974768095,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p024.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p025.m4a",
+      "title": "p025.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8024485,
+      "createdAt": 1794974843007,
+      "updatedAt": 1794974843011,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p025.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p026.m4a",
+      "title": "p026.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 14113438,
+      "createdAt": 1794974887078,
+      "updatedAt": 1794974887083,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p026.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p027.m4a",
+      "title": "p027.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6447430,
+      "createdAt": 1794974971485,
+      "updatedAt": 1794974971489,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p027.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p028.m4a",
+      "title": "p028.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 16052356,
+      "createdAt": 1794975008692,
+      "updatedAt": 1794975008699,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p028.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p029.m4a",
+      "title": "p029.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 14174356,
+      "createdAt": 1794975106816,
+      "updatedAt": 1794975106821,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p029.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p030.m4a",
+      "title": "p030.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 11033702,
+      "createdAt": 1794975196707,
+      "updatedAt": 1794975196712,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p030.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p031.m4a",
+      "title": "p031.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 10628645,
+      "createdAt": 1794975270013,
+      "updatedAt": 1794975270019,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p031.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p032.m4a",
+      "title": "p032.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8022503,
+      "createdAt": 1794975329337,
+      "updatedAt": 1794975329340,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p032.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p033.m4a",
+      "title": "p033.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 12660063,
+      "createdAt": 1794975378897,
+      "updatedAt": 1794975378904,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p033.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p034.m4a",
+      "title": "p034.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6855995,
+      "createdAt": 1794975457237,
+      "updatedAt": 1794975457243,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p034.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p035.m4a",
+      "title": "p035.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 20572494,
+      "createdAt": 1794975504416,
+      "updatedAt": 1794975504435,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p035.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p036.m4a",
+      "title": "p036.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 10989318,
+      "createdAt": 1794975641070,
+      "updatedAt": 1794975641079,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p036.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p037.m4a",
+      "title": "p037.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 7315174,
+      "createdAt": 1794975711737,
+      "updatedAt": 1794975711742,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p037.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p038.m4a",
+      "title": "p038.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 12108586,
+      "createdAt": 1794975761088,
+      "updatedAt": 1794975761092,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p038.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p039.m4a",
+      "title": "p039.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 10575263,
+      "createdAt": 1794975832247,
+      "updatedAt": 1794975832251,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p039.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p040.m4a",
+      "title": "p040.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 11689925,
+      "createdAt": 1794975899569,
+      "updatedAt": 1794975899573,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p040.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p041.m4a",
+      "title": "p041.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 10577444,
+      "createdAt": 1794975973786,
+      "updatedAt": 1794975973791,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p041.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p042.m4a",
+      "title": "p042.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 10097193,
+      "createdAt": 1794976037129,
+      "updatedAt": 1794976037133,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p042.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p043.m4a",
+      "title": "p043.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8197190,
+      "createdAt": 1794976096472,
+      "updatedAt": 1794976096477,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p043.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p044.m4a",
+      "title": "p044.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 8457832,
+      "createdAt": 1794976142177,
+      "updatedAt": 1794976142181,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p044.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p045.m4a",
+      "title": "p045.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 9644158,
+      "createdAt": 1794976195001,
+      "updatedAt": 1794976195004,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p045.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p047.m4a",
+      "title": "p047.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 13229111,
+      "createdAt": 1794976351558,
+      "updatedAt": 1794976351563,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p047.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p046.m4a",
+      "title": "p046.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 16228427,
+      "createdAt": 1794976258282,
+      "updatedAt": 1794976258287,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p046.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p048.m4a",
+      "title": "p048.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 4644731,
+      "createdAt": 1794976438102,
+      "updatedAt": 1794976438104,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p048.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p049.m4a",
+      "title": "p049.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6236133,
+      "createdAt": 1794976466681,
+      "updatedAt": 1794976466684,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p049.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p050.m4a",
+      "title": "p050.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 16125416,
+      "createdAt": 1794976505511,
+      "updatedAt": 1794976505517,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p050.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p051.m4a",
+      "title": "p051.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 5555769,
+      "createdAt": 1794976607001,
+      "updatedAt": 1794976607005,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p051.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p052.m4a",
+      "title": "p052.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 13478904,
+      "createdAt": 1794976642857,
+      "updatedAt": 1794976642861,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p052.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    },
+    {
+      "name": "p053.m4a",
+      "title": "p053.m4a",
+      "mimeType": "audio/m4a",
+      "contentType": "audio",
+      "size": 6194778,
+      "createdAt": 1794976721118,
+      "updatedAt": 1794976721123,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/hardware-foundations-lab/bili/audio/p053.m4a",
+      "_meta": {
+        "sourceTool": "WorkspaceWatcher",
+        "ownerConversationId": "46a885ad-1d1a-425c-802e-0fe2c123f572",
+        "requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "codebuddy.ai/requestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "createdByRequestId": "01a1ed115fb373b3ab863267c5e9315e",
+        "touchedByRequestIds": [
+          "01a1ed115fb373b3ab863267c5e9315e"
+        ]
+      }
+    }
+  ]
+}

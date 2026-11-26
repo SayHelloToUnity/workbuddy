@@ -1,0 +1,41 @@
+import zipfile
+from xml.etree import ElementTree as ET
+from collections import Counter
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+p = r'C:/Users/56583/Desktop/静脉输液手术数据/静脉 输液2026.10.22.xlsx'
+z = zipfile.ZipFile(p)
+ss = [''.join(t.text or '' for t in si.iter(NS + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml'))]
+sh = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+cells = {}
+for row in sh.iter(NS + 'row'):
+    for c in row.findall(NS + 'c'):
+        ref = c.get('r')
+        col = ''.join(ch for ch in ref if ch.isalpha())
+        rn = int(''.join(ch for ch in ref if ch.isdigit()))
+        v = c.find(NS + 'v')
+        t = c.get('t')
+        val = None
+        if v is not None:
+            val = ss[int(v.text)] if t == 's' else v.text
+        cells[(rn, col)] = val
+
+print('E51-54:', [cells.get((r, 'E')) for r in (51, 52, 53, 54)])
+print('O列:', Counter(cells.get((r, 'O')) for r in range(2, 173)))
+print('W19/X19:', cells.get((19, 'W')), cells.get((19, 'X')))
+
+# A vs E full check
+bad = []
+for r in range(2, 173):
+    a = str(cells.get((r, 'A')) or '')
+    if not a:
+        continue
+    seg = a.split('-')
+    if len(seg) < 6:
+        bad.append((r, a, '段数异常'))
+        continue
+    if seg[3] != str(cells.get((r, 'E')) or ''):
+        bad.append((r, a, cells.get((r, 'E'))))
+print('A/E 不一致:', len(bad))
+for b in bad:
+    print('  ', b)

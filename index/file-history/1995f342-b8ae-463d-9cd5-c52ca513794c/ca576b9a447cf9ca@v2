@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+"""直读 xlsx 的 sheet1.xml，导出为 grid.json（不依赖 openpyxl）"""
+import zipfile, re, json, sys
+import xml.etree.ElementTree as ET
+
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+
+def load(path):
+    z = zipfile.ZipFile(path)
+    # sharedStrings
+    sst = []
+    if 'xl/sharedStrings.xml' in z.namelist():
+        root = ET.fromstring(z.read('xl/sharedStrings.xml'))
+        for si in root.findall(NS + 'si'):
+            sst.append(''.join(t.text or '' for t in si.iter(NS + 't')))
+    root = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+    cells = {}
+    maxr = maxc = 0
+    for row in root.iter(NS + 'row'):
+        r = int(row.get('r'))
+        for c in row.findall(NS + 'c'):
+            ref = c.get('r')
+            m = re.match(r'([A-Z]+)(\d+)', ref)
+            col = 0
+            for ch in m.group(1):
+                col = col * 26 + (ord(ch) - 64)
+            t = c.get('t')
+            v = c.find(NS + 'v')
+            if t == 's' and v is not None:
+                val = sst[int(v.text)]
+            elif t == 'inlineStr':
+                val = ''.join(x.text or '' for x in c.iter(NS + 't'))
+            elif v is not None:
+                val = v.text
+            else:
+                val = ''
+            cells[(r, col)] = val
+            maxr = max(maxr, r); maxc = max(maxc, col)
+    return cells, maxr, maxc
+
+def colname(n):
+    s = ''
+    while n:
+        n, rem = divmod(n - 1, 26)
+        s = chr(65 + rem) + s
+    return s
+
+if __name__ == '__main__':
+    path = sys.argv[1]
+    cells, maxr, maxc = load(path)
+    print('maxrow=%d maxcol=%d(%s)' % (maxr, maxc, colname(maxc)))
+    out = []
+    for r in range(1, maxr + 1):
+        out.append([cells.get((r, c), '') for c in range(1, maxc + 1)])
+    json.dump({'maxr': maxr, 'maxc': maxc, 'rows': out},
+              open(sys.argv[2], 'w', encoding='utf-8'), ensure_ascii=False)

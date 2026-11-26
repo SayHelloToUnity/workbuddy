@@ -1,0 +1,820 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+wbmigrate —— WorkBuddy 聊天记录 导出 / 迁移 / 还原（方案 A）
+
+只依赖 Python 标准库，Windows / macOS / Linux 通用。
+
+常用命令
+--------
+  python wbmigrate.py list                              # 列出本机所有项目与会话，以及它们对应的磁盘文件
+  python wbmigrate.py verify                            # 体检：检查每个会话该有的 jsonl 是否真的在
+  python wbmigrate.py export --all -o D:\\wb-sync            # 导出全部会话成一个包（git 友好，纯文本）
+  python wbmigrate.py export --project 手术数据 -o D:\\wb-sync
+  python wbmigrate.py import D:\\wb-sync\\pkg-xxx --dry-run  # 先在目标机预览要做什么（默认就是 dry-run）
+  python wbmigrate.py import D:\\wb-sync\\pkg-xxx --apply    # 真正写入目标机
+  python wbmigrate.py git D:\\wb-sync\\pkg-xxx --remote <仓库地址>
+
+  import 常用参数：
+    --map-cwd "C:/Users/老机器/Desktop/X=C:/Users/新机器/Desktop/X"   # 路径重映射，可重复
+    --reassign-user            # 目标机账号不同时，把 user_id 改成本机账号
+    --overwrite                # 目标机已存在同 id 会话时覆盖（默认忽略，不破坏本地数据）
+    --with-files               # 顺便把工作区文件一起打包（体积可能很大）
+
+设计原则
+--------
+1. 导出包默认只含文本（.jsonl / .json），可以进 git，能 diff、能看历史。
+2. 不直接搬 workbuddy.db —— SQLite 带 -wal/-shm，且含大量临时状态；改为导出「行级 JSON」，
+   在目标机按目标库的真实列结构插入，兼容版本差异。
+3. import 默认 dry-run，只有 --apply 才落盘；落盘前自动备份 workbuddy.db。
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shutil
+import sqlite3
+import subprocess
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+
+VERSION = 1
+TOOL = "wbmigrate"
+
+# 参与迁移的表：(表名, 主键列)
+TABLES = {
+    "spaces": "id",
+    "sessions": "id",
+    "workspaces": "path",
+    "session_usage": "session_id",
+}
+
+
+# --------------------------------------------------------------------------- #
+# 基础工具
+# --------------------------------------------------------------------------- #
+def die(msg: str, code: int = 2):
+    print(f"[错误] {msg}", file=sys.stderr)
+    raise SystemExit(code)
+
+
+def info(msg: str):
+    print(msg)
+
+
+def human(n: int) -> str:
+    for unit in ("B", "KB", "MB", "GB"):
+        if n < 1024 or unit == "GB":
+            return f"{n:.0f}{unit}" if unit == "B" else f"{n:.1f}{unit}"
+        n /= 1024.0
+    return f"{n:.1f}GB"
+
+
+def now_iso() -> str:
+    return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def find_home(explicit: str | None) -> Path:
+    if explicit:
+        return Path(explicit).expanduser().resolve()
+    env = os.environ.get("WORKBUDDY_HOME")
+    if env:
+        return Path(env).expanduser().resolve()
+    base = os.environ.get("USERPROFILE") if os.name == "nt" else None
+    return (Path(base) if base else Path.home()) / ".workbuddy"
+
+
+def encode_project_dir(cwd: str) -> str:
+    """把工作目录绝对路径编码成 ~/.workbuddy/projects/ 下的目录名。
+
+    C:\\Users\\a\\Desktop\\手术数据  ->  c-Users-a-Desktop-手术数据
+    （去掉冒号，反斜杠/斜杠统一替换为 -，盘符小写；实测与本机 10 个目录 100% 吻合）
+    """
+    s = cwd.replace("\\", "/").replace(":", "").replace("/", "-")
+    if s and s[0].isalpha():
+        s = s[0].lower() + s[1:]
+    return s
+
+
+def norm_path(p: str) -> str:
+    s = p.replace("\\", "/")
+    if os.name == "nt":
+        s = s.lower()
+    return s.rstrip("/")
+
+
+def connect_ro(db: Path) -> sqlite3.Connection:
+    if not db.exists():
+        die(f"找不到数据库：{db}")
+    con = sqlite3.connect(f"file:{db.as_posix()}?mode=ro", uri=True, timeout=10)
+    con.row_factory = sqlite3.Row
+    return con
+
+
+def connect_rw(db: Path) -> sqlite3.Connection:
+    con = sqlite3.connect(str(db), timeout=15)
+    con.row_factory = sqlite3.Row
+    return con
+
+
+def table_columns(con: sqlite3.Connection, table: str) -> list[str]:
+    return [r[1] for r in con.execute(f"PRAGMA table_info({table})")]
+
+
+def row_to_jsonable(value):
+    if isinstance(value, (bytes, bytearray, memoryview)):
+        import base64
+
+        return {"__blob_b64__": base64.b64encode(bytes(value)).decode("ascii")}
+    return value
+
+
+def jsonable_to_db(value):
+    if isinstance(value, dict) and "__blob_b64__" in value:
+        import base64
+
+        return sqlite3.Binary(base64.b64decode(value["__blob_b64__"]))
+    return value
+
+
+def fetch_rows(con: sqlite3.Connection, table: str, where: str = "", params=()) -> list[dict]:
+    sql = f"SELECT * FROM {table}" + (f" WHERE {where}" if where else "")
+    return [{k: row_to_jsonable(r[k]) for k in r.keys()} for r in con.execute(sql, params)]
+
+
+def insert_row(con: sqlite3.Connection, table: str, row: dict, overwrite: bool) -> str:
+    """按目标库真实列结构插入，忽略目标库没有的列。返回 inserted / replaced / skipped。"""
+    cols = set(table_columns(con, table))
+    keys = [k for k in row if k in cols]
+    if not keys:
+        return "skipped"
+    verb = "INSERT OR REPLACE" if overwrite else "INSERT OR IGNORE"
+    sql = f"{verb} INTO {table} ({','.join(keys)}) VALUES ({','.join('?' * len(keys))})"
+    cur = con.execute(sql, [jsonable_to_db(row[k]) for k in keys])
+    if cur.rowcount == 0:
+        return "skipped"
+    return "replaced" if overwrite else "inserted"
+
+
+def detect_user_id(home: Path) -> str | None:
+    db = home / "workbuddy.db"
+    if db.exists():
+        try:
+            con = connect_ro(db)
+            for table in ("sessions", "spaces"):
+                try:
+                    r = con.execute(f"SELECT user_id FROM {table} LIMIT 1").fetchone()
+                except sqlite3.Error:
+                    continue
+                if r and r[0]:
+                    con.close()
+                    return r[0]
+            con.close()
+        except sqlite3.Error:
+            pass
+    # 退化方案：从账号目录名 user-<uuid>-personal 里取
+    if home.exists():
+        for p in home.glob("user-*-personal"):
+            name = p.name[len("user-") : -len("-personal")]
+            if name:
+                return name
+    return None
+
+
+def detect_device_id(home: Path) -> str | None:
+    f = home / "device-id"
+    if f.exists():
+        try:
+            return f.read_text(encoding="utf-8").strip() or None
+        except OSError:
+            return None
+    return None
+
+
+# --------------------------------------------------------------------------- #
+# list / verify
+# --------------------------------------------------------------------------- #
+def list_sessions(home: Path) -> list[dict]:
+    con = connect_ro(home / "workbuddy.db")
+    rows = fetch_rows(con, "sessions")
+    con.close()
+    out = []
+    for r in rows:
+        cwd = r.get("cwd") or ""
+        enc = encode_project_dir(cwd) if cwd else ""
+        jsonl = home / "projects" / enc / f"{r['id']}.jsonl" if enc else None
+        size = jsonl.stat().st_size if jsonl and jsonl.exists() else 0
+        out.append(
+            {
+                "id": r["id"],
+                "cwd": cwd,
+                "encoded": enc,
+                "title": r.get("custom_title") or r.get("title") or "(无标题)",
+                "status": r.get("status"),
+                "updated_at": r.get("updated_at") or 0,
+                "space_id": r.get("space_id"),
+                "jsonl": str(jsonl) if jsonl else None,
+                "jsonl_exists": bool(jsonl and jsonl.exists()),
+                "size": size,
+                "sidecar": str(home / "projects" / enc / r["id"]) if enc else None,
+            }
+        )
+    out.sort(key=lambda x: (x["cwd"], -x["updated_at"]))
+    return out
+
+
+def cmd_list(home: Path, args) -> None:
+    sessions = list_sessions(home)
+    if not sessions:
+        info("没有找到任何会话。")
+        return
+    db = home / "workbuddy.db"
+    info(f"数据根目录 : {home}")
+    info(f"会话库     : {db}  ({human(db.stat().st_size) if db.exists() else '缺失'})")
+    info(f"会话总数   : {len(sessions)}\n")
+
+    cur_cwd = None
+    for s in sessions:
+        if s["cwd"] != cur_cwd:
+            cur_cwd = s["cwd"]
+            enc = s["encoded"] or "(空)"
+            info(f"\n▣ 项目：{cur_cwd or '(无 cwd)'}")
+            info(f"   projects 目录名：{enc}")
+        flag = "OK " if s["jsonl_exists"] else "缺失"
+        ts = datetime.fromtimestamp(s["updated_at"] / 1000).strftime("%Y-%m-%d %H:%M") if s["updated_at"] else "-"
+        info(f"   [{flag}] {s['id'][:8]}  {ts}  {human(s['size']):>8}  {s['title']}")
+        if s["jsonl"]:
+            info(f"           {s['jsonl']}")
+    missing = [s for s in sessions if not s["jsonl_exists"]]
+    info(f"\n合计 {len(sessions)} 个会话，其中 {len(missing)} 个缺少 jsonl 正文。")
+    if missing:
+        info("提示：缺少正文的会话通常是刚创建未产生内容，或数据已被清理。")
+
+
+def cmd_verify(home: Path, args) -> None:
+    sessions = list_sessions(home)
+    bad = []
+    for s in sessions:
+        if not s["jsonl_exists"]:
+            bad.append(s)
+            continue
+        # 抽查首行是否可解析
+        try:
+            with open(s["jsonl"], "r", encoding="utf-8") as f:
+                first = f.readline()
+            json.loads(first)
+        except Exception as e:  # noqa: BLE001
+            bad.append({**s, "reason": f"首行解析失败: {e}"})
+    if not bad:
+        info(f"体检通过：{len(sessions)} 个会话全部可读。")
+        return
+    info(f"发现 {len(bad)} 个异常会话：")
+    for s in bad:
+        info(f"  - {s['id'][:8]}  {s.get('title')}")
+        info(f"    cwd={s['cwd']}")
+        info(f"    期望文件={s['jsonl']}")
+        if s.get("reason"):
+            info(f"    原因={s['reason']}")
+
+
+# --------------------------------------------------------------------------- #
+# export
+# --------------------------------------------------------------------------- #
+def session_assets(home: Path, session: dict) -> list[tuple[Path, Path]]:
+    """返回 (源绝对路径, 包内相对路径) 列表。"""
+    enc = session["encoded"]
+    sid = session["id"]
+    pairs: list[tuple[Path, Path]] = []
+
+    src_base = home / "projects" / enc
+    main = src_base / f"{sid}.jsonl"
+    if main.exists():
+        pairs.append((main, Path("projects") / enc / f"{sid}.jsonl"))
+
+    side = src_base / sid
+    if side.is_dir():
+        for p in side.rglob("*"):
+            if p.is_file():
+                pairs.append((p, Path("projects") / enc / sid / p.relative_to(side)))
+
+    rollback = src_base / f"{sid}.file-rollback.ndjson"
+    if rollback.exists():
+        pairs.append((rollback, Path("projects") / enc / rollback.name))
+
+    for name, folder in (
+        ("artifact-index", "index/artifact-index"),
+        ("changes-index", "index/changes-index"),
+    ):
+        f = home / name / f"{sid}.json"
+        if f.exists():
+            pairs.append((f, Path(folder) / f.name))
+
+    fh = home / "file-history" / sid
+    if fh.is_dir():
+        for p in fh.rglob("*"):
+            if p.is_file():
+                pairs.append((p, Path("index/file-history") / sid / p.relative_to(fh)))
+
+    return pairs
+
+
+def cmd_export(home: Path, args) -> None:
+    sessions = list_sessions(home)
+    if not sessions:
+        die("没有可导出的会话。")
+
+    selected: list[dict] = []
+    if args.session:
+        wanted = {x.lower() for x in args.session}
+        selected = [s for s in sessions if s["id"].lower() in wanted or s["id"][:8].lower() in wanted]
+    elif args.project:
+        kw = [k.lower() for k in args.project]
+        selected = [
+            s
+            for s in sessions
+            if any(k in s["cwd"].lower() or k in s["encoded"].lower() or k in s["title"].lower() for k in kw)
+        ]
+    elif args.all:
+        selected = sessions
+    else:
+        die("请指定范围：--all / --project <关键字> / --session <id>")
+
+    selected = [s for s in selected if s["jsonl_exists"]]
+    if not selected:
+        die("筛选结果里没有带正文的会话。")
+
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    slug = args.name or ("all" if args.all else (args.project[0] if args.project else "session"))
+    slug = "".join(ch if ch.isalnum() or ch in "-_" else "-" for ch in slug)[:40] or "pkg"
+    out_root = Path(args.output).expanduser().resolve() if args.output else Path.cwd() / "wb-sync"
+    pkg = out_root / f"pkg-{slug}-{stamp}"
+    if pkg.exists():
+        die(f"目标已存在：{pkg}")
+    pkg.mkdir(parents=True)
+
+    # 1) 复制文件
+    manifest_sessions = []
+    total_bytes = 0
+    for s in selected:
+        copied = []
+        for src, rel in session_assets(home, s):
+            dst = pkg / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+            copied.append(rel.as_posix())
+            total_bytes += src.stat().st_size
+        manifest_sessions.append(
+            {
+                "id": s["id"],
+                "cwd": s["cwd"],
+                "encoded": s["encoded"],
+                "title": s["title"],
+                "status": s["status"],
+                "updated_at": s["updated_at"],
+                "space_id": s["space_id"],
+                "files": copied,
+            }
+        )
+
+    # 2) 导出数据库行（只导相关行）
+    con = connect_ro(home / "workbuddy.db")
+    ids = [s["id"] for s in selected]
+    marks = ",".join("?" * len(ids))
+    db_dir = pkg / "db"
+    db_dir.mkdir()
+
+    session_rows = fetch_rows(con, "sessions", f"id IN ({marks})", ids)
+    space_ids = sorted({r.get("space_id") for r in session_rows if r.get("space_id")})
+    space_rows = []
+    if space_ids:
+        m2 = ",".join("?" * len(space_ids))
+        space_rows = fetch_rows(con, "spaces", f"id IN ({m2})", space_ids)
+
+    cwds = sorted({r["cwd"] for r in session_rows if r.get("cwd")})
+    ws_rows = []
+    if cwds:
+        # 注意：workspaces.path 常以反斜杠存储，而 sessions.cwd 用正斜杠，必须归一化后比较
+        wanted = {norm_path(c) for c in cwds}
+        ws_rows = [r for r in fetch_rows(con, "workspaces") if norm_path(r.get("path") or "") in wanted]
+
+    usage_rows = fetch_rows(con, "session_usage", f"session_id IN ({marks})", ids)
+    con.close()
+
+    for name, rows in (
+        ("sessions", session_rows),
+        ("spaces", space_rows),
+        ("workspaces", ws_rows),
+        ("session_usage", usage_rows),
+    ):
+        (db_dir / f"{name}.json").write_text(
+            json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+
+    # 3) 可选：工作区文件
+    if args.with_files:
+        for cwd in cwds:
+            src = Path(cwd)
+            if not src.is_dir():
+                info(f"[跳过] 工作区不存在：{cwd}")
+                continue
+            dst = pkg / "workspace" / encode_project_dir(cwd)
+            info(f"复制工作区文件：{cwd} -> {dst}")
+            shutil.copytree(
+                src,
+                dst,
+                dirs_exist_ok=True,
+                ignore=shutil.ignore_patterns(".git", "node_modules", "__pycache__", ".venv", "venv"),
+            )
+
+    # 4) manifest
+    manifest = {
+        "tool": TOOL,
+        "version": VERSION,
+        "created_at": now_iso(),
+        "source": {
+            "home": str(home),
+            "user_id": detect_user_id(home),
+            "device_id": detect_device_id(home),
+            "host": os.environ.get("COMPUTERNAME") or os.environ.get("HOSTNAME") or "",
+            "platform": sys.platform,
+        },
+        "scope": {"all": bool(args.all), "project": args.project, "session": args.session},
+        "projects_meta": [{"cwd": p["path"], "last_opened_at": p["last_opened_at"]} for p in ws_rows],
+        "counts": {
+            "sessions": len(session_rows),
+            "spaces": len(space_rows),
+            "workspaces": len(ws_rows),
+            "files": sum(len(s["files"]) for s in manifest_sessions),
+        },
+        "sessions": manifest_sessions,
+    }
+    (pkg / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    write_restore_readme(pkg, manifest)
+
+    size = sum(f.stat().st_size for f in pkg.rglob("*") if f.is_file())
+    info("")
+    info(f"导出完成：{pkg}")
+    info(f"  会话 {len(session_rows)} 个 / 文件 {manifest['counts']['files']} 个 / 合计 {human(size)}")
+    if size > 40 * 1024 * 1024 and not args.with_files:
+        info("  注意：包体积偏大，推送到 git 前请确认远端限额（GitHub 单文件 100MB）。")
+    info("")
+    info("下一步（二选一）：")
+    info(f"  1) 直接拷走这个文件夹，在目标机运行：python wbmigrate.py import \"{pkg}\" --apply")
+    info(f"  2) 走 git：python wbmigrate.py git \"{pkg}\" --remote <你的私有仓库地址>")
+
+
+def write_restore_readme(pkg: Path, manifest: dict) -> None:
+    src = manifest["source"]
+    lines = [
+        "# WorkBuddy 会话迁移包",
+        "",
+        f"- 生成时间：{manifest['created_at']}",
+        f"- 来源机器：{src.get('host')} / {src.get('platform')}",
+        f"- 来源账号：`{src.get('user_id')}`",
+        f"- 会话数：{manifest['counts']['sessions']}，文件数：{manifest['counts']['files']}",
+        "",
+        "## 目标机还原",
+        "",
+        "1. **完全退出 WorkBuddy**（含托盘常驻进程），否则写入后侧边栏可能仍显示旧状态。",
+        "2. 在目标机执行预览（不会写盘）：",
+        "",
+        "   ```bash",
+        f'   python wbmigrate.py import "{pkg.name}" --dry-run',
+        "   ```",
+        "",
+        "3. 确认无误后落盘（脚本会自动备份 workbuddy.db）：",
+        "",
+        "   ```bash",
+        f'   python wbmigrate.py import "{pkg.name}" --apply',
+        "   ```",
+        "",
+        "4. 若两台机器**用户名不同**，必须做路径重映射，否则侧边栏看不到这些会话：",
+        "",
+        "   ```bash",
+        '   python wbmigrate.py import "pkg-xxx" --apply \\',
+        '     --map-cwd "C:/Users/老用户名/Desktop/X=C:/Users/新用户名/Desktop/X"',
+        "   ```",
+        "",
+        "5. 若两台机器**登录的是不同 WorkBuddy 账号**，加 `--reassign-user`，否则会话归属他人不可见。",
+        "6. 重启 WorkBuddy，侧边栏应出现对应文件夹分组与会话。",
+        "",
+        "## 包里都有什么",
+        "",
+        "| 路径 | 内容 |",
+        "|---|---|",
+        "| `projects/<路径编码>/<会话id>.jsonl` | 对话正文（消息、工具调用、结果） |",
+        "| `projects/<路径编码>/<会话id>/` | 该会话的 tool-results / 子智能体记录 |",
+        "| `db/sessions.json` | 侧边栏所需的会话元数据（标题、时间、所属文件夹） |",
+        "| `db/spaces.json` / `workspaces.json` | 项目分组与最近打开记录 |",
+        "| `db/session_usage.json` | 上下文用量统计 |",
+        "| `index/` | 产物索引、变更索引、文件历史 |",
+        "| `workspace/` | 仅当导出时加了 `--with-files` 才有 |",
+        "",
+        "`workbuddy.db` 本身**不在**包里——它是 SQLite 二进制且带 -wal/-shm，不适合 git 版本化。",
+        "还原时由脚本按目标机的真实表结构插入，因此对版本差异更宽容。",
+        "",
+    ]
+    (pkg / "RESTORE.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+# --------------------------------------------------------------------------- #
+# import
+# --------------------------------------------------------------------------- #
+def parse_map_cwd(pairs: list[str] | None) -> list[tuple[str, str]]:
+    out = []
+    for item in pairs or []:
+        if "=" not in item:
+            die(f"--map-cwd 格式应为 旧路径=新路径，收到：{item}")
+        old, new = item.split("=", 1)
+        out.append((norm_path(old.strip()), new.strip().replace("\\", "/")))
+    # 最长前缀优先，避免 /a 覆盖 /a/b
+    out.sort(key=lambda x: len(x[0]), reverse=True)
+    return out
+
+
+def remap_cwd(cwd: str, mapping: list[tuple[str, str]]) -> tuple[str, bool]:
+    n = norm_path(cwd)
+    for old, new in mapping:
+        if n == old:
+            return new, True
+        if n.startswith(old + "/"):
+            # 用原始字符串切片，保留原有大小写；norm_path 不会改变长度
+            return new.rstrip("/") + cwd[len(old) :].replace("\\", "/"), True
+    return cwd, False
+
+
+def backup_db(home: Path) -> Path | None:
+    db = home / "workbuddy.db"
+    if not db.exists():
+        return None
+    dst_dir = home / "backups" / f"wbmigrate-{time.strftime('%Y%m%d-%H%M%S')}"
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    for suffix in ("", "-wal", "-shm"):
+        f = Path(str(db) + suffix)
+        if f.exists():
+            shutil.copy2(f, dst_dir / f.name)
+    return dst_dir
+
+
+def cmd_import(home: Path, args) -> None:
+    pkg = Path(args.package).expanduser().resolve()
+    mpath = pkg / "manifest.json"
+    if not mpath.exists():
+        die(f"不是有效的迁移包（缺 manifest.json）：{pkg}")
+    manifest = json.loads(mpath.read_text(encoding="utf-8"))
+    mapping = parse_map_cwd(args.map_cwd)
+
+    target_user = detect_user_id(home)
+    src_user = manifest["source"].get("user_id")
+    reassign = bool(args.reassign_user) or (bool(args.auto_user) and src_user and target_user and src_user != target_user)
+
+    # 计算计划
+    plan = []
+    unmapped = []
+    for s in manifest["sessions"]:
+        new_cwd, mapped = remap_cwd(s["cwd"], mapping)
+        if mapping and not mapped:
+            unmapped.append(s["cwd"])
+        new_enc = encode_project_dir(new_cwd) if new_cwd else s["encoded"]
+        dst_dir = home / "projects" / new_enc
+        plan.append(
+            {
+                "id": s["id"],
+                "title": s["title"],
+                "old_cwd": s["cwd"],
+                "new_cwd": new_cwd,
+                "old_enc": s["encoded"],
+                "new_enc": new_enc,
+                "dst_dir": dst_dir,
+                "files": s["files"],
+                "exists": (dst_dir / f"{s['id']}.jsonl").exists(),
+            }
+        )
+
+    info(f"迁移包   : {pkg}")
+    info(f"来源账号 : {src_user}   本机账号: {target_user}" + ("   → 将改写 user_id" if reassign else ""))
+    info(f"目标数据根: {home}")
+    info(f"会话数量 : {len(plan)}")
+    if mapping:
+        info("路径重映射:")
+        for old, new in mapping:
+            info(f"  {old}  ->  {new}")
+    if unmapped:
+        info("")
+        info("[警告] 以下项目路径没有被任何 --map-cwd 命中，将按原路径写入，可能在侧边栏不可见：")
+        for u in sorted(set(unmapped)):
+            info(f"  - {u}")
+    info("")
+    changed = [p for p in plan if norm_path(p["old_cwd"]) != norm_path(p["new_cwd"])]
+    if changed:
+        info("路径变化明细:")
+        for p in changed:
+            info(f"  {p['old_cwd']}")
+            info(f"    -> {p['new_cwd']}")
+        info("")
+
+    dup = [p for p in plan if p["exists"]]
+    if dup:
+        info(f"提示：{len(dup)} 个会话在本机已存在，默认跳过（加 --overwrite 覆盖）。")
+
+    if not args.apply:
+        info("")
+        info("dry-run 结束，未写入任何内容。确认无误后加 --apply 执行。")
+        return
+
+    if not (home / "workbuddy.db").exists():
+        die(f"目标机缺少 workbuddy.db，请先启动过一次 WorkBuddy：{home}")
+
+    bk = backup_db(home)
+    info(f"已备份数据库 -> {bk}")
+
+    # 写入数据库
+    con = connect_rw(home / "workbuddy.db")
+    stats = {"spaces": 0, "sessions": 0, "workspaces": 0, "session_usage": 0}
+    try:
+        con.execute("BEGIN")
+        for table in ("spaces", "sessions", "workspaces", "session_usage"):
+            f = pkg / "db" / f"{table}.json"
+            if not f.exists():
+                continue
+            rows = json.loads(f.read_text(encoding="utf-8"))
+            for r in rows:
+                if table == "sessions":
+                    new_cwd, _ = remap_cwd(r.get("cwd") or "", mapping)
+                    r["cwd"] = new_cwd
+                    if reassign and target_user:
+                        r["user_id"] = target_user
+                elif table == "spaces":
+                    if reassign and target_user:
+                        r["user_id"] = target_user
+                elif table == "workspaces":
+                    new_cwd, _ = remap_cwd(r.get("path") or "", mapping)
+                    r["path"] = new_cwd
+                res = insert_row(con, table, r, overwrite=args.overwrite)
+                if res != "skipped":
+                    stats[table] += 1
+        con.commit()
+    except sqlite3.Error as e:
+        con.rollback()
+        die(f"写入数据库失败，已回滚：{e}")
+    finally:
+        con.close()
+
+    # 复制正文
+    copied = 0
+    for p in plan:
+        p["dst_dir"].mkdir(parents=True, exist_ok=True)
+        for rel in p["files"]:
+            rel_path = Path(rel)
+            # 包里路径含老编码目录，需要替换成新编码
+            parts = rel_path.parts
+            if len(parts) >= 3 and parts[0] == "projects":
+                rel_path = Path("projects") / p["new_enc"] / Path(*parts[2:])
+            src = pkg / rel
+            dst = home / rel_path
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+            copied += 1
+
+    info("")
+    info("导入完成：")
+    info(f"  sessions      {stats['sessions']}")
+    info(f"  spaces        {stats['spaces']}")
+    info(f"  workspaces    {stats['workspaces']}")
+    info(f"  session_usage {stats['session_usage']}")
+    info(f"  正文文件      {copied}")
+    info("")
+    info("请完全退出并重新启动 WorkBuddy，侧边栏才会刷新出这些会话。")
+
+
+# --------------------------------------------------------------------------- #
+# git
+# --------------------------------------------------------------------------- #
+GITATTRIBUTES = "*.jsonl text eol=lf\n*.json text eol=lf\n"
+GITIGNORE = "*.tmp\n.DS_Store\nThumbs.db\n"
+
+
+def run_git(args: list[str], cwd: Path) -> tuple[int, str]:
+    p = subprocess.run(["git", *args], cwd=str(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace")
+    out = (p.stdout or "") + (p.stderr or "")
+    return p.returncode, out.strip()
+
+
+def cmd_git(home: Path, args) -> None:
+    pkg = Path(args.package).expanduser().resolve()
+    if not (pkg / "manifest.json").exists():
+        die(f"不是有效的迁移包：{pkg}")
+    if shutil.which("git") is None:
+        die("未检测到 git，请先安装 Git for Windows。")
+
+    (pkg / ".gitattributes").write_text(GITATTRIBUTES, encoding="utf-8")
+    gi = pkg / ".gitignore"
+    if not gi.exists():
+        gi.write_text(GITIGNORE, encoding="utf-8")
+
+    if not (pkg / ".git").exists():
+        code, out = run_git(["init", "-b", "main"], pkg)
+        if code != 0:
+            code, out = run_git(["init"], pkg)
+        info(f"git init: {'ok' if code == 0 else out}")
+
+    run_git(["add", "-A"], pkg)
+    code, out = run_git(["commit", "-m", f"wb chat snapshot {time.strftime('%Y-%m-%d %H:%M')}"], pkg)
+    if code != 0 and ("user.email" in out or "tell me who you are" in out.lower()):
+        run_git(["-c", "user.name=wbmigrate", "-c", "user.email=wbmigrate@local", "commit", "-m", "wb chat snapshot"], pkg)
+        code, out = 0, "committed with fallback identity"
+    info(f"git commit: {'ok' if code == 0 else out}")
+
+    if args.remote:
+        code, out = run_git(["remote", "get-url", "origin"], pkg)
+        if code == 0:
+            run_git(["remote", "set-url", "origin", args.remote], pkg)
+        else:
+            run_git(["remote", "add", "origin", args.remote], pkg)
+        info(f"remote origin = {args.remote}")
+        code, out = run_git(["push", "-u", "origin", "HEAD"], pkg)
+        if code == 0:
+            info("已推送。目标机：git clone <地址> 后执行 import --apply")
+        else:
+            info("推送失败（通常是缺少凭据或仓库未创建）：")
+            info(out)
+            info("")
+            info("手工补一次即可：")
+            info(f'  cd "{pkg}" && git push -u origin HEAD')
+    else:
+        info("")
+        info("已建仓并提交。下一步加远端并推送：")
+        info(f'  cd "{pkg}"')
+        info("  git remote add origin <你的私有仓库地址>")
+        info("  git push -u origin HEAD")
+
+
+# --------------------------------------------------------------------------- #
+# main
+# --------------------------------------------------------------------------- #
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(
+        prog="wbmigrate",
+        description="WorkBuddy 聊天记录导出 / 迁移 / 还原工具",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    p.add_argument("--home", help="WorkBuddy 数据根目录（默认 %%USERPROFILE%%\\.workbuddy）")
+    sub = p.add_subparsers(dest="cmd", required=True)
+
+    sub.add_parser("list", help="列出所有项目与会话及其磁盘文件")
+    sub.add_parser("verify", help="体检：检查会话正文是否完整可读")
+
+    e = sub.add_parser("export", help="导出会话为迁移包")
+    e.add_argument("--all", action="store_true", help="导出全部会话")
+    e.add_argument("--project", nargs="+", help="按项目路径/标题关键字筛选")
+    e.add_argument("--session", nargs="+", help="按会话 id（或前 8 位）筛选")
+    e.add_argument("-o", "--output", help="输出到哪个目录（默认 ./wb-sync）")
+    e.add_argument("--name", help="包名后缀")
+    e.add_argument("--with-files", action="store_true", help="同时打包工作区文件")
+
+    i = sub.add_parser("import", help="在目标机还原迁移包")
+    i.add_argument("package", help="迁移包目录")
+    i.add_argument("--apply", action="store_true", help="真正写入（默认 dry-run）")
+    i.add_argument("--overwrite", action="store_true", help="覆盖已存在的同 id 会话")
+    i.add_argument("--reassign-user", action="store_true", help="把 user_id 改写为本机账号")
+    i.add_argument("--auto-user", action="store_true", help="账号不同时自动改写 user_id")
+    i.add_argument("--map-cwd", action="append", help="路径重映射 旧=新，可重复")
+
+    g = sub.add_parser("git", help="把迁移包初始化成 git 仓库并（可选）推送")
+    g.add_argument("package", help="迁移包目录")
+    g.add_argument("--remote", help="远端仓库地址，给出则直接 push")
+
+    return p
+
+
+def main(argv: list[str] | None = None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+            sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:  # noqa: BLE001
+            pass
+
+    args = build_parser().parse_args(argv)
+    home = find_home(args.home)
+    if not home.exists():
+        die(f"数据根目录不存在：{home}")
+
+    handlers = {
+        "list": cmd_list,
+        "verify": cmd_verify,
+        "export": cmd_export,
+        "import": cmd_import,
+        "git": cmd_git,
+    }
+    handlers[args.cmd](home, args)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
