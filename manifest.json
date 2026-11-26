@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-26T18:35:42+08:00",
+  "created_at": "2026-11-26T18:37:49+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -120,7 +120,7 @@
     "sessions": 22,
     "spaces": 6,
     "workspaces": 25,
-    "files": 386
+    "files": 394
   },
   "sessions": [
     {
@@ -586,7 +586,15 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v11",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v12",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v13",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v14",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v15",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v16",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v17",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v18",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v19",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v2",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v20",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v21",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v5",
