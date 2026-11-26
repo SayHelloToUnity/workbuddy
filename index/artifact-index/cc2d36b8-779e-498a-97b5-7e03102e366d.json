@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "lastUpdated": 1795614711825,
+  "artifacts": [
+    {
+      "name": "关于智睿政务问卷调查系统的部署及性能测试实训报告.doc",
+      "title": "关于智睿政务问卷调查系统的部署及性能测试实训报告.doc",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 2744669,
+      "createdAt": 1795613239938,
+      "updatedAt": 1795613239938,
+      "type": "media",
+      "uri": "file:///C:/Users/Administrator/Desktop/%E5%AE%9E%E8%AE%AD%E6%8A%A5%E5%91%8A/%E5%85%B3%E4%BA%8E%E6%99%BA%E7%9D%BF%E6%94%BF%E5%8A%A1%E9%97%AE%E5%8D%B7%E8%B0%83%E6%9F%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%83%A8%E7%BD%B2%E5%8F%8A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%AE%AD%E6%8A%A5%E5%91%8A.doc",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "present_files_4_29d639f8",
+        "ownerConversationId": "cc2d36b8-779e-498a-97b5-7e03102e366d",
+        "requestId": "01a212e7f0807c90b8e91647fdf326df",
+        "codebuddy.ai/requestId": "01a212e7f0807c90b8e91647fdf326df",
+        "createdByRequestId": "01a212e7f0807c90b8e91647fdf326df",
+        "touchedByRequestIds": [
+          "01a212e7f0807c90b8e91647fdf326df"
+        ]
+      }
+    },
+    {
+      "name": "关于智睿政务问卷调查系统的部署及性能测试实训报告_修订稿.docx",
+      "title": "关于智睿政务问卷调查系统的部署及性能测试实训报告_修订稿.docx",
+      "mimeType": "application/octet-stream",
+      "contentType": "document",
+      "size": 2659249,
+      "createdAt": 1795613817569,
+      "updatedAt": 1795614633311,
+      "type": "media",
+      "uri": "file:///C:/Users/Administrator/Desktop/%E5%AE%9E%E8%AE%AD%E6%8A%A5%E5%91%8A/%E5%85%B3%E4%BA%8E%E6%99%BA%E7%9D%BF%E6%94%BF%E5%8A%A1%E9%97%AE%E5%8D%B7%E8%B0%83%E6%9F%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%83%A8%E7%BD%B2%E5%8F%8A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%AE%AD%E6%8A%A5%E5%91%8A_%E4%BF%AE%E8%AE%A2%E7%A8%BF.docx",
+      "_meta": {
+        "sourceTool": "PresentFiles",
+        "ownerConversationId": "cc2d36b8-779e-498a-97b5-7e03102e366d",
+        "requestId": "01a212e7f0807c90b8e91647fdf326df",
+        "codebuddy.ai/requestId": "01a212e7f0807c90b8e91647fdf326df",
+        "createdByRequestId": "01a212e7f0807c90b8e91647fdf326df",
+        "touchedByRequestIds": [
+          "01a212e7f0807c90b8e91647fdf326df"
+        ],
+        "codebuddy.ai/toolName": "present_files",
+        "toolCallId": "present_files_1_0f00c0a8"
+      }
+    }
+  ]
+}
