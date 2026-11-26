@@ -1,0 +1,27 @@
+# 2026-11-26
+
+## wb-chat 同步：静默卡死修复
+- 现象：另一台机（WIN-SCPP8K26CRQ，用户 Administrator）`sync.cmd` 停在 `git commit: ok` 后长期无输出，误以为卡死。
+- 根因：`wbmigrate.py` 的 `run_git()` 用 `capture_output=True`，git/ssh 的交互提示（host key、密钥口令、22 端口阻塞等待）被吞掉，进程无限等待。
+- 修复（提交 `05be458`）：`run_git()` 强制 `GIT_TERMINAL_PROMPT=0` / `GIT_ASKPASS=echo` / `SSH_ASKPASS=echo` / `GIT_SSH_COMMAND="ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=20"`，并加 300s 超时（可用 `WB_GIT_TIMEOUT` 调整）；push 失败信息补 443 端口与 ssh-add 处置建议。
+- 结论：push 最终成功（22 点→11:28 提交），慢是网络，不是 bug。
+
+## 数据核验
+- 远端 `630de1d`（11:28，对方机）快照 21 会话 / 5 项目 / 234 文件。
+- 与本机 11:25 快照（18 会话）比对：本机会话 0 丢失，对方新增 3 个（实训报告 ×2、LM317 规格书翻译）。证明 `stash_remote_only` 保护生效。
+
+## 定时上传（新增）
+- Windows 计划任务 `WorkBuddy-ChatSync`：工作日（周一至周五）12:30 与 18:30 各一次。
+- 动作：`python.exe "…\_wb-sync\snapshot\wbmigrate.py" sync --repo "…\_wb-sync\snapshot"`，工作目录同上。
+- 设置：`-MultipleInstances IgnoreNew`、`-StartWhenAvailable`、时限 20 分钟、`LogonType Interactive`（需用户已登录）。
+- 日志：仓库内 `last-run.log`（被 gitignore）。
+- 实测：手动触发 result=0，13:19 推送成功。
+- 注意：未走 `sync.cmd`，因为脚本末尾有 `pause`，无人值守会挂起。
+
+## 改为无窗口静默运行
+- 18:30 任务弹出黑窗口，用户表示突兀 → 改用 `pythonw.exe`（GUI 子系统，无控制台）。
+- 配套改动（提交 `58a6c9e`）：
+  - 脚本启动时若 `sys.stdout is None` → 指向 `os.devnull`；若 `sys.stderr is None` → 追加到仓库内 `last-error.log`（此前 pythonw 下 print 会抛 AttributeError）。
+  - `KEEP_IN_PKG` 增补 `last-run.log` / `last-error.log`：静默模式 stderr 句柄长期占用该文件，被 `clear_package_dir` 删除时抛 `PermissionError [WinError 32]`，导致整次同步失败（已实测复现并修复）。
+- 验证：`Start-ScheduledTask` 两次，结果为 1（复现 WinError 32）→ 修复后为 0，推送 `58a6c9e` 成功。
+- 静默后的排障入口：仓库内 `last-run.log`（全流程）/ `last-error.log`（异常栈）。
