@@ -1,5 +1,22 @@
 [
   {
+    "id": "0707c580-6b84-480e-b510-080f5a887975",
+    "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
+    "device_id": "8993dff9-1964-4941-a9f3-ccb151f67609",
+    "name": "Database",
+    "primary_folder_path": "C:\\Users\\56583\\Desktop\\Database",
+    "create_folder_path": "C:\\Users\\56583\\WorkBuddy\\spaces\\2026_11_26_13-18-19",
+    "pinned": 0,
+    "sort_order": 0,
+    "status": "active",
+    "transport": "local",
+    "conversation_origin": null,
+    "deleted_at": -1,
+    "created_at": 1795670299156,
+    "updated_at": 1795670299196,
+    "source_kind": "user"
+  },
+  {
     "id": "408fc64a-ba28-4ef1-99f1-adb6cbec53db",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
     "device_id": "8993dff9-1964-4941-a9f3-ccb151f67609",

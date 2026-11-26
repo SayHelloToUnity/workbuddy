@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-26T13:19:13+08:00",
+  "created_at": "2026-11-26T13:19:49+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -110,15 +110,33 @@
     {
       "cwd": "C:/Users/56583/WorkBuddy/2026-11-17-16-14-03",
       "last_opened_at": 1794903243349
+    },
+    {
+      "cwd": "C:\\Users\\56583\\Desktop\\Database",
+      "last_opened_at": 1795670299199
     }
   ],
   "counts": {
-    "sessions": 21,
-    "spaces": 5,
-    "workspaces": 24,
-    "files": 368
+    "sessions": 22,
+    "spaces": 6,
+    "workspaces": 25,
+    "files": 371
   },
   "sessions": [
+    {
+      "id": "ffb87528-3aef-4a24-a85f-2ede3b3aec62",
+      "cwd": "C:/Users/56583/Desktop/Database",
+      "encoded": "c-Users-56583-Desktop-Database",
+      "title": "下载SQLite学习",
+      "status": "working",
+      "updated_at": 1795670320838,
+      "space_id": "0707c580-6b84-480e-b510-080f5a887975",
+      "files": [
+        "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62.jsonl",
+        "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62/tool-results/call_00_FdYz2fyEVzrjPQYQyWXc2055-render.txt",
+        "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62/tool-results/call_00_x3D0P7vx88DS4G0wJvyR4660.txt"
+      ]
+    },
     {
       "id": "5f439e9e-23cd-48d8-9610-680eaeea14c4",
       "cwd": "C:/Users/56583/Desktop/hardware-foundations-lab",
