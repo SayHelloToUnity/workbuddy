@@ -1,2 +1,0 @@
-已对齐远端（reset --hard origin/main）
-[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":50,"threshold":50,"scope":"turn","targets":["\\\\?\\C:\\Users\\56583\\WorkBuddy\\_wb-sync\\snapshot\\index\\file-history\\46a885ad-1d1a-425c-802e-0fe2c123f572\\5c8ffd9b04d4e183@v2"],"targetCount":1}

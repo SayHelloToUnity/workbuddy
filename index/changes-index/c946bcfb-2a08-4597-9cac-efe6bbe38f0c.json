@@ -532,23 +532,23 @@
       "id": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c,01a20d048cd27407a651052e11f976c4",
       "conversationId": "c946bcfb-2a08-4597-9cac-efe6bbe38f0c",
       "requestId": "01a20d048cd27407a651052e11f976c4",
-      "summary": "1 个文件变更，+22 −0",
+      "summary": "1 个文件变更，+44 −0",
       "files": [
         {
           "filePath": "C:\\Users\\56583\\WorkBuddy\\2026-11-17-09-55-25\\.workbuddy\\memory\\2026-11-24.md",
           "action": "modify",
-          "additions": 22,
+          "additions": 44,
           "deletions": 0,
           "detailStatus": "content-omitted-size"
         }
       ],
       "fileCount": 1,
-      "additions": 22,
+      "additions": 44,
       "deletions": 0,
       "createdAt": 1795514734793,
-      "revision": "b86cef0a-4331-4f3f-968d-57aac52afa5f",
-      "detailRef": "cd_e6b2a95d-5cf8-46dd-9833-5ec0c2aa1cf3.b86cef0a-4331-4f3f-968d-57aac52afa5f.json",
-      "checkpointId": "01a20d04-98c9-70a4-aa48-45af277e644a"
+      "revision": "a990a288-3db2-4e39-a344-1b6dc30a428a",
+      "detailRef": "cd_d1434450-1a7e-4113-9128-051d2f0d1c50.a990a288-3db2-4e39-a344-1b6dc30a428a.json",
+      "checkpointId": "01a20d08-2240-7c18-b3ca-053c47b356da"
     }
   ]
 }
