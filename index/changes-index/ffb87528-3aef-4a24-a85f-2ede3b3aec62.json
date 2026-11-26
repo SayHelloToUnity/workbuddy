@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "changes": [
+    {
+      "id": "ffb87528-3aef-4a24-a85f-2ede3b3aec62,01a2164a52af7966b94c97a07861e8cc",
+      "conversationId": "ffb87528-3aef-4a24-a85f-2ede3b3aec62",
+      "requestId": "01a2164a52af7966b94c97a07861e8cc",
+      "summary": "1 个文件变更，+43 −0",
+      "files": [
+        {
+          "filePath": "C:\\Users\\56583\\Desktop\\Database\\sqlite\\demo.sql",
+          "action": "create",
+          "additions": 43,
+          "deletions": 0,
+          "detailStatus": "content-omitted-size"
+        }
+      ],
+      "fileCount": 1,
+      "additions": 43,
+      "deletions": 0,
+      "createdAt": 1795670488636,
+      "revision": "e71943ba-c8fc-44b3-a395-1f8439bb8e0a",
+      "detailRef": "cd_69111782-ab27-49f6-8312-bc70f2ffb9a0.e71943ba-c8fc-44b3-a395-1f8439bb8e0a.json",
+      "checkpointId": "01a2164d-363c-7489-8cca-954ef651b4c3"
+    }
+  ]
+}

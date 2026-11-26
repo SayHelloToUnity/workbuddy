@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "lastUpdated": 1795670488642,
+  "artifacts": [
+    {
+      "name": "demo.sql",
+      "title": "demo.sql",
+      "mimeType": "text/plain",
+      "contentType": "code",
+      "language": "sql",
+      "size": 1148,
+      "createdAt": 1795670488551,
+      "updatedAt": 1795670488551,
+      "type": "media",
+      "uri": "file:///C:/Users/56583/Desktop/Database/sqlite/demo.sql",
+      "_meta": {
+        "sourceTool": "Write",
+        "codebuddy.ai/toolName": "Write",
+        "toolCallId": "call_00_Jq97Uf18Rh1eGvwBrLDi9036",
+        "ownerConversationId": "ffb87528-3aef-4a24-a85f-2ede3b3aec62",
+        "requestId": "01a2164a52af7966b94c97a07861e8cc",
+        "codebuddy.ai/requestId": "01a2164a52af7966b94c97a07861e8cc",
+        "createdByRequestId": "01a2164a52af7966b94c97a07861e8cc",
+        "touchedByRequestIds": [
+          "01a2164a52af7966b94c97a07861e8cc"
+        ]
+      }
+    }
+  ]
+}

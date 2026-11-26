@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-26T13:19:49+08:00",
+  "created_at": "2026-11-26T18:30:12+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -120,7 +120,7 @@
     "sessions": 22,
     "spaces": 6,
     "workspaces": 25,
-    "files": 371
+    "files": 374
   },
   "sessions": [
     {
@@ -128,13 +128,16 @@
       "cwd": "C:/Users/56583/Desktop/Database",
       "encoded": "c-Users-56583-Desktop-Database",
       "title": "下载SQLite学习",
-      "status": "working",
-      "updated_at": 1795670320838,
+      "status": "completed",
+      "updated_at": 1795670504027,
       "space_id": "0707c580-6b84-480e-b510-080f5a887975",
       "files": [
         "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62.jsonl",
         "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62/tool-results/call_00_FdYz2fyEVzrjPQYQyWXc2055-render.txt",
-        "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62/tool-results/call_00_x3D0P7vx88DS4G0wJvyR4660.txt"
+        "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62/tool-results/call_00_x3D0P7vx88DS4G0wJvyR4660-render.txt",
+        "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62.file-rollback.ndjson",
+        "index/artifact-index/ffb87528-3aef-4a24-a85f-2ede3b3aec62.json",
+        "index/changes-index/ffb87528-3aef-4a24-a85f-2ede3b3aec62.json"
       ]
     },
     {
@@ -553,8 +556,8 @@
       "cwd": "C:/Users/56583/WorkBuddy/2026-11-17-09-55-25",
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
-      "status": "working",
-      "updated_at": 1795670187934,
+      "status": "completed",
+      "updated_at": 1795670424327,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
