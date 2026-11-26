@@ -41,8 +41,24 @@ import subprocess
 import sys
 import tempfile
 import time
+import traceback
 from datetime import datetime
 from pathlib import Path
+
+# pythonw.exe（计划任务静默模式）下 sys.stdout / sys.stderr 为 None，print 会抛
+# AttributeError。stdout 指向空设备，stderr 落到 last-error.log 便于事后排障。
+if sys.stdout is None:
+    sys.stdout = open(os.devnull, "w", encoding="utf-8")
+if sys.stderr is None:
+    try:
+        sys.stderr = open(
+            Path(__file__).resolve().parent / "last-error.log",
+            "a",
+            encoding="utf-8",
+            errors="replace",
+        )
+    except Exception:  # noqa: BLE001
+        sys.stderr = open(os.devnull, "w", encoding="utf-8")
 
 VERSION = 1
 TOOL = "wbmigrate"
@@ -498,7 +514,18 @@ def session_assets(home: Path, session: dict) -> list[tuple[Path, Path]]:
     return pairs
 
 
-KEEP_IN_PKG = {".git", ".gitignore", ".gitattributes", "wbmigrate.py", "sync.cmd", "pull.cmd"}
+KEEP_IN_PKG = {
+    ".git",
+    ".gitignore",
+    ".gitattributes",
+    "wbmigrate.py",
+    "sync.cmd",
+    "pull.cmd",
+    # 日志：静默模式下 stderr 句柄长期占用 last-error.log，被清空快照删除会抛
+    # PermissionError [WinError 32] 并中断整个同步。
+    "last-run.log",
+    "last-error.log",
+}
 
 
 def hard_rm_tree(path) -> None:
@@ -1670,6 +1697,53 @@ def restore_remote_only(pkg: Path, tmp, tables: dict, extra_ids: set) -> int:
     return added
 
 
+TOOL_FILES = ("wbmigrate.py", "sync.cmd", "pull.cmd", ".gitignore", ".gitattributes")
+
+
+def stash_tool_edits(gitroot: Path) -> Path | None:
+    """reset --hard 会静默丢弃未提交的工具脚本改动。先把有改动的工具文件另存到
+    临时目录，reset 之后再写回，避免「改了代码→跑一次 sync→修复消失」。"""
+    try:
+        code, out = run_git(["status", "--porcelain", "--", *TOOL_FILES], gitroot)
+    except Exception:  # noqa: BLE001
+        return None
+    if code != 0 or not out.strip():
+        return None
+    tmp = Path(tempfile.mkdtemp(prefix="wbtool-"))
+    saved = 0
+    for name in TOOL_FILES:
+        src = gitroot / name
+        if src.is_file():
+            try:
+                shutil.copy2(src, tmp / name)
+                saved += 1
+            except OSError:
+                pass
+    if not saved:
+        shutil.rmtree(tmp, ignore_errors=True)
+        return None
+    return tmp
+
+
+def restore_tool_edits(gitroot: Path, tmp: Path | None) -> int:
+    """把 reset 前另存的工具脚本写回，返回写回文件数。"""
+    if tmp is None:
+        return 0
+    n = 0
+    try:
+        for f in tmp.iterdir():
+            if not f.is_file():
+                continue
+            try:
+                shutil.copy2(f, gitroot / f.name)
+                n += 1
+            except OSError:
+                pass
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    return n
+
+
 def cmd_sync(home: Path, args) -> None:
     """本机 → 远端。每次先对齐 origin/main，再整体重建快照并推送。"""
     repo = Path(args.repo).expanduser().resolve()
@@ -1688,8 +1762,11 @@ def cmd_sync(home: Path, args) -> None:
     for attempt in range(1, 4):
         # 远端为准：先丢弃仓库里的本地快照，避免与远端分叉
         if has_origin_main(gitroot):
+            keep = stash_tool_edits(gitroot)
             run_git(["fetch", "origin"], gitroot)
             run_git(["reset", "--hard", "origin/main"], gitroot)
+            if restore_tool_edits(gitroot, keep):
+                info("已保留未提交的工具脚本改动（reset 前另存，随后随本次提交推送）")
             info("已对齐远端（reset --hard origin/main）")
 
         pkg = resolve_pkg(repo, args.dir_name)
@@ -1770,9 +1847,12 @@ def cmd_pull(home: Path, args) -> None:
         if code != 0:
             die(f"git fetch 失败：\n{out}")
         if has_origin_main(gitroot):
+            keep = stash_tool_edits(gitroot)
             code, out = run_git(["reset", "--hard", "origin/main"], gitroot)
             if code != 0:
                 die(f"git reset 失败：\n{out}")
+            if restore_tool_edits(gitroot, keep):
+                info("已保留未提交的工具脚本改动（reset 前另存后写回）")
             info("已对齐远端（reset --hard origin/main）")
 
     if not (pkg / "manifest.json").exists():
@@ -1819,6 +1899,11 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p.add_argument("--home", help="WorkBuddy 数据根目录（默认 %%USERPROFILE%%\\.workbuddy）")
+    p.add_argument(
+        "--notify-error",
+        action="store_true",
+        help="失败时弹出可见窗口（供计划任务静默调用；须写在子命令之前）",
+    )
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("list", help="列出所有项目与会话及其磁盘文件")
@@ -1864,6 +1949,49 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def notify_failure(reason: str) -> None:
+    """静默运行（计划任务）失败时弹出一个可见窗口；成功时不打扰。"""
+    if os.name != "nt":
+        return
+    pkg = Path(__file__).resolve().parent
+
+    def _tail(name: str, n: int) -> str:
+        try:
+            lines = (pkg / name).read_text(encoding="utf-8", errors="replace").splitlines()
+        except OSError:
+            return f"(无法读取 {name})"
+        return "\n".join(lines[-n:]) or "(空)"
+
+    body = [
+        "WorkBuddy 聊天记录自动上传失败",
+        "",
+        f"时间：{now_iso()}",
+        f"仓库：{pkg}",
+        "",
+        "失败原因：",
+        (reason.strip() or "(未提供)"),
+        "",
+        "── last-run.log 末尾 25 行 ──",
+        _tail("last-run.log", 25),
+        "",
+        "── last-error.log 末尾 40 行 ──",
+        _tail("last-error.log", 40),
+        "",
+        "把本窗口截图发给 AI 助手即可定位问题；成功运行时不会弹出任何窗口。",
+    ]
+    out = pkg / "sync-failure.txt"
+    try:
+        # 记事本对纯 LF 处理不可靠，统一写 CRLF；newline="" 防止二次转换
+        with out.open("w", encoding="utf-8-sig", newline="") as fh:
+            fh.write("\n".join(body).replace("\n", "\r\n"))
+    except OSError:
+        return
+    try:
+        subprocess.Popen(["notepad.exe", str(out)], close_fds=True)
+    except OSError:
+        pass
+
+
 def main(argv: list[str] | None = None) -> int:
     for _stream in (sys.stdout, sys.stderr):
         if hasattr(_stream, "reconfigure"):
@@ -1874,22 +2002,35 @@ def main(argv: list[str] | None = None) -> int:
 
     init_log()
     args = build_parser().parse_args(argv)
-    home = find_home(args.home)
-    if not home.exists():
-        die(f"数据根目录不存在：{home}")
+    notify = bool(getattr(args, "notify_error", False))
+    try:
+        home = find_home(args.home)
+        if not home.exists():
+            die(f"数据根目录不存在：{home}")
 
-    handlers = {
-        "list": cmd_list,
-        "verify": cmd_verify,
-        "doctor": cmd_doctor,
-        "export": cmd_export,
-        "import": cmd_import,
-        "git": cmd_git,
-        "sync": cmd_sync,
-        "pull": cmd_pull,
-    }
-    handlers[args.cmd](home, args)
-    return 0
+        handlers = {
+            "list": cmd_list,
+            "verify": cmd_verify,
+            "doctor": cmd_doctor,
+            "export": cmd_export,
+            "import": cmd_import,
+            "git": cmd_git,
+            "sync": cmd_sync,
+            "pull": cmd_pull,
+        }
+        handlers[args.cmd](home, args)
+        return 0
+    except SystemExit as e:
+        code = e.code if isinstance(e.code, int) else 2
+        if code and notify:
+            notify_failure(f"命令 {args.cmd} 提前退出，退出码 {code}")
+        raise
+    except Exception as e:  # noqa: BLE001
+        tb = traceback.format_exc()
+        _tee(tb)
+        if notify:
+            notify_failure(f"{type(e).__name__}: {e}\n\n{tb}")
+        raise
 
 
 if __name__ == "__main__":
