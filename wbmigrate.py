@@ -1424,8 +1424,36 @@ def commit_all(gitroot: Path, msg: str) -> tuple[bool, str]:
     return False, out
 
 
-def run_git(args: list[str], cwd: Path) -> tuple[int, str]:
-    p = subprocess.run(["git", *args], cwd=str(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace")
+GIT_SSH_DEFAULT = "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=20"
+GIT_TIMEOUT = int(os.environ.get("WB_GIT_TIMEOUT", "300"))
+
+
+def run_git(args: list[str], cwd: Path, timeout: int | None = None) -> tuple[int, str]:
+    """执行 git：强制非交互 + 超时保护。
+
+    这里 stdout/stderr 是被捕获的，任何交互提示（host key 确认、密钥口令、
+    https 账号密码）都会被吞掉，进程则无限期静默等待 —— 界面停在上一行输出，
+    看起来像「卡住」。因此显式关掉交互通道，让失败变成可读的错误。
+    """
+    env = dict(os.environ)
+    env.setdefault("GIT_TERMINAL_PROMPT", "0")
+    env.setdefault("GIT_ASKPASS", "echo")
+    env.setdefault("SSH_ASKPASS", "echo")
+    env.setdefault("GIT_SSH_COMMAND", GIT_SSH_DEFAULT)
+    t = GIT_TIMEOUT if timeout is None else timeout
+    try:
+        p = subprocess.run(
+            ["git", *args],
+            cwd=str(cwd),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            env=env,
+            timeout=t,
+        )
+    except subprocess.TimeoutExpired:
+        return 124, f"git {args[0]} 超过 {t} 秒无响应（网络不通或 SSH 认证被阻塞）"
     out = (p.stdout or "") + (p.stderr or "")
     return p.returncode, out.strip()
 
@@ -1714,9 +1742,20 @@ def cmd_sync(home: Path, args) -> None:
         "推送失败：\n"
         f"{last_out}\n\n"
         "排查顺序：\n"
-        "  1) ssh -T git@github.com   确认 SSH 通道\n"
-        "  2) git remote -v           确认地址正确\n"
-        "  3) 网络 / 代理"
+        "  1) ssh -T git@github.com       确认 SSH 通道（应回 Hi <用户名>!）\n"
+        "  2) git -C \"<本目录>\" push -u origin HEAD   手工推送，看真实报错\n"
+        "  3) git remote -v               确认地址正确\n"
+        "\n"
+        "若 1) 卡住或提示 port 22 timed out（国内网络常见，22 端口被封）：\n"
+        "  在 %USERPROFILE%\\.ssh\\config 追加：\n"
+        "    Host github.com\n"
+        "        HostName ssh.github.com\n"
+        "        Port 443\n"
+        "        User git\n"
+        "  然后重跑本脚本。\n"
+        "\n"
+        "若提示 Permission denied (publickey)：密钥未被 ssh 代理接管，\n"
+        "  执行 ssh-add \"%USERPROFILE%\\.ssh\\你的私钥\"，或改用无口令密钥。"
     )
 
 
