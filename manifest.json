@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-26T18:30:12+08:00",
+  "created_at": "2026-11-26T18:32:20+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -120,7 +120,7 @@
     "sessions": 22,
     "spaces": 6,
     "workspaces": 25,
-    "files": 374
+    "files": 377
   },
   "sessions": [
     {
@@ -556,8 +556,8 @@
       "cwd": "C:/Users/56583/WorkBuddy/2026-11-17-09-55-25",
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
-      "status": "completed",
-      "updated_at": 1795670424327,
+      "status": "working",
+      "updated_at": 1795689057553,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
@@ -584,6 +584,8 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v1",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v3",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v4",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v5",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v10",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v11",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/531a370595007a2e@v12",
@@ -616,6 +618,7 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v4",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/7b8192734201191f@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v4",
