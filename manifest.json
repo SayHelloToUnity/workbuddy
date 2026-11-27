@@ -1,7 +1,7 @@
 {
   "tool": "wbmigrate",
   "version": 1,
-  "created_at": "2026-11-26T18:38:56+08:00",
+  "created_at": "2026-11-27T12:30:10+08:00",
   "source": {
     "home": "C:\\Users\\56583\\.workbuddy",
     "user_id": "540ddffa-6bca-4ab9-b1be-802e2dda443b",
@@ -120,7 +120,7 @@
     "sessions": 22,
     "spaces": 6,
     "workspaces": 25,
-    "files": 396
+    "files": 399
   },
   "sessions": [
     {
@@ -129,7 +129,7 @@
       "encoded": "c-Users-56583-Desktop-Database",
       "title": "下载SQLite学习",
       "status": "completed",
-      "updated_at": 1795670504027,
+      "updated_at": 1795690819430,
       "space_id": "0707c580-6b84-480e-b510-080f5a887975",
       "files": [
         "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62.jsonl",
@@ -137,7 +137,8 @@
         "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62/tool-results/call_00_x3D0P7vx88DS4G0wJvyR4660-render.txt",
         "projects/c-Users-56583-Desktop-Database/ffb87528-3aef-4a24-a85f-2ede3b3aec62.file-rollback.ndjson",
         "index/artifact-index/ffb87528-3aef-4a24-a85f-2ede3b3aec62.json",
-        "index/changes-index/ffb87528-3aef-4a24-a85f-2ede3b3aec62.json"
+        "index/changes-index/ffb87528-3aef-4a24-a85f-2ede3b3aec62.json",
+        "index/file-history/ffb87528-3aef-4a24-a85f-2ede3b3aec62/f35b9f7088a05f96@v2"
       ]
     },
     {
@@ -556,8 +557,8 @@
       "cwd": "C:/Users/56583/WorkBuddy/2026-11-17-09-55-25",
       "encoded": "c-Users-56583-WorkBuddy-2026-11-17-09-55-25",
       "title": "聊天记录存储位置与跨设备同步",
-      "status": "working",
-      "updated_at": 1795689234149,
+      "status": "completed",
+      "updated_at": 1795741768350,
       "space_id": null,
       "files": [
         "projects/c-Users-56583-WorkBuddy-2026-11-17-09-55-25/c946bcfb-2a08-4597-9cac-efe6bbe38f0c.jsonl",
@@ -597,6 +598,7 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v21",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v22",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v23",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v24",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/172b3bfa9a6133e3@v5",
@@ -638,6 +640,7 @@
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/6e432b815e03496f@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/7b8192734201191f@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/7b8192734201191f@v3",
+        "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/7b8192734201191f@v4",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v2",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v3",
         "index/file-history/c946bcfb-2a08-4597-9cac-efe6bbe38f0c/84c7e89667640990@v4",
